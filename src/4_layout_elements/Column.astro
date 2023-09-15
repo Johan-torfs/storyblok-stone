@@ -1,9 +1,0 @@
----
-const { padding = true } = Astro.props;
-
-const className = padding ? "py-4 px-4" : '';
----
-
-<div class:list={[className]}>
-    <slot/>
-</div>
