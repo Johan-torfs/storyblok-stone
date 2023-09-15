@@ -66,11 +66,7 @@ const className = `
 `.replace(/\s+/g, ' ').trim();
  
 const html = renderRichText(blok.content);
-const htmlWithClass = html.replace(/<p>/g, `<p class="${className}">`)
+const htmlWithClass = html.replace(/<p>/g, `<p class="${className} ${{...storyblokEditable(blok)}} ">`)
 ---
 
-<Fragment 
-    set:html={htmlWithClass} 
-    {...storyblokEditable(blok)} 
-    class:list={[className]} 
-/>
+<Fragment set:html={htmlWithClass} />
