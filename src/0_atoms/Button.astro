@@ -1,0 +1,76 @@
+---
+import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+
+interface StoryblokButton extends SbBlokData {
+    component: "button";
+    text?: string;
+    href?: string;
+    color?: "primary"| "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
+    rounded?: "none" | "sm" | "md" | "lg" | "full";
+    paddingX?: 0|2|4|6|8|16|24;
+    paddingY?: 0|2|4|6|8|16|24;
+}
+
+
+interface Props {
+    blok: StoryblokButton;
+}
+
+const { blok } = Astro.props;
+
+const possibleColors = {
+    primary: "bg-primary-950 dark:bg-primary-700 hover:bg-primary-700 dark:hover:bg-primary-400 focus-visible:outline-primary-950 dark:focus-visible:outline-primary-700",
+    secondary: "bg-secondary-950 dark:bg-secondary-700 hover:bg-secondary-700 dark:hover:bg-secondary-400 focus-visible:outline-secondary-950 dark:focus-visible:outline-secondary-700",
+    accent_1: "bg-accent-1-950 dark:bg-accent-1-700 hover:bg-accent-1-700 dark:hover:bg-accent-1-400 focus-visible:outline-accent-1-950 dark:focus-visible:outline-accent-1-700",
+    accent_2: "bg-accent-2-950 dark:bg-accent-2-700 hover:bg-accent-2-700 dark:hover:bg-accent-2-400 focus-visible:outline-accent-2-950 dark:focus-visible:outline-accent-2-700",
+    accent_3: "bg-accent-3-950 dark:bg-accent-3-700 hover:bg-accent-3-700 dark:hover:bg-accent-3-400 focus-visible:outline-accent-3-950 dark:focus-visible:outline-accent-3-700",
+    accent_4: "bg-accent-4-950 dark:bg-accent-4-700 hover:bg-accent-4-700 dark:hover:bg-accent-4-400 focus-visible:outline-accent-4-950 dark:focus-visible:outline-accent-4-700",
+    accent_5: "bg-accent-5-950 dark:bg-accent-5-700 hover:bg-accent-5-700 dark:hover:bg-accent-5-400 focus-visible:outline-accent-5-950 dark:focus-visible:outline-accent-5-700",
+    white: "bg-white dark:bg-black hover:bg-white dark:hover:bg-black focus-visible:outline-white dark:focus-visible:outline-black",
+    black: "bg-black dark:bg-white hover:bg-black dark:hover:bg-white focus-visible:outline-black dark:focus-visible:outline-white",
+    default: "bg-primary-600 dark:bg-primary-400 hover:bg-primary-700 dark:hover:bg-primary-300 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-400 dark:text-primary-950",
+}
+
+const possibleRounded = {
+    none: "rounded-none",
+    sm: "rounded-sm",
+    md: "rounded-md",
+    lg: "rounded-lg",
+    full: "rounded-full"
+}
+
+const possiblePaddingX = {
+    0: "px-0",
+    2: "px-2",
+    4: "px-4",
+    6: "px-6",
+    8: "px-8",
+    16: "px-16",
+    24: "px-24",
+};
+
+const possiblePaddingY = {
+    0: "py-0",
+    2: "py-2",
+    4: "py-4",
+    6: "py-6",
+    8: "py-8",
+    16: "py-16",
+    24: "py-24",
+};
+
+const className = `
+    ${blok.color ? possibleColors[blok.color] : possibleColors.default}
+    ${blok.rounded ? possibleRounded[blok.rounded] : possibleRounded.none}
+    ${blok.paddingX ? possiblePaddingX[blok.paddingX] : possiblePaddingX[4]}
+    ${blok.paddingY ? possiblePaddingY[blok.paddingY] : possiblePaddingY[2]}
+`.replace(/\s+/g, ' ').trim();
+---
+
+<a
+    {...storyblokEditable(blok)}
+    href={blok.href}
+    class:list={["inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none", className]}
+>
+    {blok.text}
+</a>

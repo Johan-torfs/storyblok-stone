@@ -1,0 +1,64 @@
+---
+import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+// @ts-ignore
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+interface StoryblokFlex extends SbBlokData {
+    component: 'flex',
+    content: [SbBlokData],
+    gap: number,
+    padding?: 0|2|4|6|8|16|24;
+    items?: "center"|"start"|"end"|"stretch"|"baseline"|"auto"|"default";
+    justify?: "center"|"start"|"end"|"between"|"around"|"evenly"|"auto"|"default";
+}
+
+interface Props {
+    blok: StoryblokFlex;
+}
+
+const { blok } = Astro.props;
+
+const possiblePadding = {
+    0: "py-0 px-0",
+    2: "py-2 px-2",
+    4: "py-4 px-4",
+    6: "py-6 px-6",
+    8: "py-8 px-8",
+    16: "py-16 px-16",
+    24: "py-24 px-24",
+};
+
+const possibleItems = {
+    "center": "items-center",
+    "start": "items-start",
+    "end": "items-end",
+    "stretch": "items-stretch",
+    "baseline": "items-baseline",
+    "auto": "items-auto",
+    "default": "",
+};
+
+const possibleJustify = {
+    "center": "justify-center",
+    "start": "justify-start",
+    "end": "justify-end",
+    "between": "justify-between",
+    "around": "justify-around",
+    "evenly": "justify-evenly",
+    "auto": "justify-auto",
+    "default": "",
+};
+
+const className = `
+    ${blok.gap ? 'gap-' + blok.gap : ''}
+    ${blok.padding ? possiblePadding[blok.padding] : ''}
+    ${blok.items ? possibleItems[blok.items] : ''}
+    ${blok.justify ? possibleJustify[blok.justify] : ''}
+`.replace(/\s+/g, ' ').trim();
+---
+
+<div class:list={["flex", className]} {...storyblokEditable(blok)}>
+    {blok.content.map(item => {            
+		return <StoryblokComponent blok={item} />
+	})}
+</div>

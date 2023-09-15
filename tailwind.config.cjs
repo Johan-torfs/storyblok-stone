@@ -41,7 +41,7 @@ module.exports = {
 		'900': '#3a3c6e',
 		'950': '#323257',
 	  },
-	  'light-red': {
+	  'accent-1': {
 		DEFAULT: '#f83b3b',
 		'50': '#fff1f1',
 		'100': '#ffe1e1',
@@ -55,7 +55,7 @@ module.exports = {
 		'900': '#841818',
 		'950': '#480707',
 	  },
-	  'orangey-yellow': {
+	  'accent-2': {
 		DEFAULT: '#f98d07',
 		'50': '#fffaeb',
 		'100': '#fff0c6',
@@ -69,7 +69,7 @@ module.exports = {
 		'900': '#7a2c0d',
 		'950': '#461502',
 	  },
-	  'green-teal': {
+	  'accent-3': {
 		DEFAULT: '#00bd97',
 		'50': '#eafff8',
 		'100': '#cdfeeb',
@@ -83,7 +83,7 @@ module.exports = {
 		'900': '#005549',
 		'950': '#00302a',
 	  },
-	  'cobalt-blue': {
+	  'accent-4': {
 		DEFAULT: '#415dff',
 		'50': '#eaf3ff',
 		'100': '#d9e8ff',
@@ -97,7 +97,7 @@ module.exports = {
 		'900': '#1a2595',
 		'950': '#0f1357',
 	  },
-	  'dark-cyan': {
+	  'accent-5': {
 		DEFAULT: '#3f7d65',
 		'50': '#f1f8f5',
 		'100': '#ddeee4',
@@ -110,7 +110,7 @@ module.exports = {
 		'800': '#214438',
 		'900': '#1c382f',
 		'950': '#0f1f1a',
-	},
+	  },
     },
     fontFamily: {
       sans: ['Hanken Grotesk', 'sans-serif'],

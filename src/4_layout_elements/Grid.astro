@@ -1,0 +1,78 @@
+---
+import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+// @ts-ignore
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+interface StoryblokGrid extends SbBlokData {
+    component: 'grid',
+    columns: [SbBlokData],
+    gap: number,
+    default_columns: number,
+    small_columns: number,
+    medium_columns: number,
+    large_columns: number,
+    extra_large_columns: number,
+    extra_extra_large_columns: number,
+    padding?: 0|2|4|6|8|16|24;
+    content?: "center"|"start"|"end"|"between"|"around"|"evenly"|"auto"|"default";
+    justify?: "center"|"start"|"end"|"between"|"around"|"evenly"|"auto"|"default";
+}
+
+interface Props {
+    blok: StoryblokGrid;
+}
+
+const { blok } = Astro.props;
+
+const possiblePadding = {
+    0: "py-0 px-0",
+    2: "py-2 px-2",
+    4: "py-4 px-4",
+    6: "py-6 px-6",
+    8: "py-8 px-8",
+    16: "py-16 px-16",
+    24: "py-24 px-24",
+};
+
+const possibleJustify = {
+    "center": "justify-center",
+    "start": "justify-start",
+    "end": "justify-end",
+    "between": "justify-between",
+    "around": "justify-around",
+    "evenly": "justify-evenly",
+    "auto": "justify-auto",
+    "default": "",
+};
+
+const possibleContent = {
+    "center": "content-center",
+    "start": "content-start",
+    "end": "content-end",
+    "between": "content-between",
+    "around": "content-around",
+    "evenly": "content-evenly",
+    "auto": "content-auto",
+    "default": "",
+};
+
+const className = `
+    ${blok.gap ? 'gap-' + blok.gap : ''}
+    ${blok.default_columns ? 'grid-cols-' + blok.default_columns : ''} 
+    ${blok.small_columns ? 'sm:grid-cols-' + blok.small_columns : ''}
+    ${blok.medium_columns ? 'md:grid-cols-' + blok.medium_columns : ''}
+    ${blok.large_columns ? 'lg:grid-cols-' + blok.large_columns : ''}
+    ${blok.extra_large_columns ? 'xl:grid-cols-' + blok.extra_large_columns : ''}
+    ${blok.extra_extra_large_columns ? 'xxl:grid-cols-' + blok.extra_extra_large_columns : ''}
+
+    ${blok.padding ? possiblePadding[blok.padding] : ''}
+    ${possibleJustify[blok.justify? blok.justify : 'default']}
+    ${possibleContent[blok.content? blok.content : 'default']}
+`.replace(/\s+/g, ' ').trim();
+---
+
+<div class:list={["grid", className]} {...storyblokEditable(blok)}>
+    {blok.columns.map(item => {            
+		return <StoryblokComponent blok={item} />
+	})}
+</div>

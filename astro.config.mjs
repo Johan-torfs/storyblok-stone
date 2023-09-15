@@ -1,5 +1,7 @@
 import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
+import storyblok from '@storyblok/astro';
+import { loadEnv } from 'vite';
 
 import vercel from "@astrojs/vercel/serverless";
 
@@ -15,8 +17,17 @@ export default defineConfig({
       accessToken: env.STORYBLOK_TOKEN,
       bridge: true,
       apiOptions: {},
-      // storyblok-js-client options
       components: {
+        section: '4_layout_elements/Section',
+        container: '4_layout_elements/Container',
+        grid: '4_layout_elements/Grid',
+        flex: '4_layout_elements/Flex',
+        card: '1_molecules/Card',
+        button: '0_atoms/Button',
+        image: '0_atoms/Image',
+        paragraph: '0_atoms/Text',
+        title: '0_atoms/Title',
+        icon_button: '0_atoms/IconButton',
       },
       componentsDir: "src",
       enableFallbackComponent: true,

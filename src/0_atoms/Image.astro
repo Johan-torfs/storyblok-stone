@@ -1,0 +1,45 @@
+---
+import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+
+interface StoryblokImage extends SbBlokData {
+    component: 'image',
+    image: {
+        id: number;
+        alt: string;
+        name: string;
+        focus: string;
+        title: string;
+        source: string;
+        filename: string;
+        copyright: string;
+        fieldtype: string;
+        meta_data: {};
+        is_external_url: boolean;
+    },
+    xs: boolean;
+    sm: boolean;
+    md: boolean;
+    lg: boolean;
+    xl: boolean;
+}
+
+
+interface Props {
+    blok: StoryblokImage;
+}
+
+const { blok } = Astro.props;
+---
+
+<img 
+    {...storyblokEditable(blok)}
+    src={blok.image.filename} 
+    alt={blok.image.alt} 
+    class:list={[
+        blok.xs ? "block" : "hidden", 
+        blok.sm ? "sm:block" : "sm:hidden",
+        blok.md ? "md:block" : "md:hidden",
+        blok.lg ? "lg:block" : "lg:hidden",
+        blok.xl ? "xl:block" : "xl:hidden",
+    ]}
+>

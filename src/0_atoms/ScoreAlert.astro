@@ -1,0 +1,50 @@
+---
+import Icon from "./Icon.astro";
+import Text from "./Text.astro";
+
+interface Props {
+    icon: {icon: string, type: string};
+    label: string;
+    score: number;
+    total: number;
+    color?: "primary"| "secondary" | "light-red" | "orangey-yellow" | "green-teal" | "cobalt-blue" | "default";
+    gradient?: boolean;
+}
+
+const { icon, label, score, total, color = "default", gradient = false } = Astro.props;
+
+const possibleColors = {
+    primary: "bg-primary-700/10 dark:bg-primary-400/10",
+    secondary: "bg-secondary-700/10 dark:bg-secondary-400/10",
+    "light-red": "bg-light-red-700/10 dark:bg-light-red-400/10",
+    "orangey-yellow": "bg-orangey-yellow-700/10 dark:bg-orangey-yellow-400/10",
+    "green-teal": "bg-green-teal-700/10 dark:bg-green-teal-400/10",
+    "cobalt-blue": "bg-cobalt-blue-700/10 dark:bg-cobalt-blue-400/10",
+    default: "bg-white/10 dark:bg-black/10"
+}
+
+const possibleGradients = {
+    primary: "bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:from-primary-600/10 dark:to-primary-400/10",
+    secondary: "bg-gradient-to-b from-secondary-500/10 to-secondary-700/10 dark:from-secondary-600/10 dark:to-secondary-400/10",
+    "light-red": "bg-gradient-to-b from-light-red-500/10 to-light-red-700/10 dark:from-light-red-600/10 dark:to-light-red-400/10",
+    "orangey-yellow": "bg-gradient-to-b from-orangey-yellow-500/10 to-orangey-yellow-700/10 dark:from-orangey-yellow-600/10 dark:to-orangey-yellow-400/10",
+    "green-teal": "bg-gradient-to-b from-green-teal-500/10 to-green-teal-700/10 dark:from-green-teal-600/10 dark:to-green-teal-400/10",
+    "cobalt-blue": "bg-gradient-to-b from-cobalt-blue-500/10 to-cobalt-blue-700/10 dark:from-cobalt-blue-600/10 dark:to-cobalt-blue-400/10",
+    default: "bg-white dark:bg-black"
+}
+
+const className = `${possibleColors[color]} ${gradient ? possibleGradients[color] : ""}`
+---
+
+<div class:list={["rounded-lg flex justify-between py-3 px-4", className]}>
+    <div class="flex items-center gap-2">
+        <Icon icon={icon} color={color} dark={true}/>
+        <Text color={color} dark={true}>{label}</Text>
+    </div>
+    <div class="flex items-center">
+        <p>
+            <span class="font-bold text-slate-600">{score}</span>
+            <span class="font-bold text-slate-600/40"> / {total}</span>
+        </p>
+    </div>
+</div>

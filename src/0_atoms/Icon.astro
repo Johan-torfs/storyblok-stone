@@ -1,0 +1,29 @@
+---
+interface Props {
+    icon: {icon: string, type: string};
+    color?: "primary"| "secondary" | "light-red" | "orangey-yellow" | "green-teal" | "cobalt-blue" | "default" | string;
+    dark?: boolean;
+}
+
+const { icon, color = "default", dark = false } = Astro.props;
+
+const possibleColors = {
+    primary: dark ? "dark:text-primary-700 text-primary-400" : "text-primary-700 dark:text-primary-400",
+    secondary: dark ? "dark:text-secondary-700 text-secondary-400" : "text-secondary-700 dark:text-secondary-400",
+    "light-red": dark ? "dark:text-light-red-700 text-light-red-400" : "text-light-red-700 dark:text-light-red-400",
+    "orangey-yellow": dark ? "dark:text-orangey-yellow-700 text-orangey-yellow-400" : "text-orangey-yellow-700 dark:text-orangey-yellow-400",
+    "green-teal": dark ? "dark:text-green-teal-700 text-green-teal-400" : "text-green-teal-700 dark:text-green-teal-400",
+    "cobalt-blue": dark ? "dark:text-cobalt-blue-700 text-cobalt-blue-400" : "text-cobalt-blue-700 dark:text-cobalt-blue-400",
+    default: dark ? "text-white text-black" : "dark:text-white text-black",
+}
+
+const className = `
+    ${possibleColors.hasOwnProperty(color) 
+        //@ts-ignore
+        ? possibleColors[color] 
+        : color
+    }
+`.replace(/\s+/g, ' ').trim();
+---
+
+<i class:list={[icon.type, icon.icon, className]} aria-hidden="true"></i>
