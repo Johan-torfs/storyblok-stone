@@ -9,9 +9,10 @@ export async function getStaticPaths() {
         version: import.meta.env.PUBLIC_VERCEL_ENV == 'production' ? 'published' : 'draft',
     });
 
-    const stories = data.stories;    
+    const stories = data.stories;   
+    console.log(stories); 
     return stories.map((entry: any) => {
-        let slug = entry.slug == "home" ? undefined : entry.slug;
+        let slug = entry.slug == "home" ? undefined : entry.full_slug;
         return { 
             params: {slug}, 
             props: { 
