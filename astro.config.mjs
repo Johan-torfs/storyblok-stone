@@ -28,6 +28,8 @@ export default defineConfig({
         paragraph: '0_atoms/Text',
         title: '0_atoms/Title',
         icon_button: '0_atoms/IconButton',
+        score_circle: '0_atoms/ScoreCircle',
+        alert: '1_molecules/Alert',
       },
       componentsDir: "src",
       enableFallbackComponent: true,
