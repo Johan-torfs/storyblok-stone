@@ -54,10 +54,9 @@ const possiblePadding = {
 };
 
 const className = `
-    ${blok.color ? possibleColors[blok.color] : possibleColors["default"]} 
-    ${blok.color && blok.gradient ? possibleGradients[blok.color] : possibleGradients["default"]}
+    ${blok.color ? blok.gradient ? possibleGradients[blok.color] : possibleColors[blok.color]: possibleColors["default"]} 
     ${blok.padding ? possiblePadding[blok.padding] : possiblePadding[0]}
-`
+`.replace(/\s+/g, ' ').trim();
 ---
 
 <div {...storyblokEditable(blok)} class:list={["rounded-lg", className]}>
