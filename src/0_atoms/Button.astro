@@ -7,8 +7,8 @@ interface StoryblokButton extends SbBlokData {
     href?: string;
     color?: "primary"| "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
     rounded?: "none" | "sm" | "md" | "lg" | "full";
-    paddingX?: 0|2|4|6|8|16|24;
-    paddingY?: 0|2|4|6|8|16|24;
+    padding_x?: 0|2|4|6|8|16|24;
+    padding_y?: 0|2|4|6|8|16|24;
 }
 
 
@@ -62,8 +62,8 @@ const possiblePaddingY = {
 const className = `
     ${blok.color ? possibleColors[blok.color] : possibleColors.default}
     ${blok.rounded ? possibleRounded[blok.rounded] : possibleRounded.none}
-    ${blok.paddingX ? possiblePaddingX[blok.paddingX] : possiblePaddingX[4]}
-    ${blok.paddingY ? possiblePaddingY[blok.paddingY] : possiblePaddingY[2]}
+    ${blok.padding_x ? possiblePaddingX[blok.padding_x] : possiblePaddingX[4]}
+    ${blok.padding_y ? possiblePaddingY[blok.padding_y] : possiblePaddingY[2]}
 `.replace(/\s+/g, ' ').trim();
 ---
 

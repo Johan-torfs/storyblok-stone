@@ -43,7 +43,7 @@ const possibleGradients = {
 }
 
 const className = `
-    ${possibleColors[blok.color ? blok.color : "default"]} ${blok.gradient ? possibleGradients[blok.color ? blok.color : "default"] : ""}
+    ${blok.color ? blok.gradient ? possibleGradients[blok.color] : possibleColors[blok.color]: possibleColors["default"]}
 `.replace(/\s+/g, ' ').trim();
 ---
 
