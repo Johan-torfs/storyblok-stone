@@ -3,24 +3,22 @@ import { useStoryblokApi, type SbBlokData } from '@storyblok/astro'
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
-const storyblokApi = useStoryblokApi()
 export async function getStaticPaths() {
+    const storyblokApi = useStoryblokApi()
     const { data } = await storyblokApi.get('cdn/stories', {
         version: import.meta.env.PUBLIC_VERCEL_ENV == 'production' ? 'published' : 'draft',
     });
 
-    console.log(data);
-
     const stories = data.stories;    
-    return [stories.map((entry: any) => {
-        let path = entry.slug;
+    return stories.map((entry: any) => {
+        let slug = entry.slug == "home" ? undefined : entry.slug;
         return { 
-            params: {path}, 
+            params: {slug}, 
             props: { 
                 blok: entry.content
             }
         }
-    })];
+    });
 }
 
 const exludedPages: (string | undefined)[] = []; // Refactor to Regex string
@@ -29,6 +27,7 @@ let response = undefined;
 const { slug } = Astro.params.slug == undefined ? { slug: "home" } : Astro.params;
 if (import.meta.env.PUBLIC_VERCEL_ENV != 'production') {
     if (!exludedPages.includes(slug)) {
+        const storyblokApi = useStoryblokApi()
         response = await storyblokApi.get('cdn/stories/' + slug, {
         version: import.meta.env.PUBLIC_VERCEL_ENV == 'production' ? 'published' : 'draft',
         }).then((response: any ) => {      
