@@ -27,7 +27,7 @@ let response = undefined;
 const { slug } = Astro.params.slug == undefined ? { slug: "home" } : Astro.params;
 if (import.meta.env.PUBLIC_VERCEL_ENV != 'production') {
     if (!exludedPages.includes(slug)) {
-        const storyblokApi = useStoryblokApi()
+        const storyblokApi = useStoryblokApi()        
         response = await storyblokApi.get('cdn/stories/' + slug, {
         version: import.meta.env.PUBLIC_VERCEL_ENV == 'production' ? 'published' : 'draft',
         }).then((response: any ) => {      
