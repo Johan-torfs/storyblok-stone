@@ -9,7 +9,7 @@ const env = loadEnv("", process.cwd(), ['STORYBLOK', 'PUBLIC_VERCEL_ENV', ]);
 
 // https://astro.build/config
 export default defineConfig({
-  output: env.PUBLIC_VERCEL_ENV === 'production' ? 'hybrid' : 'server',
+  output: env.PUBLIC_VERCEL_ENV === 'production' ? 'hybrid' : 'hybrid',
   adapter: vercel(),
   integrations: [
     tailwind(),
