@@ -1,0 +1,66 @@
+---
+import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+// @ts-ignore
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+interface StoryblokAlert extends SbBlokData {
+    component: 'alert',
+    content: [SbBlokData],
+    color?: "primary"| "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
+    padding?: 0|2|4|6|8|16|24,
+    gradient?: boolean;
+}
+
+interface Props {
+    blok: StoryblokAlert;
+}
+
+const { blok } = Astro.props;
+
+const possibleColors = {
+    primary: "bg-primary-700/10 dark:bg-primary-400/10",
+    secondary: "bg-secondary-700/10 dark:bg-secondary-400/10",
+    accent_1: "bg-accent-1-700/10 dark:bg-accent-1-400/10",
+    accent_2: "bg-accent-2-700/10 dark:bg-accent-2-400/10",
+    accent_3: "bg-accent-3-700/10 dark:bg-accent-3-400/10",
+    accent_4: "bg-accent-4-700/10 dark:bg-accent-4-400/10",
+    accent_5: "bg-accent-5-700/10 dark:bg-accent-5-400/10",
+    white: "bg-white/10 dark:bg-black/10",
+    black: "bg-black/10 dark:bg-white/10",
+    default: "bg-white/10 dark:bg-black/10"
+}
+
+const possibleGradients = {
+    primary: "bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:from-primary-600/10 dark:to-primary-400/10",
+    secondary: "bg-gradient-to-b from-secondary-500/10 to-secondary-700/10 dark:from-secondary-600/10 dark:to-secondary-400/10",
+    accent_1: "bg-gradient-to-b from-accent-1-500/10 to-accent-1-700/10 dark:from-accent-1-600/10 dark:to-accent-1-400/10",
+    accent_2: "bg-gradient-to-b from-accent-2-500/10 to-accent-2-700/10 dark:from-accent-2-600/10 dark:to-accent-2-400/10",
+    accent_3: "bg-gradient-to-b from-accent-3-500/10 to-accent-3-700/10 dark:from-accent-3-600/10 dark:to-accent-3-400/10",
+    accent_4: "bg-gradient-to-b from-accent-4-500/10 to-accent-4-700/10 dark:from-accent-4-600/10 dark:to-accent-4-400/10",
+    accent_5: "bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:from-accent-5-600/10 dark:to-accent-5-400/10",
+    white: "bg-gradient-to-b from-white/10 to-white/10 dark:from-black/10 dark:to-black/10",
+    black: "bg-gradient-to-b from-black/10 to-black/10 dark:from-white/10 dark:to-white/10",
+    default: "bg-white/10 dark:bg-black/10"
+}
+
+const possiblePadding = {
+    0: "py-0 px-0",
+    2: "py-2 px-2",
+    4: "py-4 px-4",
+    6: "py-6 px-6",
+    8: "py-8 px-8",
+    16: "py-16 px-16",
+    24: "py-24 px-24",
+};
+
+const className = `
+    ${blok.color ? blok.gradient ? possibleGradients[blok.color] : possibleColors[blok.color]: possibleColors["default"]} 
+    ${blok.padding ? possiblePadding[blok.padding] : possiblePadding[0]}
+`.replace(/\s+/g, ' ').trim();
+---
+
+<div {...storyblokEditable(blok)} class:list={["rounded-lg", className]}>
+    {blok.content.map(item => {            
+        return <StoryblokComponent blok={item} />
+    })}
+</div>
