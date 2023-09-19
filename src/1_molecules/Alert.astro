@@ -9,6 +9,7 @@ interface StoryblokAlert extends SbBlokData {
     color?: "primary"| "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
     padding?: 0|2|4|6|8|16|24,
     gradient?: boolean;
+    rounded?: "none" | "sm" | "md" | "lg" | "full";
 }
 
 interface Props {
@@ -53,13 +54,22 @@ const possiblePadding = {
     24: "py-24 px-24",
 };
 
+const possibleRounded = {
+    none: "rounded-none",
+    sm: "rounded-sm",
+    md: "rounded-md",
+    lg: "rounded-lg",
+    full: "rounded-full"
+}
+
 const className = `
     ${blok.color ? blok.gradient ? possibleGradients[blok.color] : possibleColors[blok.color]: possibleColors["default"]} 
+    ${blok.rounded ? possibleRounded[blok.rounded] : possibleRounded.lg}
     ${blok.padding ? possiblePadding[blok.padding] : possiblePadding[0]}
 `.replace(/\s+/g, ' ').trim();
 ---
 
-<div {...storyblokEditable(blok)} class:list={["rounded-lg", className]}>
+<div {...storyblokEditable(blok)} class:list={[className]}>
     {blok.content.map(item => {            
         return <StoryblokComponent blok={item} />
     })}
