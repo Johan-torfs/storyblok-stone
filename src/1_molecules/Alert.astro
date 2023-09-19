@@ -7,8 +7,10 @@ interface StoryblokAlert extends SbBlokData {
     component: 'alert',
     content: [SbBlokData],
     color?: "primary"| "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
-    padding?: 0|2|4|6|8|16|24,
+    padding_x?: 0|2|4|6|8|16|24,
+    padding_y?: 0|2|4|6|8|16|24,
     gradient?: boolean;
+    rounded?: "none" | "sm" | "md" | "lg" | "full";
 }
 
 interface Props {
@@ -43,23 +45,43 @@ const possibleGradients = {
     default: "bg-white/10 dark:bg-black/10"
 }
 
-const possiblePadding = {
-    0: "py-0 px-0",
-    2: "py-2 px-2",
-    4: "py-4 px-4",
-    6: "py-6 px-6",
-    8: "py-8 px-8",
-    16: "py-16 px-16",
-    24: "py-24 px-24",
+const possiblePaddingX = {
+    0: "px-0",
+    2: "px-2",
+    4: "px-4",
+    6: "px-6",
+    8: "px-8",
+    16: "px-16",
+    24: "px-24",
 };
+
+const possiblePaddingY = {
+    0: "py-0",
+    2: "py-2",
+    4: "py-4",
+    6: "py-6",
+    8: "py-8",
+    16: "py-16",
+    24: "py-24",
+};
+
+const possibleRounded = {
+    none: "rounded-none",
+    sm: "rounded-sm",
+    md: "rounded-md",
+    lg: "rounded-lg",
+    full: "rounded-full"
+}
 
 const className = `
     ${blok.color ? blok.gradient ? possibleGradients[blok.color] : possibleColors[blok.color]: possibleColors["default"]} 
-    ${blok.padding ? possiblePadding[blok.padding] : possiblePadding[0]}
+    ${blok.rounded ? possibleRounded[blok.rounded] : possibleRounded.lg}
+    ${blok.padding_x ? possiblePaddingX[blok.padding_x] : possiblePaddingX[0]}
+    ${blok.padding_y ? possiblePaddingY[blok.padding_y] : possiblePaddingY[0]}
 `.replace(/\s+/g, ' ').trim();
 ---
 
-<div {...storyblokEditable(blok)} class:list={["rounded-lg", className]}>
+<div {...storyblokEditable(blok)} class:list={[className]}>
     {blok.content.map(item => {            
         return <StoryblokComponent blok={item} />
     })}

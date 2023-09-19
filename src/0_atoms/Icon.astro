@@ -36,4 +36,4 @@ const className = `
 `.replace(/\s+/g, ' ').trim();
 ---
 
-<i class:list={[blok.icon.type, blok.icon.icon, className]} aria-hidden="true"></i>
+<i {...storyblokEditable(blok)} class:list={[blok.icon.type, blok.icon.icon, className]} aria-hidden="true"></i>

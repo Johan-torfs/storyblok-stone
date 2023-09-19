@@ -6,6 +6,7 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 interface StoryblokContainer extends SbBlokData {
     component: 'container',
     content: [SbBlokData],
+    size?: "small" | "medium" | "large" | "full",
 }
 
 interface Props {
@@ -13,9 +14,20 @@ interface Props {
 }
 
 const { blok } = Astro.props;
+
+const possibleSizes = {
+    small: "sm:max-w-sm",
+    medium: "sm:max-w-2xl",
+    large: "sm:max-w-2xl lg:max-w-7xl",
+    full: "sm:max-w-full",
+}
+
+const className = `
+    ${blok.size ? possibleSizes[blok.size] : possibleSizes["large"]}
+`
 ---
 
-<div {...storyblokEditable(blok)} class="sm:mx-auto sm:max-w-2xl lg:max-w-7xl">
+<div {...storyblokEditable(blok)} class:list={["mx-auto", className]}>
     {blok.content.map(item => {            
 		return <StoryblokComponent blok={item} />
 	})}
