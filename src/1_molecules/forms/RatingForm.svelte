@@ -17,7 +17,7 @@ const possiblePadding = {
 
 const className = `
     ${blok.padding ? possiblePadding[blok.padding] : ''}
-    overflow-hidden flex flex-nowrap
+    overflow-hidden
 `.replace(/\s+/g, ' ').trim();
 
 let formState = 0;
@@ -38,66 +38,69 @@ function updateForm(e) {
         submitForm(e);
         if (postSubmitState == 0) {
             e.target.reset();
-            formState = 0;
+            changeFormState(0)
         } else {
-            formState = postSubmitState;
+            changeFormState(postSubmitState);
         }
     } else {
-        formState++;
+        changeFormState(formState + 1);
     }
 }
 
 function submitForm(e) {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    // const interactiveTextArray = e.target.querySelectorAll('[interactive]');
-    // console.log(interactiveTextArray);
-    // interactiveTextArray.forEach(element => {
-    //     const updatedHTML = element.innerHTML.replace(new RegExp('{{(' + Object.keys(data).join('|') + ')}}'), data["$1"]);
-    //     element.innerHTML = updatedHTML;
-    // });
+    console.log(data);
+}
+
+const delay = 300;
+function changeFormState(number) {
+    formState = -1;
+    setTimeout(() => {
+        formState = number;
+    }, delay);
 }
 </script>
 
 <form on:submit|preventDefault={updateForm} class={className} {...storyblokEditable(blok)}>
     {#if formState == 0}
-        <div in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
+        <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-0"/>
         </div>
     {:else if formState == 1}
-        <div in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
+        <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-1"/>
         </div>
     {:else if formState == 2}
-        <div in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
+        <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-2"/>
         </div>
     {:else if formState == 3}
-        <div in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
+        <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-3"/>
         </div>
     {:else if formState == 4}
-        <div in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
+        <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-4"/>
         </div>
     {:else if formState == 5}
-        <div in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
+        <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-5"/>
         </div>
     {:else if formState == 6}
-        <div in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
+        <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-6"/>
         </div>
     {:else if formState == 7}
-        <div in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
+        <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-7"/>
         </div>
     {:else if formState == 8}
-        <div in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
+        <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-8"/>
         </div>
     {:else if formState == 9}
-        <div in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
+        <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-9"/>
         </div>
     {/if}
