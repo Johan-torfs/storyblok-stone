@@ -55,7 +55,7 @@ function submitForm(e) {
 }
 </script>
 
-<form on:submit|preventDefault={updateForm} class:list={[className]} {...storyblokEditable(blok)}>
+<form on:submit|preventDefault={updateForm} class:list={["flex flex-nowrap", className]} {...storyblokEditable(blok)}>
     {#if formState == 0}
         <div  in:fly={{ duration: 300, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }}>
             <slot name="name-0"/>
