@@ -72,4 +72,4 @@ const storyblokEditableData = storyblokEditable(blok);
 const htmlWithClass = html.replace(/<p>/g, `<p class="${className}" data-blok-c='${storyblokEditableData['data-blok-c']}' data-blok-uid='${storyblokEditableData['data-blok-uid']}' interactive='${!!blok.interactive}'>`)
 ---
 
-{blok.interactive ? <TextSvelte blok={blok} htmlWithClass={htmlWithClass} client:visible/> : <Fragment set:html={htmlWithClass} />} 
+{blok.interactive ? <TextSvelte blok={blok} htmlWithClass={htmlWithClass} /> : <Fragment set:html={htmlWithClass} />} 
