@@ -1,5 +1,6 @@
 ---
 import { storyblokEditable, type SbBlokData, type ISbRichtext, renderRichText } from '@storyblok/astro';
+import TextSvelte from './Text.svelte';
 
 interface StoryblokParagraph extends SbBlokData {
     component: 'paragraph';
@@ -11,6 +12,7 @@ interface StoryblokParagraph extends SbBlokData {
     uppercase?: boolean;
     decoration?: "underline" | "line-through" | "overline" | "none";
     center?: boolean;
+    interactive?: boolean;
 }
 
 
@@ -67,7 +69,7 @@ const className = `
  
 const html = renderRichText(blok.content);
 const storyblokEditableData = storyblokEditable(blok);
-const htmlWithClass = html.replace(/<p>/g, `<p class="${className}" data-blok-c='${storyblokEditableData['data-blok-c']}' data-blok-uid='${storyblokEditableData['data-blok-uid']}'>`)
+const htmlWithClass = html.replace(/<p>/g, `<p class="${className}" data-blok-c='${storyblokEditableData['data-blok-c']}' data-blok-uid='${storyblokEditableData['data-blok-uid']}' interactive='${!!blok.interactive}'>`)
 ---
 
-<Fragment set:html={htmlWithClass} />
+{blok.interactive ? <TextSvelte blok={blok} htmlWithClass={htmlWithClass} /> : <Fragment set:html={htmlWithClass} />} 

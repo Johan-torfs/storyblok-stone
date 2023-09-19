@@ -51,7 +51,12 @@ function updateForm(e) {
 function submitForm(e) {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+    // const interactiveTextArray = e.target.querySelectorAll('[interactive]');
+    // console.log(interactiveTextArray);
+    // interactiveTextArray.forEach(element => {
+    //     const updatedHTML = element.innerHTML.replace(new RegExp('{{(' + Object.keys(data).join('|') + ')}}'), data["$1"]);
+    //     element.innerHTML = updatedHTML;
+    // });
 }
 </script>
 

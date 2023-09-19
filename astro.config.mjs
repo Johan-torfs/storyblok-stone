@@ -29,7 +29,8 @@ export default defineConfig({
       title: '0_atoms/Title',
       icon_button: '0_atoms/IconButton',
       score_circle: '0_atoms/ScoreCircle',
-      icon: '0_atoms/Icon'
+      icon: '0_atoms/Icon',
+      input: '0_atoms/Input',
     },
     componentsDir: "src",
     enableFallbackComponent: true,
