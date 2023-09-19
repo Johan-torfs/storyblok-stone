@@ -13,6 +13,7 @@ interface StoryblokIconButton extends SbBlokData {
     rounded?: "none" | "sm" | "md" | "lg" | "full";
     padding_x?: 0|2|4|6|8|16|24;
     padding_y?: 0|2|4|6|8|16|24;
+    submit?: boolean;
 }
 
 
@@ -88,11 +89,23 @@ ${blok.color ? possibleColors[blok.color] : possibleColors.default}
 `.replace(/\s+/g, ' ').trim();
 ---
 
+{blok.submit ? 
+<button
+    {...storyblokEditable(blok)}
+    class:list={["inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none", className]}
+    type="submit"
+>
+    <i class:list={[blok.icon.type, blok.icon.icon, classNameColor]} aria-hidden="true"></i>
+    <span class:list={["ml-2", classNameColor]}>{blok.text}</span>  
+</button>
+:
 <a
     {...storyblokEditable(blok)}
     href={blok.href}
     class:list={["inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none", className]}
+    type="button"
 >
     <i class:list={[blok.icon.type, blok.icon.icon, classNameColor]} aria-hidden="true"></i>
     <span class:list={["ml-2", classNameColor]}>{blok.text}</span>  
 </a>
+}
