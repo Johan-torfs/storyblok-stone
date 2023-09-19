@@ -7,11 +7,12 @@ interface StoryblokCard extends SbBlokData {
     component: 'card',
     content: [SbBlokData],
     padding?: 0|8|16|24;
-    color?: "primary"| "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
+    color?: "primary" | "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
     gradient?: boolean;
     center?: boolean;
     shadow?: boolean;
-    rounded?: ["top_left"|"top_right"|"bottom_left"|"bottom_right"]
+    rounded?: ["top_left"|"top_right"|"bottom_left"|"bottom_right"];
+    height?: number;
 }
 
 interface Props {
@@ -72,9 +73,15 @@ const classNameInner = `${blok.center ? "items-center" : ""}`;
 ---
 
 <div class:list={[className]} {...storyblokEditable(blok)}>
-    <div class:list={["flex flex-col gap-4", classNameInner]}>
+    <div class:list={["flex flex-col gap-4 card", classNameInner]}>
         {blok.content.map(item => {            
             return <StoryblokComponent blok={item} />
         })}
     </div>
 </div>
+
+<style define:vars={{height: blok.height + "px" || "auto"}}>
+    .card {
+        min-height: var(--height);
+    }
+</style>
