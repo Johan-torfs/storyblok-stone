@@ -12,7 +12,7 @@ interface StoryblokFormState extends SbBlokData {
 
 interface StoryblokForm extends SbBlokData {
     component: 'form',
-    states: [StoryblokFormState],
+    states: StoryblokFormState[],
     padding?: 0|2|4|6|8|16|24;
     type: "rating";
 }
@@ -23,23 +23,80 @@ interface Props {
 
 const { blok } = Astro.props;
 ---
+
 {blok.states.length > 10 ? <div class="bg-red-500 text-white p-4">You can only have up to 10 states in a form</div> : null}
 {blok.type == "rating" ? 
     <RatingForm blok={blok} client:load>
         {blok.states[0] ? () => {   
-            return <Fragment slot="name-0">
+            return <div slot="name-0">
                 {blok.states[0].content.map(item => {
                     return <StoryblokComponent blok={item} />
                 })}
-            </Fragment>
+            </div>
         } : null}
         {blok.states[1] ? () => {   
-            return <Fragment slot="name-1">
+            return <div slot="name-1">
                 {blok.states[1].content.map(item => {
                     return <StoryblokComponent blok={item} />
                 })}
-            </Fragment>
+            </div>
         } : null}
+        {blok.states[2] ? () => {   
+            return <div slot="name-2">
+                {blok.states[2].content.map(item => {
+                    return <StoryblokComponent blok={item} />
+                })}
+            </div>
+        } : null}
+        {blok.states[3] ? () => {   
+            return <div slot="name-3">
+                {blok.states[3].content.map(item => {
+                    return <StoryblokComponent blok={item} />
+                })}
+            </div>
+        } : null}
+        {blok.states[4] ? () => {   
+            return <div slot="name-4">
+                {blok.states[4].content.map(item => {
+                    return <StoryblokComponent blok={item} />
+                })}
+            </div>
+        } : null}
+        {blok.states[5] ? () => {   
+            return <div slot="name-5">
+                {blok.states[5].content.map(item => {
+                    return <StoryblokComponent blok={item} />
+                })}
+            </div>
+        } : null}
+        {blok.states[6] ? () => {   
+            return <div slot="name-6">
+                {blok.states[6].content.map(item => {
+                    return <StoryblokComponent blok={item} />
+                })}
+            </div>
+        } : null}
+        {blok.states[7] ? () => {   
+            return <div slot="name-7">
+                {blok.states[7].content.map(item => {
+                    return <StoryblokComponent blok={item} />
+                })}
+            </div>
+        } : null}
+        {blok.states[8] ? () => {   
+            return <div slot="name-8">
+                {blok.states[8].content.map(item => {
+                    return <StoryblokComponent blok={item} />
+                })}
+            </div>
+        } : null}
+        {blok.states[9] ? () => {   
+            return <div slot="name-9">
+                {blok.states[9].content.map(item => {
+                    return <StoryblokComponent blok={item} />
+                })}
+            </div>
+        } : null}        
     </RatingForm> 
     : null
 }

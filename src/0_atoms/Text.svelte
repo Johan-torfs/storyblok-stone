@@ -1,12 +1,15 @@
 <script>
 import { store } from '../stores.js';
 
-export let blok;
 export let htmlWithClass;
 
-console.log($store.inputs["rating"]);
+let html = htmlWithClass.replace(new RegExp('{{(' + Object.keys($store.inputs).join('|') + ')}}', 'g'), match => $store.inputs[match.replace(/{{|}}/g, '')]);
 </script>
 
-{@html htmlWithClass.replace(new RegExp('{{rating}}', 'g'), $store.inputs["rating"])}
+{#if $store.inputs["rating"]}
+    {@html html}
+{:else}
+    <p>Submitting review</p>
+{/if}
 
 <!-- new RegExp('{{(' + Object.keys($store.inputs).join('|') + ')}}', 'g'), $store.inputs["$1"] -->
