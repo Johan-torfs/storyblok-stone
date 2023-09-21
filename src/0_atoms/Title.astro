@@ -68,25 +68,57 @@ const className = `
 ---
 
 {blok.html_tag == 'h1' ? (
-    <h1 {...storyblokEditable(blok)} class:list={[blok.size && blok.size != "default" ? possibleSize[blok.size] : 'text-4xl sm:text-5xl lg:text-6xl', "font-medium tracking-tight mb-12 sm:mb-16", className]}>{blok.title}</h1>
+    <h1 {...storyblokEditable(blok)} 
+    class:list={[
+        blok.size && blok.size != "default" ? possibleSize[blok.size] : 'text-4xl sm:text-5xl lg:text-6xl', 
+        "font-medium tracking-tight", 
+        blok.margin_bottom ? possibleMarginBottom[blok.margin_bottom] : "mb-12 sm:mb-16",
+        className
+    ]}>{blok.title}</h1>
 ) : null}
 
 {blok.html_tag == 'h2' || blok.html_tag == undefined ? (
-    <h2 {...storyblokEditable(blok)} class:list={[blok.size && blok.size != "default" ? possibleSize[blok.size] : 'text-3xl sm:text-4xl', "font-medium tracking-tight mb-12 sm:mb-16", className]}>{blok.title}</h2>
+    <h2 {...storyblokEditable(blok)} 
+    class:list={[
+        blok.size && blok.size != "default" ? possibleSize[blok.size] : 'text-3xl sm:text-4xl', 
+        "font-medium tracking-tight", 
+        blok.margin_bottom ? possibleMarginBottom[blok.margin_bottom] : "mb-12 sm:mb-16",
+        className
+    ]}>{blok.title}</h2>
 ) : null}
 
 {blok.html_tag == 'h3' ? (
-    <h3 {...storyblokEditable(blok)} class:list={[blok.size && blok.size != "default" ? possibleSize[blok.size] : 'text-xl', "font-bold", className]}>{blok.title}</h3>
+    <h3 {...storyblokEditable(blok)} 
+    class:list={[
+        blok.size && blok.size != "default" ? possibleSize[blok.size] : 'text-xl', "font-bold",
+        blok.margin_bottom ? possibleMarginBottom[blok.margin_bottom] : "",
+        className
+    ]}>{blok.title}</h3>
 ) : null}
 
 {blok.html_tag == 'h4' ? (
-    <h4 {...storyblokEditable(blok)} class:list={[blok.size && blok.size != "default" ? possibleSize[blok.size] : '', className]}>{blok.title}</h4>
+    <h4 {...storyblokEditable(blok)} 
+    class:list={[
+        blok.size && blok.size != "default" ? possibleSize[blok.size] : '',
+        blok.margin_bottom ? possibleMarginBottom[blok.margin_bottom] : "",
+        className
+    ]}>{blok.title}</h4>
 ) : null}
 
 {blok.html_tag == 'h5' ? (
-    <h5 {...storyblokEditable(blok)} class:list={[blok.size && blok.size != "default" ? possibleSize[blok.size] : '', className]}>{blok.title}</h5>
+    <h5 {...storyblokEditable(blok)} 
+    class:list={[
+        blok.size && blok.size != "default" ? possibleSize[blok.size] : '',
+        blok.margin_bottom ? possibleMarginBottom[blok.margin_bottom] : "",
+        className
+    ]}>{blok.title}</h5>
 ) : null}
 
 {blok.html_tag == 'h6' ? (
-    <h6 {...storyblokEditable(blok)} class:list={[blok.size && blok.size != "default" ? possibleSize[blok.size] : '', className]}>{blok.title}</h6>
+    <h6 {...storyblokEditable(blok)} 
+    class:list={[
+        blok.size && blok.size != "default" ? possibleSize[blok.size] : '',
+        blok.margin_bottom ? possibleMarginBottom[blok.margin_bottom] : "",
+        className
+    ]}>{blok.title}</h6>
 ) : null}
