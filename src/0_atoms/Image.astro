@@ -46,18 +46,12 @@ const className = `
     ${blok.lg ? "lg:block" : "lg:hidden"}
     ${blok.xl ? "xl:block" : "xl:hidden"}
     ${blok.rounded ? possibleRounded[blok.rounded] : ""}
-`
+`.replace(/\s+/g, ' ').trim();
 ---
 
 <img 
     {...storyblokEditable(blok)}
     src={blok.image.filename} 
     alt={blok.image.alt} 
-    class:list={[
-        blok.xs ? "block" : "hidden", 
-        blok.sm ? "sm:block" : "sm:hidden",
-        blok.md ? "md:block" : "md:hidden",
-        blok.lg ? "lg:block" : "lg:hidden",
-        blok.xl ? "xl:block" : "xl:hidden",
-    ]}
+    class:list={[className]}
 >
