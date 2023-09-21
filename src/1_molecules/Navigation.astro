@@ -1,0 +1,37 @@
+---
+import { type SbBlokData } from '@storyblok/astro';
+// @ts-ignore
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import NavigationSvelte from './navigation/Navigation.svelte';
+
+interface StoryblokNavigation extends SbBlokData {
+    component: 'navigation',
+    mobile: [SbBlokData],
+    mobile_menu: [SbBlokData],
+    desktop: [SbBlokData]
+}
+
+interface Props {
+    blok: StoryblokNavigation;
+}
+
+const { blok } = Astro.props;
+---
+
+<NavigationSvelte blok={blok} client:load>
+    <Fragment slot="mobile-menu">
+        {blok.mobile_menu.map(item => {            
+            return <StoryblokComponent blok={item} />
+        })}
+    </Fragment>
+    <Fragment slot="mobile">
+        {blok.mobile.map(item => {            
+            return <StoryblokComponent blok={item} />
+        })}
+    </Fragment>
+    <Fragment slot="desktop">
+        {blok.desktop.map(item => {            
+            return <StoryblokComponent blok={item} />
+        })}
+    </Fragment>
+</NavigationSvelte>

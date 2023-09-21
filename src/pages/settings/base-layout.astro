@@ -1,0 +1,22 @@
+---
+import { useStoryblokApi } from "@storyblok/astro";
+import Navigation from "../../1_molecules/Navigation.astro";
+import BaseLayoutLayout from "../../layouts/BaseLayout.astro";
+
+const storyblokApi = useStoryblokApi()
+const response = await storyblokApi.get('cdn/stories/settings/base-layout', {
+  version: import.meta.env.PUBLIC_VERCEL_ENV == 'production' ? 'published' : 'draft',
+}).then((response: any ) => {
+    return response;
+}).catch((error: any) => {
+    console.log(error);
+});
+
+const navigation = response.data.story.content.navigation[0] || {};
+---
+
+<BaseLayoutLayout>
+    <Fragment slot="header">
+        <Navigation blok={navigation}/>
+    </Fragment>
+</BaseLayoutLayout>
