@@ -15,6 +15,7 @@ interface StoryblokCard extends SbBlokData {
     shadow?: boolean;
     rounded?: ["top_left"|"top_right"|"bottom_left"|"bottom_right"];
     height?: number;
+    width?: number;
 }
 
 interface Props {
@@ -106,8 +107,9 @@ const classNameInner = `${blok.center ? "items-center" : ""}`;
     </div>
 </div>
 
-<style define:vars={{height: blok.height + "px" || "auto"}}>
+<style define:vars={{height: blok.height + "px" || "auto", width: blok.width + "px" || "auto"}}>
     .card {
         min-height: var(--height);
+        width: var(--width);
     }
 </style>

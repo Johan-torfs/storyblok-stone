@@ -7,12 +7,13 @@ interface StoryblokParagraph extends SbBlokData {
     content: ISbRichtext;
     color?: "primary"| "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
     dark?: boolean;
-    size?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "default";
+    size?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "default";
     font?: "sans" | "montserrat" | "fraunces";
     uppercase?: boolean;
     decoration?: "underline" | "line-through" | "overline" | "none";
     center?: boolean;
     interactive?: boolean;
+    max_width?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
 }
 
 
@@ -42,7 +43,21 @@ const possibleSize = {
     xl: "text-xl",
     "2xl": "text-2xl",
     "3xl": "text-3xl",
+    "4xl": "text-4xl",
     default: "text-md",
+}
+
+const possibleMaxWidth = {
+    sm: "max-w-sm",
+    md: "max-w-md",
+    lg: "max-w-lg",
+    xl: "max-w-xl",
+    "2xl": "max-w-2xl",
+    "3xl": "max-w-3xl",
+    "4xl": "text-4xl",
+    full: "max-w-full",
+    prose: "max-w-prose",
+    fit: "max-w-fit",
 }
 
 const possibleFonts = {
@@ -65,6 +80,7 @@ const className = `
     ${blok.font ? possibleFonts[blok.font] : possibleFonts["sans"]}
     ${blok.uppercase ? "uppercase" : ""}
     ${blok.decoration ? possibleDecorations[blok.decoration] : possibleDecorations["none"]}
+    ${blok.max_width ? possibleMaxWidth[blok.max_width] : ""}
 `.replace(/\s+/g, ' ').trim();
  
 const html = renderRichText(blok.content);
@@ -72,4 +88,4 @@ const storyblokEditableData = storyblokEditable(blok);
 const htmlWithClass = html.replace(/<p>/g, `<p class="${className}" data-blok-c='${storyblokEditableData['data-blok-c']}' data-blok-uid='${storyblokEditableData['data-blok-uid']}' interactive='${!!blok.interactive}'>`)
 ---
 
-{blok.interactive ? <TextSvelte htmlWithClass={htmlWithClass} client:visible/> : <Fragment set:html={htmlWithClass} />} 
+{blok.interactive ? <TextSvelte htmlWithClass={htmlWithClass} client:visible/> : <Fragment set:html={htmlWithClass} class=" max"/>} 
