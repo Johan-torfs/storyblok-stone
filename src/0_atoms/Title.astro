@@ -9,6 +9,7 @@ interface StoryblokTitle extends SbBlokData {
     size?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "default";
     font?: "sans" | "montserrat" | "fraunces";
     dark?: boolean;
+    center?: boolean;
 }
 
 
@@ -50,6 +51,7 @@ const possibleFonts = {
 const className = `
     ${blok.color ? possibleColors[blok.color] : possibleColors["default"]}
     ${blok.font ? possibleFonts[blok.font] : possibleFonts["sans"]}
+    ${blok.center ? "text-center" : ""}
 `.replace(/\s+/g, ' ').trim();
 ---
 
