@@ -99,7 +99,7 @@ const className = `
 const classNameInner = `${blok.center ? "items-center" : ""}`;
 ---
 
-<div class:list={[className]} {...storyblokEditable(blok)}>
+<div class:list={["card-container", className]} {...storyblokEditable(blok)}>
     <div class:list={["flex flex-col gap-4 card", classNameInner]}>
         {blok.content.map(item => {            
             return <StoryblokComponent blok={item} />
@@ -110,6 +110,9 @@ const classNameInner = `${blok.center ? "items-center" : ""}`;
 <style define:vars={{height: blok.height + "px" || "auto", width: blok.width + "px" || "auto"}}>
     .card {
         min-height: var(--height);
+    }
+
+    .card-container {
         width: clamp(150px, var(--width), 100%);
     }
 </style>
