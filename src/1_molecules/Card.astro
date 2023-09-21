@@ -8,6 +8,8 @@ interface StoryblokCard extends SbBlokData {
     content: [SbBlokData],
     padding?: 0|2|4|6|8|16|24;
     color?: "primary" | "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
+    border_color?: "primary" | "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
+    border_pos?: ["top"|"bottom"|"left"|"right"];
     gradient?: boolean;
     center?: boolean;
     shadow?: boolean;
@@ -44,6 +46,25 @@ const possibleColors = {
     default: "bg-white dark:bg-black"
 }
 
+const possibleBorders = {
+    top: "border-t-2",
+    bottom: "border-b-2",
+    left: "border-l-2",
+    right: "border-r-2",
+}
+
+const possibleColorsBorder = {
+    primary: "border-primary-700 dark:border-primary-400",
+    secondary: "border-secondary-700 dark:border-secondary-400",
+    accent_1: "border-accent-1-700 dark:border-accent-1-400",
+    accent_2: "border-accent-2-700 dark:border-accent-2-400",
+    accent_3: "border-accent-3-700 dark:border-accent-3-400",
+    accent_4: "border-accent-4-700 dark:border-accent-4-400",
+    accent_5: "border-accent-5-700 dark:border-accent-5-400",
+    white: "border-white dark:border-black",
+    black: "border-black dark:border-white"
+}
+
 const possibleGradients = {
     primary: "bg-gradient-to-b from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-400",
     secondary: "bg-gradient-to-b from-secondary-500 to-secondary-700 dark:from-secondary-600 dark:to-secondary-400",
@@ -69,6 +90,8 @@ const className = `
     ${blok.padding ? possiblePadding[blok.padding] : ''}
     ${possibleColors[blok.color ? blok.color : "default"]} ${blok.gradient ? possibleGradients[blok.color ? blok.color : "default"] : ""}
     ${blok.rounded ? blok.rounded.map((r) => possibleRounded[r]).join(" ") : ""}
+    ${blok.border_pos ? blok.border_pos.map((b) => possibleBorders[b]).join(" ") : ""}
+    ${blok.border_color ? possibleColorsBorder[blok.border_color] : ""}
     overflow-hidden
 `.replace(/\s+/g, ' ').trim();
 
