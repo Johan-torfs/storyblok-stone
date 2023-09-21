@@ -109,7 +109,7 @@ const classNameInner = `${blok.center ? "items-center" : ""}`;
 
 <style define:vars={{height: blok.height + "px" || "auto", width: blok.width + "px" || "auto"}}>
     .card {
-        min-height: var(--height);
+        height: clamp(150px, var(--height), 100%);
     }
 
     .card-container {
