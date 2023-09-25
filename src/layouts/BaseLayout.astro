@@ -1,4 +1,20 @@
 ---
+import { useStoryblokApi, type SbBlokData } from "@storyblok/astro";
+// @ts-ignore
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+const storyblokApi = useStoryblokApi()
+const response = await storyblokApi.get('cdn/stories/settings/base-layout', {
+  version: import.meta.env.PUBLIC_VERCEL_ENV == 'production' ? 'published' : 'draft',
+}).then((response: any ) => {
+    return response;
+}).catch((error: any) => {
+    console.log(error);
+});
+
+const navigation = response.data.story.content.navigation;
+const header = response.data.story.content.header;
+const footer = response.data.story.content.footer;
 ---
 
 <html lang="en">
@@ -16,6 +32,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Hanken+Grotesk:wght@500;700;800&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
+		{navigation?.map((blok: SbBlokData) => {            
+			return <StoryblokComponent blok={blok} />
+		})}
         <header><slot name="header"/></header>
         <main><slot/></main>
         <footer><slot name="footer"/></footer>

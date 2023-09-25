@@ -22,6 +22,15 @@ interface StoryblokImage extends SbBlokData {
     lg: boolean;
     xl: boolean;
     rounded?: "none" | "sm" | "md" | "lg" | "full";
+    width?: number;
+    height?: number;
+    link: {
+        id: number;
+        url: string;
+        linktype: string;
+        fieldtype: string;
+        cached_url: string;
+    }
 }
 
 
@@ -40,6 +49,7 @@ const possibleRounded = {
 }
 
 const className = `
+    image
     ${blok.xs ? "block" : "hidden"}
     ${blok.sm ? "sm:block" : "sm:hidden"}
     ${blok.md ? "md:block" : "md:hidden"}
@@ -47,11 +57,34 @@ const className = `
     ${blok.xl ? "xl:block" : "xl:hidden"}
     ${blok.rounded ? possibleRounded[blok.rounded] : ""}
 `.replace(/\s+/g, ' ').trim();
+
+if (blok.link?.linktype === 'story') {
+    blok.link.cached_url = `/${blok.link.cached_url}`;
+}
 ---
 
+{blok.link 
+? 
+<a href={blok.link.cached_url}>
+    <img 
+        {...storyblokEditable(blok)}
+        src={blok.image.filename} 
+        alt={blok.image.alt} 
+        class:list={[className]}
+    />
+</a> 
+:
 <img 
     {...storyblokEditable(blok)}
     src={blok.image.filename} 
     alt={blok.image.alt} 
     class:list={[className]}
->
+/>
+}
+
+<style define:vars={{height: blok.height ? blok.height + "px" : "auto", width: blok.width ? blok.width + "px" : "auto"}}>
+    .image {
+        height: var(--height);
+        width: var(--width);
+    }
+</style>

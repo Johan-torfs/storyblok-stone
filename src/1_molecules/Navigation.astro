@@ -3,12 +3,33 @@ import { type SbBlokData } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import NavigationSvelte from './navigation/Navigation.svelte';
+import Dropdown from '../0_atoms/Dropdown.astro';
 
 interface StoryblokNavigation extends SbBlokData {
     component: 'navigation',
     mobile: [SbBlokData],
     mobile_menu: [SbBlokData],
-    desktop: [SbBlokData]
+    desktop: [SbBlokData],
+    margin_x: 0|2|4|6|8|16|24,
+    margin_y: 0|2|4|6|8|16|24,
+    padding_x: 0|2|4|6|8|16|24,
+    padding_y: 0|2|4|6|8|16|24,
+    margin_x_lg: 0|2|4|6|8|16|24,
+    margin_x_md: 0|2|4|6|8|16|24,
+    margin_x_sm: 0|2|4|6|8|16|24,
+    margin_x_xl: 0|2|4|6|8|16|24,
+    margin_y_lg: 0|2|4|6|8|16|24,
+    margin_y_md: 0|2|4|6|8|16|24,
+    margin_y_sm: 0|2|4|6|8|16|24,
+    margin_y_xl: 0|2|4|6|8|16|24,
+    padding_x_lg: 0|2|4|6|8|16|24,
+    padding_x_md: 0|2|4|6|8|16|24,
+    padding_x_sm: 0|2|4|6|8|16|24,
+    padding_x_xl: 0|2|4|6|8|16|24,
+    padding_y_lg: 0|2|4|6|8|16|24,
+    padding_y_md: 0|2|4|6|8|16|24,
+    padding_y_sm: 0|2|4|6|8|16|24,
+    padding_y_xl: 0|2|4|6|8|16|24,
 }
 
 interface Props {

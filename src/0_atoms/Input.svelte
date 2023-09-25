@@ -1,6 +1,6 @@
 <script>
 import { storyblokEditable } from '@storyblok/astro';
-import { store } from '../stores.js';
+import { inputs } from '../stores.js';
 
 export let blok;
 
@@ -56,8 +56,8 @@ const classNameRadio = `
 `.replace(/\s+/g, " ").trim();
 
 function storeInput(e) {
-    store.update((s) => {
-        s["inputs"][blok.name] = e.target.value;
+    inputs.update((s) => {
+        s[blok.name] = e.target.value;
         return s;
     });
 }

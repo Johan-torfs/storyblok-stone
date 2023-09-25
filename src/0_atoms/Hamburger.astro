@@ -1,0 +1,18 @@
+---
+import { type SbBlokData } from '@storyblok/astro';
+import HamburgerSvelte from './Hamburger.svelte';
+
+interface StoryblokHamburger extends SbBlokData {
+    component: 'hamburger';
+    aria_controls: string;
+}
+
+
+interface Props {
+    blok: StoryblokHamburger;
+}
+
+const { blok } = Astro.props;
+---
+
+<HamburgerSvelte blok={blok} client:load />

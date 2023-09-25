@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 
-export const store = writable({
-    inputs: {},
+export const inputs = writable({});
+export const navigation = writable({
+    open: false,
 });
