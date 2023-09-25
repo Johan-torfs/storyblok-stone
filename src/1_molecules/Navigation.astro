@@ -39,7 +39,7 @@ interface Props {
 const { blok } = Astro.props;
 ---
 
-<NavigationSvelte blok={blok} client:load>
+<NavigationSvelte blok={blok} client:idle>
     <Fragment slot="mobile-menu">
         {blok.mobile_menu.map(item => {            
             return <StoryblokComponent blok={item} />
