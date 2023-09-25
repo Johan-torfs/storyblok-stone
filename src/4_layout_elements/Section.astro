@@ -2,7 +2,7 @@
 import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-// import { getPaddingClasses } from '../padding';
+import { getPaddingClasses } from '../padding';
 
 interface StoryblokSection extends SbBlokData {
     component: 'section',
@@ -49,9 +49,8 @@ const possibleColors = {
     default: "bg-transparent"
 }
 
-// ${getPaddingClasses(blok)}
-
 const className = `
+    ${getPaddingClasses(blok)}
     ${blok.color ? possibleColors[blok.color] : possibleColors.default}
 `.replace(/\s+/g, ' ').trim();
 ---
