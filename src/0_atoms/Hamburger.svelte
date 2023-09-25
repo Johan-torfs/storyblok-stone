@@ -1,20 +1,21 @@
 <script>
 import { storyblokEditable } from '@storyblok/astro';
-import { navigation } from '../stores.js';
+// import { navigation } from '../stores.js';
 
 export let blok;
+let open = false;
 
 function toggle() {
-    navigation.update((s) => {
-        s['open'] = !s['open'];
-        return s;
-    });
+    // navigation.update((s) => {
+    //     s['open'] = !s['open'];
+    //     return s;
+    // });
 }
 </script>
 
 
 
-<button {...storyblokEditable(blok)} class="hamburger pointer-events-auto lg:hidden w-8 h-6" aria-controls={blok.controls || "page navigation"} aria-expanded={$navigation.open} aria-label="open navigation" on:click={toggle}>
+<button {...storyblokEditable(blok)} class="hamburger pointer-events-auto lg:hidden w-8 h-6" aria-controls={blok.controls || "page navigation"} aria-expanded={open} aria-label="open navigation" on:click={toggle}>
     <svg aria-hidden="true">
         <line x1="15%" y1="10%" x2="95%" y2="10%" stroke-width="3" stroke="#000000" stroke-linecap="round" />
         <line x1="5%" y1="50%" x2="95%" y2="50%" stroke-width="3" stroke="#000000" stroke-linecap="round" />
