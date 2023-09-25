@@ -1,12 +1,12 @@
 <script>
-import { store } from '../stores.js';
+import { inputs } from '../stores.js';
 
 export let htmlWithClass;
 
-let html = htmlWithClass.replace(new RegExp('{{(' + Object.keys($store.inputs).join('|') + ')}}', 'g'), match => $store.inputs[match.replace(/{{|}}/g, '')]);
+let html = htmlWithClass.replace(new RegExp('{{(' + Object.keys($inputs).join('|') + ')}}', 'g'), match => $inputs[match.replace(/{{|}}/g, '')]);
 </script>
 
-{#if $store.inputs["rating"]}
+{#if $inputs["rating"]}
     {@html html}
 {:else}
     <p>Submitting review</p>

@@ -21,6 +21,16 @@ interface StoryblokImage extends SbBlokData {
     md: boolean;
     lg: boolean;
     xl: boolean;
+    rounded?: "none" | "sm" | "md" | "lg" | "full";
+    width?: number;
+    height?: number;
+    link: {
+        id: number;
+        url: string;
+        linktype: string;
+        fieldtype: string;
+        cached_url: string;
+    }
 }
 
 
@@ -29,17 +39,52 @@ interface Props {
 }
 
 const { blok } = Astro.props;
+
+const possibleRounded = {
+    none: "rounded-none",
+    sm: "rounded-sm",
+    md: "rounded-md",
+    lg: "rounded-lg",
+    full: "rounded-full"
+}
+
+const className = `
+    image
+    ${blok.xs ? "block" : "hidden"}
+    ${blok.sm ? "sm:block" : "sm:hidden"}
+    ${blok.md ? "md:block" : "md:hidden"}
+    ${blok.lg ? "lg:block" : "lg:hidden"}
+    ${blok.xl ? "xl:block" : "xl:hidden"}
+    ${blok.rounded ? possibleRounded[blok.rounded] : ""}
+`.replace(/\s+/g, ' ').trim();
+
+if (blok.link?.linktype === 'story') {
+    blok.link.cached_url = `/${blok.link.cached_url}`;
+}
 ---
 
+{blok.link 
+? 
+<a href={blok.link.cached_url}>
+    <img 
+        {...storyblokEditable(blok)}
+        src={blok.image.filename} 
+        alt={blok.image.alt} 
+        class:list={[className]}
+    />
+</a> 
+:
 <img 
     {...storyblokEditable(blok)}
     src={blok.image.filename} 
     alt={blok.image.alt} 
-    class:list={[
-        blok.xs ? "block" : "hidden", 
-        blok.sm ? "sm:block" : "sm:hidden",
-        blok.md ? "md:block" : "md:hidden",
-        blok.lg ? "lg:block" : "lg:hidden",
-        blok.xl ? "xl:block" : "xl:hidden",
-    ]}
->
+    class:list={[className]}
+/>
+}
+
+<style define:vars={{height: blok.height ? blok.height + "px" : "auto", width: blok.width ? blok.width + "px" : "auto"}}>
+    .image {
+        height: var(--height);
+        width: var(--width);
+    }
+</style>

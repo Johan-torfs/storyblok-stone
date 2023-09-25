@@ -1,0 +1,32 @@
+---
+import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+
+interface StoryblokLink extends SbBlokData {
+    component: 'link';
+    text: string;
+    link: {
+        linktype: 'url' | 'story' | 'asset';
+        cached_url: string;
+    };
+    hover: 'underline' | 'none';
+}
+
+interface Props {
+    blok: StoryblokLink;
+}
+
+const { blok } = Astro.props;
+
+if (!blok.link) {
+    blok.link = {
+        linktype: 'url',
+        cached_url: '#',
+    };
+}
+
+if (blok.link.linktype === 'story') {
+    blok.link.cached_url = `/${blok.link.cached_url}`;
+}
+---
+
+<a {...storyblokEditable(blok)} href={blok.link.cached_url} class="relative cursor-pointer pointer-events-auto after:absolute after:block after:h-1 after:w-0 hover:after:w-full after:transition-all after:duration-200 after:delay-200 after:ease-in after:bg-primary-500 after:rounded-full">{blok.text}</a>
