@@ -3,7 +3,6 @@ import { storyblokEditable } from '@storyblok/astro';
 // import { navigation } from '../stores.js';
 
 export let blok;
-let open = false;
 
 function toggle() {
     // navigation.update((s) => {
