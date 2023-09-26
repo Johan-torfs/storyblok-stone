@@ -62,8 +62,8 @@ if (blok.link?.linktype === 'story') {
     blok.link.cached_url = `/${blok.link.cached_url}`;
 }
 
-if (blok.cached_url == '/home') {
-    blok.cached_url = '/';
+if (blok.link?.cached_url == '/home') {
+    blok.link.cached_url = '/';
 }
 ---
 
