@@ -8,7 +8,7 @@ interface StoryblokLink extends SbBlokData {
         linktype: 'url' | 'story' | 'asset';
         cached_url: string;
     };
-    hover: 'underline' | 'none';
+    hover: 'underline' | 'background' | 'text';
 }
 
 interface Props {
@@ -31,6 +31,13 @@ if (blok.link.linktype === 'story') {
 if (blok.link.cached_url == '/home') {
     blok.link.cached_url = '/';
 }
+
+const className = `
+    relative cursor-pointer pointer-events-auto 
+    ${blok.hover === 'underline' ? 'relative cursor-pointer pointer-events-auto after:absolute after:block after:h-1 after:w-0 hover:after:w-full after:transition-all after:duration-200 after:delay-200 after:ease-in after:bg-primary-500 after:rounded-full after:-bottom-1' : ''}
+    ${blok.hover === 'background' ? 'hover:bg-primary-500/20 rounded-md p-2' : ''}
+    ${blok.hover === 'text' ? 'hover:text-primary-500' : ''}
+`
 ---
 
-<a {...storyblokEditable(blok)} href={blok.link.cached_url} class="relative cursor-pointer pointer-events-auto after:absolute after:block after:h-1 after:w-0 hover:after:w-full after:transition-all after:duration-200 after:delay-200 after:ease-in after:bg-primary-500 after:rounded-full">{blok.text}</a>
+<a {...storyblokEditable(blok)} href={blok.link.cached_url} class={className}>{blok.text}</a>

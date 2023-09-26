@@ -19,7 +19,7 @@ const className = `
         <slot name="mobile-menu"/>
     </div>
     {#if $navigation.open}
-        <div id="page-navigation" class="w-full h-full flex justify-center items-center pointer-events-auto" transition:fly={{ duration: 300, x: '-100%', y: 0, opacity: 1, easing: quadInOut }}>
+        <div id="page-navigation" class="w-full h-full flex justify-center items-center pointer-events-auto" transition:fly={{ duration: 300, y: '-100%', x: 0, opacity: 1, easing: quadInOut }}>
             <slot name="mobile"/>
         </div>
     {/if}
