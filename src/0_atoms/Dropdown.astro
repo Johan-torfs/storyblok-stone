@@ -18,15 +18,17 @@ interface Props {
 const { blok } = Astro.props;
 ---
 
-<div {...storyblokEditable(blok)} class="group">
-    <span class="flex items-center relative cursor-pointer pointer-events-auto after:absolute after:block after:h-1 after:w-0 hover:after:w-full after:transition-all after:duration-200 after:delay-200 after:ease-in after:bg-primary-500">{blok.label}
+<div {...storyblokEditable(blok)} class="group relative">
+    <span class="flex items-center relative cursor-pointer pointer-events-auto">{blok.label}
         <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
         </svg>
     </span>
-    <ul class="hidden duration-300 lg:invisible lg:absolute lg:block lg:h-auto lg:w-[13.5rem] lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100 bg-white shadow-lg border-secondary-500 border rounded-md">
-        {blok.content?.map((blok: SbBlokData) => {            
+    {blok.content.length > 0 ?
+    <ul class="hidden duration-300 lg:invisible lg:absolute lg:flex lg:flex-col lg:h-auto lg:w-[13.5rem] lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100 bg-white shadow-lg border-secondary-500 border rounded-md p-2 top-8">
+        {blok.content?.map((blok: SbBlokData) => {
             return <StoryblokComponent blok={blok} />
         })}
     </ul>
+    : null}
 </div>

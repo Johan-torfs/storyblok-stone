@@ -1,7 +1,8 @@
 ---
-import { useStoryblokApi } from "@storyblok/astro";
-// import Navigation from "../../1_molecules/Navigation.astro";
+import { useStoryblokApi, type SbBlokData } from "@storyblok/astro";
 import SettingsLayout from "../../layouts/SettingsLayout.astro";
+// @ts-ignore
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 const storyblokApi = useStoryblokApi()
 const response = await storyblokApi.get('cdn/stories/settings/base-layout', {
@@ -12,11 +13,13 @@ const response = await storyblokApi.get('cdn/stories/settings/base-layout', {
     console.log(error);
 });
 
-// const navigation = response.data.story.content.navigation[0] || {};
+const navigation = response.data.story.content.navigation;
 ---
 
 <SettingsLayout>
     <Fragment slot="header">
-        <!-- <Navigation blok={navigation}/> -->
+        {navigation?.map((blok: SbBlokData) => {            
+			return <StoryblokComponent blok={blok} />
+		})}
     </Fragment>
 </SettingsLayout>
