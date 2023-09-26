@@ -1,7 +1,7 @@
 ---
 import { useStoryblokApi } from "@storyblok/astro";
-import Navigation from "../../1_molecules/Navigation.astro";
-import BaseLayoutLayout from "../../layouts/BaseLayout.astro";
+// import Navigation from "../../1_molecules/Navigation.astro";
+import SettingsLayout from "../../layouts/SettingsLayout.astro";
 
 const storyblokApi = useStoryblokApi()
 const response = await storyblokApi.get('cdn/stories/settings/base-layout', {
@@ -12,11 +12,11 @@ const response = await storyblokApi.get('cdn/stories/settings/base-layout', {
     console.log(error);
 });
 
-const navigation = response.data.story.content.navigation[0] || {};
+// const navigation = response.data.story.content.navigation[0] || {};
 ---
 
-<BaseLayoutLayout>
+<SettingsLayout>
     <Fragment slot="header">
-        <Navigation blok={navigation}/>
+        <!-- <Navigation blok={navigation}/> -->
     </Fragment>
-</BaseLayoutLayout>
+</SettingsLayout>

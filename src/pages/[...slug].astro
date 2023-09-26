@@ -11,8 +11,7 @@ export async function getStaticPaths() {
         excluding_slugs: 'settings/*',
     });
 
-    const stories = data.stories;   
-    console.log(stories); 
+    const stories = data.stories;    
     return stories.map((entry: any) => {
         let slug = entry.slug == "home" ? undefined : entry.full_slug;
         return { 
