@@ -20,6 +20,7 @@ export default defineConfig({
       container: '4_layout_elements/Container',
       grid: '4_layout_elements/Grid',
       flex: '4_layout_elements/Flex',
+      column: '4_layout_elements/Column',
       card: '1_molecules/Card',
       alert: '1_molecules/Alert',
       form: '1_molecules/Form',
