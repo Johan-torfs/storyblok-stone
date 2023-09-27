@@ -11,6 +11,7 @@ interface StoryblokTitle extends SbBlokData {
     dark?: boolean;
     center?: boolean;
     margin_bottom?: 0|2|4|6|8|16|24;
+    max_width?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
 }
 
 
@@ -59,11 +60,25 @@ const possibleMarginBottom = {
     24: "mb-24",
 };
 
+const possibleMaxWidth = {
+    sm: "max-w-sm",
+    md: "max-w-md",
+    lg: "max-w-lg",
+    xl: "max-w-xl",
+    "2xl": "max-w-2xl",
+    "3xl": "max-w-3xl",
+    "4xl": "text-4xl",
+    full: "max-w-full",
+    prose: "max-w-prose",
+    fit: "max-w-fit",
+}
+
 const className = `
     ${blok.color ? possibleColors[blok.color] : possibleColors["default"]}
     ${blok.font ? possibleFonts[blok.font] : possibleFonts["sans"]}
     ${blok.center ? "text-center" : ""}
     ${blok.margin_bottom ? possibleMarginBottom[blok.margin_bottom] : ""}
+    ${blok.max_width ? possibleMaxWidth[blok.max_width] : ""}
 `.replace(/\s+/g, ' ').trim();
 ---
 
