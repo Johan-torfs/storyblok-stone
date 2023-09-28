@@ -1,6 +1,5 @@
 ---
-import { type SbBlokData } from '@storyblok/astro';
-import { storyblokEditable } from '../storyblok/storyblok_editable';
+import { type SbBlokData, storyblokEditable } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
@@ -31,7 +30,7 @@ const className = getClassName(blok, {
 })
 ---
 
-<section class:list={[className]} {...storyblokEditable(blok, import.meta.env.PUBLIC_VERCEL_ENV == 'production')}>
+<section class:list={[className]} {...storyblokEditable(blok)}>
     {blok.content.map(item => {            
 		return <StoryblokComponent blok={item}/>
 	})}
