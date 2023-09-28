@@ -1,22 +1,18 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+import { type SbBlokData } from '@storyblok/astro';
+import { storyblokEditable } from '../storyblok/storyblok_editable';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
-interface StoryblokGrid extends SbBlokData {
+import { getClassName, getGapClasses, getColumnsClasses, getPaddingXClasses, getPaddingYClasses, getAlignContentClasses, getAlignItemsClasses, getJustifyContentClasses, getJustifyItemsClasses } from '../tailwind/class_name_compiler';
+import type { Gap } from '../tailwind/types/Gap'
+import type { Columns } from '../tailwind/types/Columns'
+import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
+import type { JustifyContent, JustifyItems, AlignContent, AlignItems } from '../tailwind/types/Grid';
+
+interface StoryblokGrid extends SbBlokData, Gap, Columns, PaddingX, PaddingY, JustifyContent, JustifyItems, AlignContent, AlignItems {
     component: 'grid',
     columns: [SbBlokData],
-    gap: number,
-    default_columns: number,
-    small_columns: number,
-    medium_columns: number,
-    large_columns: number,
-    extra_large_columns: number,
-    extra_extra_large_columns: number,
-    padding_x?: 0|2|4|6|8|16|24;
-    padding_y?: 0|2|4|6|8|16|24;
-    content?: "center"|"start"|"end"|"between"|"around"|"evenly"|"auto"|"default";
-    justify?: "center"|"start"|"end"|"between"|"around"|"evenly"|"auto"|"default";
 }
 
 interface Props {
@@ -25,65 +21,21 @@ interface Props {
 
 const { blok } = Astro.props;
 
-const possiblePaddingX = {
-    0: "px-0",
-    2: "px-2",
-    4: "px-4",
-    6: "px-6",
-    8: "px-8",
-    16: "px-16",
-    24: "px-24",
-};
-
-const possiblePaddingY = {
-    0: "py-0",
-    2: "py-2",
-    4: "py-4",
-    6: "py-6",
-    8: "py-8",
-    16: "py-16",
-    24: "py-24",
-};
-
-const possibleJustify = {
-    "center": "justify-items-center",
-    "start": "justify-items-start",
-    "end": "justify-items-end",
-    "between": "justify-items-between",
-    "around": "justify-items-around",
-    "evenly": "justify-items-evenly",
-    "auto": "justify-items-auto",
-    "default": "",
-};
-
-const possibleContent = {
-    "center": "content-center",
-    "start": "content-start",
-    "end": "content-end",
-    "between": "content-between",
-    "around": "content-around",
-    "evenly": "content-evenly",
-    "auto": "content-auto",
-    "default": "",
-};
-
-const className = `
-    ${blok.gap ? 'gap-' + blok.gap : ''}
-    ${blok.default_columns ? 'grid-cols-' + blok.default_columns : ''} 
-    ${blok.small_columns ? 'sm:grid-cols-' + blok.small_columns : ''}
-    ${blok.medium_columns ? 'md:grid-cols-' + blok.medium_columns : ''}
-    ${blok.large_columns ? 'lg:grid-cols-' + blok.large_columns : ''}
-    ${blok.extra_large_columns ? 'xl:grid-cols-' + blok.extra_large_columns : ''}
-    ${blok.extra_extra_large_columns ? 'xxl:grid-cols-' + blok.extra_extra_large_columns : ''}
-
-    ${blok.padding_x ? possiblePaddingX[blok.padding_x] : ''}
-    ${blok.padding_y ? possiblePaddingY[blok.padding_y] : ''}
-    ${possibleJustify[blok.justify? blok.justify : 'default']}
-    ${possibleContent[blok.content? blok.content : 'default']}
-`.replace(/\s+/g, ' ').trim();
+var className = getClassName(blok, {
+    decorators: [
+        {decorator: getGapClasses},
+        {decorator: getColumnsClasses},
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
+        {decorator: getAlignContentClasses},
+        {decorator: getAlignItemsClasses},
+        {decorator: getJustifyContentClasses},
+        {decorator: getJustifyItemsClasses},
+    ]
+})
 ---
 
-<div class:list={["grid", className]} {...storyblokEditable(blok)}>
+<div class:list={["grid", className]} {...storyblokEditable(blok, import.meta.env.PUBLIC_VERCEL_ENV == 'production')}>
     {blok.columns.map(item => {            
 		return <StoryblokComponent blok={item} />
 	})}

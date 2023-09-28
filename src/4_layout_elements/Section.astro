@@ -1,33 +1,17 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+import { type SbBlokData } from '@storyblok/astro';
+import { storyblokEditable } from '../storyblok/storyblok_editable';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-import { getPaddingClasses } from '../padding';
 
-interface StoryblokSection extends SbBlokData {
+import { getClassName, getPaddingXClasses, getPaddingYClasses, getMarginXClasses, getMarginYClasses, getBackgroundColorClasses } from '../tailwind/class_name_compiler';
+import {type PaddingX, type PaddingY} from '../tailwind/types/Padding';
+import {type MarginX, type MarginY} from '../tailwind/types/Margin';
+import {type BackgroundColor} from '../tailwind/types/Color';
+
+interface StoryblokSection extends SbBlokData, PaddingX, PaddingY, MarginX, MarginY, BackgroundColor {
     component: 'section',
-    color?: "primary"| "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
     content: [SbBlokData],
-    margin_x: 0|2|4|6|8|16|24,
-    margin_y: 0|2|4|6|8|16|24,
-    padding_x: 0|2|4|6|8|16|24,
-    padding_y: 0|2|4|6|8|16|24,
-    margin_x_lg: 0|2|4|6|8|16|24,
-    margin_x_md: 0|2|4|6|8|16|24,
-    margin_x_sm: 0|2|4|6|8|16|24,
-    margin_x_xl: 0|2|4|6|8|16|24,
-    margin_y_lg: 0|2|4|6|8|16|24,
-    margin_y_md: 0|2|4|6|8|16|24,
-    margin_y_sm: 0|2|4|6|8|16|24,
-    margin_y_xl: 0|2|4|6|8|16|24,
-    padding_x_lg: 0|2|4|6|8|16|24,
-    padding_x_md: 0|2|4|6|8|16|24,
-    padding_x_sm: 0|2|4|6|8|16|24,
-    padding_x_xl: 0|2|4|6|8|16|24,
-    padding_y_lg: 0|2|4|6|8|16|24,
-    padding_y_md: 0|2|4|6|8|16|24,
-    padding_y_sm: 0|2|4|6|8|16|24,
-    padding_y_xl: 0|2|4|6|8|16|24,
 }
 
 interface Props {
@@ -36,27 +20,19 @@ interface Props {
 
 const { blok } = Astro.props;
 
-const possibleColors = {
-    primary: "bg-primary-700 dark:bg-primary-400",
-    secondary: "bg-secondary-700 dark:bg-secondary-400",
-    accent_1: "bg-accent-1-700 dark:bg-accent-1-400",
-    accent_2: "bg-accent-2-700 dark:bg-accent-2-400",
-    accent_3: "bg-accent-3-700 dark:bg-accent-3-400",
-    accent_4: "bg-accent-4-700 dark:bg-accent-4-400",
-    accent_5: "bg-accent-5-700 dark:bg-accent-5-400",
-    white: "bg-white dark:bg-black",
-    black: "bg-black dark:bg-white",
-    default: "bg-transparent"
-}
-
-const className = `
-    ${getPaddingClasses(blok)}
-    ${blok.color ? possibleColors[blok.color] : possibleColors.default}
-`.replace(/\s+/g, ' ').trim();
+const className = getClassName(blok, {
+    decorators: [
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
+        {decorator: getMarginXClasses},
+        {decorator: getMarginYClasses},
+        {decorator: getBackgroundColorClasses},
+    ]
+})
 ---
 
-<section class:list={[className]} {...storyblokEditable(blok)}>
+<section class:list={[className]} {...storyblokEditable(blok, import.meta.env.PUBLIC_VERCEL_ENV == 'production')}>
     {blok.content.map(item => {            
-		return <StoryblokComponent blok={item} />
+		return <StoryblokComponent blok={item}/>
 	})}
 </section>
