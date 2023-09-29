@@ -23,6 +23,8 @@ import { getJustifyContentClasses } from './decorators/grid_justify_content';
 import { getJustifyItemsClasses } from './decorators/grid_justify_items';
 import { getContainerSizeClasses } from './decorators/container_size';
 import { getColSpanClasses } from './decorators/columns_col_span';
+import { getVisibilityClasses } from './decorators/visibility';
+import { getBreakpointClasses } from './decorators/breakpoint';
 
 export {
     getClassName,
@@ -39,4 +41,6 @@ export {
     getJustifyItemsClasses,
     getContainerSizeClasses,
     getColSpanClasses,
+    getVisibilityClasses,
+    getBreakpointClasses,
 }
