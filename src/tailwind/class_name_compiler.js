@@ -22,6 +22,7 @@ import { getAlignItemsClasses } from './decorators/grid_align_items';
 import { getJustifyContentClasses } from './decorators/grid_justify_content';
 import { getJustifyItemsClasses } from './decorators/grid_justify_items';
 import { getContainerSizeClasses } from './decorators/container_size';
+import { getColSpanClasses } from './decorators/columns_col_span';
 
 export {
     getClassName,
@@ -37,4 +38,5 @@ export {
     getJustifyContentClasses,
     getJustifyItemsClasses,
     getContainerSizeClasses,
+    getColSpanClasses,
 }

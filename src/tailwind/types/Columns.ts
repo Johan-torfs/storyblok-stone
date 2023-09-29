@@ -7,3 +7,13 @@ export interface Columns {
         xl?: string;
     };
 }
+
+export interface ColSpan {
+    col_span?: {
+        xs?: string;
+        sm?: string;
+        md?: string;
+        lg?: string;
+        xl?: string;
+    };
+}
