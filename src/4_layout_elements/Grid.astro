@@ -11,7 +11,7 @@ import type { JustifyContent, JustifyItems, AlignContent, AlignItems } from '../
 
 interface StoryblokGrid extends SbBlokData, Gap, Columns, PaddingX, PaddingY, JustifyContent, JustifyItems, AlignContent, AlignItems {
     component: 'grid',
-    columns: [SbBlokData],
+    content: [SbBlokData],
 }
 
 interface Props {
@@ -35,7 +35,7 @@ var className = getClassName(blok, {
 ---
 
 <div class:list={["grid", className]} {...storyblokEditable(blok)}>
-    {blok.columns.map(item => {            
+    {blok.content.map(item => {            
 		return <StoryblokComponent blok={item} />
 	})}
 </div>
