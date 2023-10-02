@@ -252,6 +252,133 @@ const possibleBackgroundColorsIntense = {
     }
 }
 
+const possibleBackgroundColorsTranspicuous = {
+    default: {
+        xs: {
+            primary: "bg-primary-700/10 dark:bg-primary-400/10",
+            secondary: "bg-secondary-700/10 dark:bg-secondary-400/10",
+            accent_1: "bg-accent-1-700/10 dark:bg-accent-1-400/10",
+            accent_2: "bg-accent-2-700/10 dark:bg-accent-2-400/10",
+            accent_3: "bg-accent-3-700/10 dark:bg-accent-3-400/10",
+            accent_4: "bg-accent-4-700/10 dark:bg-accent-4-400/10",
+            accent_5: "bg-accent-5-700/10 dark:bg-accent-5-400/10",
+            white: "bg-white/10 dark:bg-black/10",
+            black: "bg-black/10 dark:bg-white/10",
+            transparent: "bg-transparent",
+        },
+        sm: {
+            primary: "sm:bg-primary-700/10 dark:sm:bg-primary-400/10",
+            secondary: "sm:bg-secondary-700/10 dark:sm:bg-secondary-400/10",
+            accent_1: "sm:bg-accent-1-700/10 dark:sm:bg-accent-1-400/10",
+            accent_2: "sm:bg-accent-2-700/10 dark:sm:bg-accent-2-400/10",
+            accent_3: "sm:bg-accent-3-700/10 dark:sm:bg-accent-3-400/10",
+            accent_4: "sm:bg-accent-4-700/10 dark:sm:bg-accent-4-400/10",
+            accent_5: "sm:bg-accent-5-700/10 dark:sm:bg-accent-5-400/10",
+            white: "sm:bg-white/10 dark:sm:bg-black/10",
+            black: "sm:bg-black/10 dark:sm:bg-white/10",
+            transparent: "sm:bg-transparent",
+        },
+        md: {
+            primary: "md:bg-primary-700/10 dark:md:bg-primary-400/10",
+            secondary: "md:bg-secondary-700/10 dark:md:bg-secondary-400/10",
+            accent_1: "md:bg-accent-1-700/10 dark:md:bg-accent-1-400/10",
+            accent_2: "md:bg-accent-2-700/10 dark:md:bg-accent-2-400/10",
+            accent_3: "md:bg-accent-3-700/10 dark:md:bg-accent-3-400/10",
+            accent_4: "md:bg-accent-4-700/10 dark:md:bg-accent-4-400/10",
+            accent_5: "md:bg-accent-5-700/10 dark:md:bg-accent-5-400/10",
+            white: "md:bg-white/10 dark:md:bg-black/10",
+            black: "md:bg-black/10 dark:md:bg-white/10",
+            transparent: "md:bg-transparent",
+        },
+        lg: {
+            primary: "lg:bg-primary-700/10 dark:lg:bg-primary-400/10",
+            secondary: "lg:bg-secondary-700/10 dark:lg:bg-secondary-400/10",
+            accent_1: "lg:bg-accent-1-700/10 dark:lg:bg-accent-1-400/10",
+            accent_2: "lg:bg-accent-2-700/10 dark:lg:bg-accent-2-400/10",
+            accent_3: "lg:bg-accent-3-700/10 dark:lg:bg-accent-3-400/10",
+            accent_4: "lg:bg-accent-4-700/10 dark:lg:bg-accent-4-400/10",
+            accent_5: "lg:bg-accent-5-700/10 dark:lg:bg-accent-5-400/10",
+            white: "lg:bg-white/10 dark:lg:bg-black/10",
+            black: "lg:bg-black/10 dark:lg:bg-white/10",
+            transparent: "lg:bg-transparent",
+        },
+        xl: {
+            primary: "xl:bg-primary-700/10 dark:xl:bg-primary-400/10",
+            secondary: "xl:bg-secondary-700/10 dark:xl:bg-secondary-400/10",
+            accent_1: "xl:bg-accent-1-700/10 dark:xl:bg-accent-1-400/10",
+            accent_2: "xl:bg-accent-2-700/10 dark:xl:bg-accent-2-400/10",
+            accent_3: "xl:bg-accent-3-700/10 dark:xl:bg-accent-3-400/10",
+            accent_4: "xl:bg-accent-4-700/10 dark:xl:bg-accent-4-400/10",
+            accent_5: "xl:bg-accent-5-700/10 dark:xl:bg-accent-5-400/10",
+            white: "xl:bg-white/10 dark:xl:bg-black/10",
+            black: "xl:bg-black/10 dark:xl:bg-white/10",
+            transparent: "xl:bg-transparent",
+        }
+    },
+    gradient: {
+        xs: {
+            primary: "bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:from-primary-600/10 dark:to-primary-400/10",
+            secondary: "bg-gradient-to-b from-secondary-500/10 to-secondary-700/10 dark:from-secondary-600/10 dark:to-secondary-400/10",
+            accent_1: "bg-gradient-to-b from-accent-1-500/10 to-accent-1-700/10 dark:from-accent-1-600/10 dark:to-accent-1-400/10",
+            accent_2: "bg-gradient-to-b from-accent-2-500/10 to-accent-2-700/10 dark:from-accent-2-600/10 dark:to-accent-2-400/10",
+            accent_3: "bg-gradient-to-b from-accent-3-500/10 to-accent-3-700/10 dark:from-accent-3-600/10 dark:to-accent-3-400/10",
+            accent_4: "bg-gradient-to-b from-accent-4-500/10 to-accent-4-700/10 dark:from-accent-4-600/10 dark:to-accent-4-400/10",
+            accent_5: "bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:from-accent-5-600/10 dark:to-accent-5-400/10",
+            white: "bg-gradient-to-b from-white/10 to-white/10 dark:from-black/10 dark:to-black/10",
+            black: "bg-gradient-to-b from-black/10 to-black/10 dark:from-white/10 dark:to-white/10",
+            transparent: "bg-transparent",
+        },
+        sm: {
+            primary: "sm:bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:sm:from-primary-600/10 dark:sm:to-primary-400/10",
+            secondary: "sm:bg-gradient-to-b from-secondary-500/10 to-secondary-700/10 dark:sm:from-secondary-600/10 dark:sm:to-secondary-400/10",
+            accent_1: "sm:bg-gradient-to-b from-accent-1-500/10 to-accent-1-700/10 dark:sm:from-accent-1-600/10 dark:sm:to-accent-1-400/10",
+            accent_2: "sm:bg-gradient-to-b from-accent-2-500/10 to-accent-2-700/10 dark:sm:from-accent-2-600/10 dark:sm:to-accent-2-400/10",
+            accent_3: "sm:bg-gradient-to-b from-accent-3-500/10 to-accent-3-700/10 dark:sm:from-accent-3-600/10 dark:sm:to-accent-3-400/10",
+            accent_4: "sm:bg-gradient-to-b from-accent-4-500/10 to-accent-4-700/10 dark:sm:from-accent-4-600/10 dark:sm:to-accent-4-400/10",
+            accent_5: "sm:bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:sm:from-accent-5-600/10 dark:sm:to-accent-5-400/10",
+            white: "sm:bg-gradient-to-b from-white/10 to-white/10 dark:sm:from-black/10 dark:sm:to-black/10",
+            black: "sm:bg-gradient-to-b from-black/10 to-black/10 dark:sm:from-white/10 dark:sm:to-white/10",
+            transparent: "sm:bg-transparent",
+        },
+        md: {
+            primary: "md:bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:md:from-primary-600/10 dark:md:to-primary-400/10",
+            secondary: "md:bg-gradient-to-b from-secondary-500/10 to-secondary-700/10 dark:md:from-secondary-600/10 dark:md:to-secondary-400/10",
+            accent_1: "md:bg-gradient-to-b from-accent-1-500/10 to-accent-1-700/10 dark:md:from-accent-1-600/10 dark:md:to-accent-1-400/10",
+            accent_2: "md:bg-gradient-to-b from-accent-2-500/10 to-accent-2-700/10 dark:md:from-accent-2-600/10 dark:md:to-accent-2-400/10",
+            accent_3: "md:bg-gradient-to-b from-accent-3-500/10 to-accent-3-700/10 dark:md:from-accent-3-600/10 dark:md:to-accent-3-400/10",
+            accent_4: "md:bg-gradient-to-b from-accent-4-500/10 to-accent-4-700/10 dark:md:from-accent-4-600/10 dark:md:to-accent-4-400/10",
+            accent_5: "md:bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:md:from-accent-5-600/10 dark:md:to-accent-5-400/10",
+            white: "md:bg-gradient-to-b from-white/10 to-white/10 dark:md:from-black/10 dark:md:to-black/10",
+            black: "md:bg-gradient-to-b from-black/10 to-black/10 dark:md:from-white/10 dark:md:to-white/10",
+            transparent: "md:bg-transparent",
+        },
+        lg: {
+            primary: "lg:bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:lg:from-primary-600/10 dark:lg:to-primary-400/10",
+            secondary: "lg:bg-gradient-to-b from-secondary-500/10 to-secondary-700/10 dark:lg:from-secondary-600/10 dark:lg:to-secondary-400/10",
+            accent_1: "lg:bg-gradient-to-b from-accent-1-500/10 to-accent-1-700/10 dark:lg:from-accent-1-600/10 dark:lg:to-accent-1-400/10",
+            accent_2: "lg:bg-gradient-to-b from-accent-2-500/10 to-accent-2-700/10 dark:lg:from-accent-2-600/10 dark:lg:to-accent-2-400/10",
+            accent_3: "lg:bg-gradient-to-b from-accent-3-500/10 to-accent-3-700/10 dark:lg:from-accent-3-600/10 dark:lg:to-accent-3-400/10",
+            accent_4: "lg:bg-gradient-to-b from-accent-4-500/10 to-accent-4-700/10 dark:lg:from-accent-4-600/10 dark:lg:to-accent-4-400/10",
+            accent_5: "lg:bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:lg:from-accent-5-600/10 dark:lg:to-accent-5-400/10",
+            white: "lg:bg-gradient-to-b from-white/10 to-white/10 dark:lg:from-black/10 dark:lg:to-black/10",
+            black: "lg:bg-gradient-to-b from-black/10 to-black/10 dark:lg:from-white/10 dark:lg:to-white/10",
+            transparent: "lg:bg-transparent",
+        },
+        xl: {
+            primary: "xl:bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:xl:from-primary-600/10 dark:xl:to-primary-400/10",
+            secondary: "xl:bg-gradient-to-b from-secondary-500/10 to-secondary-700/10 dark:xl:from-secondary-600/10 dark:xl:to-secondary-400/10",
+            accent_1: "xl:bg-gradient-to-b from-accent-1-500/10 to-accent-1-700/10 dark:xl:from-accent-1-600/10 dark:xl:to-accent-1-400/10",
+            accent_2: "xl:bg-gradient-to-b from-accent-2-500/10 to-accent-2-700/10 dark:xl:from-accent-2-600/10 dark:xl:to-accent-2-400/10",
+            accent_3: "xl:bg-gradient-to-b from-accent-3-500/10 to-accent-3-700/10 dark:xl:from-accent-3-600/10 dark:xl:to-accent-3-400/10",
+            accent_4: "xl:bg-gradient-to-b from-accent-4-500/10 to-accent-4-700/10 dark:xl:from-accent-4-600/10 dark:xl:to-accent-4-400/10",
+            accent_5: "xl:bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:xl:from-accent-5-600/10 dark:xl:to-accent-5-400/10",
+            white: "xl:bg-gradient-to-b from-white/10 to-white/10 dark:xl:from-black/10 dark:xl:to-black/10",
+            black: "xl:bg-gradient-to-b from-black/10 to-black/10 dark:xl:from-white/10 dark:xl:to-white/10",
+            transparent: "xl:bg-transparent",
+        }
+    }
+}
+
 const screenSizes = ["xs", "sm", "md", "lg", "xl"];
 
 const nameDefault = 'background_color';
@@ -262,6 +389,9 @@ export function getBackgroundColorClasses(blok, {possibleBackgroundColors = poss
     switch (type) {
         case 'intense':
             possibleBackgroundColors = possibleBackgroundColorsIntense;
+            break;
+        case 'transpicuous':
+            possibleBackgroundColors = possibleBackgroundColorsTranspicuous;
             break;
     } 
 
