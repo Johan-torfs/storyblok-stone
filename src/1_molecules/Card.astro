@@ -3,19 +3,17 @@ import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
-interface StoryblokCard extends SbBlokData {
+import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
+import { getBackgroundColorClasses, getBorderClasses, getClassName, getPaddingXClasses, getPaddingYClasses } from '../tailwind/class_name_compiler';
+import type { BackgroundGradient } from '../tailwind/types/Color';
+import type { Border } from '../tailwind/types/Border';
+import type { Dimensions } from '../tailwind/types/Dimensions';
+
+interface StoryblokCard extends SbBlokData, PaddingX, PaddingY, BackgroundGradient, Border, Dimensions {
     component: 'card',
     content: [SbBlokData],
-    padding?: 0|2|4|6|8|16|24;
-    color?: "primary" | "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
-    border_color?: "primary" | "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
-    border_pos?: ["top"|"bottom"|"left"|"right"];
-    gradient?: boolean;
-    center?: boolean;
     shadow?: boolean;
     rounded?: ["top_left"|"top_right"|"bottom_left"|"bottom_right"];
-    height?: number;
-    width?: number;
 }
 
 interface Props {
@@ -24,61 +22,6 @@ interface Props {
 
 const { blok } = Astro.props;
 
-const possiblePadding = {
-    0: "py-0 px-0",
-    2: "py-2 px-2",
-    4: "py-4 px-4",
-    6: "py-6 px-6",
-    8: "py-8 px-8",
-    16: "py-16 px-16",
-    24: "py-24 px-24",
-};
-
-const possibleColors = {
-    primary: "bg-primary-700 dark:bg-primary-400",
-    secondary: "bg-secondary-700 dark:bg-secondary-400",
-    accent_1: "bg-accent-1-700 dark:bg-accent-1-400",
-    accent_2: "bg-accent-2-700 dark:bg-accent-2-400",
-    accent_3: "bg-accent-3-700 dark:bg-accent-3-400",
-    accent_4: "bg-accent-4-700 dark:bg-accent-4-400",
-    accent_5: "bg-accent-5-700 dark:bg-accent-5-400",
-    white: "bg-white dark:bg-black",
-    black: "bg-black dark:bg-white",
-    default: "bg-white dark:bg-black"
-}
-
-const possibleBorders = {
-    top: "border-t-4",
-    bottom: "border-b-4",
-    left: "border-l-4",
-    right: "border-r-4",
-}
-
-const possibleColorsBorder = {
-    primary: "border-primary-700 dark:border-primary-400",
-    secondary: "border-secondary-700 dark:border-secondary-400",
-    accent_1: "border-accent-1-700 dark:border-accent-1-400",
-    accent_2: "border-accent-2-700 dark:border-accent-2-400",
-    accent_3: "border-accent-3-700 dark:border-accent-3-400",
-    accent_4: "border-accent-4-700 dark:border-accent-4-400",
-    accent_5: "border-accent-5-700 dark:border-accent-5-400",
-    white: "border-white dark:border-black",
-    black: "border-black dark:border-white"
-}
-
-const possibleGradients = {
-    primary: "bg-gradient-to-b from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-400",
-    secondary: "bg-gradient-to-b from-secondary-500 to-secondary-700 dark:from-secondary-600 dark:to-secondary-400",
-    accent_1: "bg-gradient-to-b from-accent-1-500 to-accent-1-700 dark:from-accent-1-600 dark:to-accent-1-400",
-    accent_2: "bg-gradient-to-b from-accent-2-500 to-accent-2-700 dark:from-accent-2-600 dark:to-accent-2-400",
-    accent_3: "bg-gradient-to-b from-accent-3-500 to-accent-3-700 dark:from-accent-3-600 dark:to-accent-3-400",
-    accent_4: "bg-gradient-to-b from-accent-4-500 to-accent-4-700 dark:from-accent-4-600 dark:to-accent-4-400",
-    accent_5: "bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:from-accent-5-600 dark:to-accent-5-400",
-    white: "bg-gradient-to-b from-white to-white dark:from-black dark:to-black",
-    black: "bg-gradient-to-b from-black to-black dark:from-white dark:to-white",
-    default: "bg-white dark:bg-black"
-}
-
 const possibleRounded = {
     top_left: "rounded-tl-3xl",
     top_right: "rounded-tr-3xl",
@@ -86,29 +29,30 @@ const possibleRounded = {
     bottom_right: "rounded-br-3xl",
 }
 
-const className = `
+var className = getClassName(blok, {
+    decorators: [
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
+        {decorator: getBackgroundColorClasses},
+        {decorator: getBorderClasses},
+    ]
+});
+
+className = className + ' ' + `
     ${blok.shadow ? "shadow-lg" : ''}
-    ${blok.padding ? possiblePadding[blok.padding] : ''}
-    ${possibleColors[blok.color ? blok.color : "default"]} ${blok.gradient ? possibleGradients[blok.color ? blok.color : "default"] : ""}
     ${blok.rounded ? blok.rounded.map((r) => possibleRounded[r]).join(" ") : ""}
-    ${blok.border_pos ? blok.border_pos.map((b) => possibleBorders[b]).join(" ") : ""}
-    ${blok.border_color ? possibleColorsBorder[blok.border_color] : ""}
     overflow-hidden
 `.replace(/\s+/g, ' ').trim();
-
-const classNameInner = `${blok.center ? "items-center" : ""}`;
 ---
 
 <div class:list={["card-container", className]} {...storyblokEditable(blok)}>
-    <div class:list={["flex flex-col gap-4 card", classNameInner]}>
-        {blok.content.map(item => {            
-            return <StoryblokComponent blok={item} />
-        })}
-    </div>
+    {blok.content.map(item => {            
+        return <StoryblokComponent blok={item} />
+    })}
 </div>
 
 <style define:vars={{height: blok.height + "px" || "auto", width: blok.width + "px" || "auto"}}>
-    .card {
+    .card-container {
         min-height: var(--height);
     }
 

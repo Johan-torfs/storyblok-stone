@@ -25,6 +25,7 @@ import { getContainerSizeClasses } from './decorators/container_size';
 import { getColSpanClasses } from './decorators/columns_col_span';
 import { getVisibilityClasses } from './decorators/visibility';
 import { getBreakpointClasses } from './decorators/breakpoint';
+import { getBorderClasses } from './decorators/border';
 
 export {
     getClassName,
@@ -43,4 +44,5 @@ export {
     getColSpanClasses,
     getVisibilityClasses,
     getBreakpointClasses,
+    getBorderClasses,
 }
