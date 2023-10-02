@@ -1,8 +1,11 @@
 ---
-import { type SbBlokData } from '@storyblok/astro';
+import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import RatingForm from './forms/RatingForm.svelte';
+
+import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
+import { getClassName, getPaddingXClasses, getPaddingYClasses } from '../tailwind/class_name_compiler';
 
 interface StoryblokFormState extends SbBlokData {
     component: 'form_state',
@@ -10,10 +13,9 @@ interface StoryblokFormState extends SbBlokData {
     type: "intermediate" | "final" | "post-submit";
 }
 
-interface StoryblokForm extends SbBlokData {
+interface StoryblokForm extends SbBlokData, PaddingX, PaddingY {
     component: 'form',
     states: StoryblokFormState[],
-    padding?: 0|2|4|6|8|16|24;
     type: "rating";
 }
 
@@ -22,11 +24,19 @@ interface Props {
 }
 
 const { blok } = Astro.props;
+
+const className = getClassName(blok, {
+    decorators: [
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
+    ]
+});
+const storyblokEditableData = storyblokEditable(blok);
 ---
 
 {blok.states.length > 10 ? <div class="bg-red-500 text-white p-4">You can only have up to 10 states in a form</div> : null}
 {blok.type == "rating" ? 
-    <RatingForm blok={blok} client:load>
+    <RatingForm className={className} storyblokEditableData={storyblokEditableData} states={blok.states.map(state => state.type)} client:load>
         {blok.states[0] ? () => {   
             return <div slot="name-0">
                 {blok.states[0].content.map(item => {
