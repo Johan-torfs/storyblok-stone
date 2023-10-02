@@ -26,6 +26,8 @@ import { getColSpanClasses } from './decorators/columns_col_span';
 import { getVisibilityClasses } from './decorators/visibility';
 import { getBreakpointClasses } from './decorators/breakpoint';
 import { getBorderClasses } from './decorators/border';
+import { getShadowClasses } from './decorators/shadow';
+import { getBorderRadiusClasses } from './decorators/border_radius';
 
 export {
     getClassName,
@@ -45,4 +47,6 @@ export {
     getVisibilityClasses,
     getBreakpointClasses,
     getBorderClasses,
+    getShadowClasses,
+    getBorderRadiusClasses,
 }
