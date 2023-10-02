@@ -1,6 +1,6 @@
 <script>
 import { storyblokEditable } from '@storyblok/astro';
-import { navigation } from '../stores.js';
+import { navigation } from '../../stores.js';
 
 export let blok;
 
