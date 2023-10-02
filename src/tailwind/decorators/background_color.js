@@ -387,6 +387,7 @@ const typeNameDefault = 'background_color_type';
 const gradientDefault = false;
 
 export function getBackgroundColorClasses(blok, {possibleBackgroundColors = possibleBackgroundColorsDefault, name = nameDefault, typeName = typeNameDefault, type = 'default', screenSize = 'xs'} = {}) {
+    if (!!blok[typeName]) type = blok[typeName];
     switch (type) {
         case 'intense':
             possibleBackgroundColors = possibleBackgroundColorsIntense;
@@ -395,8 +396,6 @@ export function getBackgroundColorClasses(blok, {possibleBackgroundColors = poss
             possibleBackgroundColors = possibleBackgroundColorsTranspicuous;
             break;
     }
-
-    if (!blok[typeName]) type = blok[typeName];
 
     screenSize = screenSizes.includes(screenSize) ? screenSize : 'xs';
     const className = `
