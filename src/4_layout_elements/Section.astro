@@ -11,6 +11,7 @@ import {type BackgroundColor} from '../tailwind/types/Color';
 interface StoryblokSection extends SbBlokData, PaddingX, PaddingY, MarginX, MarginY, BackgroundColor {
     component: 'section',
     content: [SbBlokData],
+    html_tag: 'section' | 'footer' | 'div' | 'header';
 }
 
 interface Props {
@@ -30,8 +31,31 @@ const className = getClassName(blok, {
 })
 ---
 
+{!blok.html_tag || blok.html_tag === 'section' ?
 <section class:list={[className]} {...storyblokEditable(blok)}>
     {blok.content.map(item => {            
 		return <StoryblokComponent blok={item}/>
 	})}
 </section>
+: null}
+{blok.html_tag === 'footer' ?
+<footer class:list={[className]} {...storyblokEditable(blok)}>
+    {blok.content.map(item => {            
+		return <StoryblokComponent blok={item}/>
+	})}
+</footer>
+: null}
+{blok.html_tag === 'header' ?
+<header class:list={[className]} {...storyblokEditable(blok)}>
+    {blok.content.map(item => {            
+		return <StoryblokComponent blok={item}/>
+	})}
+</header>
+: null}
+{blok.html_tag === 'div' ?
+<div class:list={[className]} {...storyblokEditable(blok)}>
+    {blok.content.map(item => {            
+		return <StoryblokComponent blok={item}/>
+	})}
+</div>
+: null}

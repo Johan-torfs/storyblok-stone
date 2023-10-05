@@ -17,7 +17,7 @@ const navigation = response.data.story.content.navigation;
 ---
 
 <SettingsLayout>
-    <Fragment slot="header">
+    <Fragment slot="nav">
         {navigation?.map((blok: SbBlokData) => {            
 			return <StoryblokComponent blok={blok} />
 		})}
