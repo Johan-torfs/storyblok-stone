@@ -16,8 +16,18 @@ export interface TextCenter {
     text_center?: boolean;
 }
 
-export interface TextWidth {
+export interface TextMaxWidth {
     max_width?: {
+        xs?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
+        sm?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
+        md?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
+        lg?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
+        xl?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
+    }
+}
+
+export interface TextWidth {
+    text_width?: {
         xs?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
         sm?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
         md?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";

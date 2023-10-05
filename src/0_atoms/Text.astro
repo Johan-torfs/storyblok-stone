@@ -1,12 +1,12 @@
 ---
 import { storyblokEditable, type SbBlokData, type ISbRichtext, renderRichText } from '@storyblok/astro';
 import TextSvelte from './text/Text.svelte';
-import { getClassName, getFontClasses, getFontSizeClasses, getMarginBottomClasses, getTextCenterClasses, getTextColorClasses, getTextWidthClasses, getTextDecorationClasses, getTextUppercaseClasses } from '../tailwind/class_name_compiler';
+import { getClassName, getFontClasses, getFontSizeClasses, getMarginBottomClasses, getTextCenterClasses, getTextColorClasses, getTextMaxWidthClasses, getTextDecorationClasses, getTextUppercaseClasses } from '../tailwind/class_name_compiler';
 import type { TextColor } from '../tailwind/types/Color';
 import type { MarginBottom } from '../tailwind/types/Margin';
-import type { TextFont, TextSize, TextCenter, TextWidth, TextDecoration, TextUpperCase } from '../tailwind/types/Text';
+import type { TextFont, TextSize, TextCenter, TextMaxWidth, TextDecoration, TextUpperCase } from '../tailwind/types/Text';
 
-interface StoryblokParagraph extends SbBlokData, TextColor, TextFont, TextSize, TextCenter, TextWidth, TextDecoration, TextUpperCase, MarginBottom {
+interface StoryblokParagraph extends SbBlokData, TextColor, TextFont, TextSize, TextCenter, TextMaxWidth, TextDecoration, TextUpperCase, MarginBottom {
     component: 'paragraph';
     content: ISbRichtext;
     interactive?: boolean;
@@ -26,7 +26,7 @@ const className = getClassName(blok, {
         {decorator: getFontSizeClasses},
         {decorator: getTextCenterClasses},
         {decorator: getMarginBottomClasses},
-        {decorator: getTextWidthClasses},
+        {decorator: getTextMaxWidthClasses},
         {decorator: getTextDecorationClasses},
         {decorator: getTextUppercaseClasses}
     ]

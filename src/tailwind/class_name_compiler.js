@@ -33,7 +33,7 @@ import { getFontClasses } from './decorators/text_font';
 import { getFontSizeClasses } from './decorators/text_size';
 import { getTextCenterClasses } from './decorators/text_center';
 import { getMarginBottomClasses } from './decorators/margin_bottom';
-import { getTextWidthClasses } from './decorators/text_width';
+import { getTextMaxWidthClasses, getTextWidthClasses } from './decorators/text_width';
 import { getTextUppercaseClasses } from './decorators/text_uppercase';
 import { getTextDecorationClasses } from './decorators/text_decoration';
 import { getHoverClasses } from './decorators/hover';
@@ -66,6 +66,7 @@ export {
     getFontSizeClasses,
     getTextCenterClasses,
     getMarginBottomClasses,
+    getTextMaxWidthClasses,
     getTextWidthClasses,
     getTextUppercaseClasses,
     getTextDecorationClasses,

@@ -2,10 +2,10 @@
 import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 import type { Hover } from '../tailwind/types/Hover';
 import { getClassName, getHoverClasses, getTextCenterClasses, getTextWidthClasses, getPaddingXClasses, getPaddingYClasses } from '../tailwind/class_name_compiler';
-import type { TextCenter, TextWidth } from '../tailwind/types/Text';
+import type { TextCenter, TextMaxWidth } from '../tailwind/types/Text';
 import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
 
-interface StoryblokLink extends SbBlokData, Hover, TextWidth, TextCenter, PaddingX, PaddingY {
+interface StoryblokLink extends SbBlokData, Hover, TextMaxWidth, TextCenter, PaddingX, PaddingY {
     component: 'link';
     text: string;
     link: {

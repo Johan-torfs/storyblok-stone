@@ -1,4 +1,4 @@
-const possibleTextWidthDefault = {
+const possibleTextMaxWidthDefault = {
     xs: {
         sm: "max-w-sm",
         md: "max-w-md",
@@ -61,13 +61,88 @@ const possibleTextWidthDefault = {
     },
 };
 
+const possibleTextWidthDefault = {
+    xs: {
+        sm: "w-sm",
+        md: "w-md",
+        lg: "w-lg",
+        xl: "w-xl",
+        "2xl": "w-2xl",
+        "3xl": "w-3xl",
+        "4xl": "text-4xl",
+        full: "w-full",
+        prose: "w-prose",
+        fit: "w-fit",
+    },
+    sm: {
+        sm: "sm:w-sm",
+        md: "sm:w-md",
+        lg: "sm:w-lg",
+        xl: "sm:w-xl",
+        "2xl": "sm:w-2xl",
+        "3xl": "sm:w-3xl",
+        "4xl": "sm:text-4xl",
+        full: "sm:w-full",
+        prose: "sm:w-prose",
+        fit: "sm:w-fit",
+    },
+    md: {
+        sm: "md:w-sm",
+        md: "md:w-md",
+        lg: "md:w-lg",
+        xl: "md:w-xl",
+        "2xl": "md:w-2xl",
+        "3xl": "md:w-3xl",
+        "4xl": "md:text-4xl",
+        full: "md:w-full",
+        prose: "md:w-prose",
+        fit: "md:w-fit",
+    },
+    lg: {
+        sm: "lg:w-sm",
+        md: "lg:w-md",
+        lg: "lg:w-lg",
+        xl: "lg:w-xl",
+        "2xl": "lg:w-2xl",
+        "3xl": "lg:w-3xl",
+        "4xl": "lg:text-4xl",
+        full: "lg:w-full",
+        prose: "lg:w-prose",
+        fit: "lg:w-fit",
+    },
+    xl: {
+        sm: "xl:w-sm",
+        md: "xl:w-md",
+        lg: "xl:w-lg",
+        xl: "xl:w-xl",
+        "2xl": "xl:w-2xl",
+        "3xl": "xl:w-3xl",
+        "4xl": "xl:text-4xl",
+        full: "xl:w-full",
+        prose: "xl:w-prose",
+        fit: "xl:w-fit",
+    },
+};
+
 const screenSizesDefault = {
     sizes: ["xs", "sm", "md", "lg", "xl"],
 };
 
 const nameDefault = 'max_width';
 
-export function getTextWidthClasses(blok, {possibleTextWidth = possibleTextWidthDefault, screenSizes = screenSizesDefault, name = nameDefault} = {}) { 
+export function getTextMaxWidthClasses(blok, {possibleTextWidth = possibleTextMaxWidthDefault, screenSizes = screenSizesDefault, name = nameDefault} = {}) { 
+    const className = `
+        ${screenSizes.sizes.map((screen) => (
+            blok[name] ? possibleTextWidth[screen][blok[name][screen]] : ''
+        )).join(' ')}
+    `.replace(/\s+/g, ' ').trim();
+
+    return className;
+}
+
+const widthNameDefault = 'text_width';
+
+export function getTextWidthClasses(blok, {possibleTextWidth = possibleTextWidthDefault, screenSizes = screenSizesDefault, name = widthNameDefault} = {}) { 
     const className = `
         ${screenSizes.sizes.map((screen) => (
             blok[name] ? possibleTextWidth[screen][blok[name][screen]] : ''
