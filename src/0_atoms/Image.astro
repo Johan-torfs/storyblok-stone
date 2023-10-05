@@ -59,7 +59,7 @@ const className = getClassName(blok, {
         {...storyblokEditable(blok)}
         src={blok.image.filename} 
         alt={blok.image.alt} 
-        class:list={[className]}
+        class:list={[className, 'image']}
     />
 </a> 
 :
@@ -67,7 +67,7 @@ const className = getClassName(blok, {
     {...storyblokEditable(blok)}
     src={blok.image.filename} 
     alt={blok.image.alt} 
-    class:list={[className]}
+    class:list={[className, 'image']}
 />
 }
 
