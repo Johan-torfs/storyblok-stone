@@ -47,7 +47,7 @@ const className = getClassName({...blok, hover: 'background'}, {
 :
 <a
     {...storyblokEditable(blok)}
-    href={blok.link.cached_url}
+    href={blok.link?.cached_url}
     class:list={["inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none", className]}
     type="button"
 >
