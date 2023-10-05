@@ -28,7 +28,7 @@ import { getBreakpointClasses } from './decorators/breakpoint';
 import { getBorderClasses } from './decorators/border';
 import { getShadowClasses } from './decorators/shadow';
 import { getBorderRadiusClasses } from './decorators/border_radius';
-import { getTextColorClasses } from './decorators/text_color';
+import { getTextColorClasses, getTextColorOnBackground } from './decorators/text_color';
 import { getFontClasses } from './decorators/text_font';
 import { getFontSizeClasses } from './decorators/text_size';
 import { getTextCenterClasses } from './decorators/text_center';
@@ -38,6 +38,7 @@ import { getTextUppercaseClasses } from './decorators/text_uppercase';
 import { getTextDecorationClasses } from './decorators/text_decoration';
 import { getHoverClasses } from './decorators/hover';
 import { getPeerCheckedClasses } from './decorators/peer_checked';
+import { getFocusOutlineClasses } from './decorators/focus_outline';
 
 export {
     getClassName,
@@ -60,6 +61,7 @@ export {
     getShadowClasses,
     getBorderRadiusClasses,
     getTextColorClasses,
+    getTextColorOnBackground,
     getFontClasses,
     getFontSizeClasses,
     getTextCenterClasses,
@@ -69,4 +71,5 @@ export {
     getTextDecorationClasses,
     getHoverClasses,
     getPeerCheckedClasses,
+    getFocusOutlineClasses,
 }

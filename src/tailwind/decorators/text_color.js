@@ -33,3 +33,53 @@ export function getTextColorClasses(blok, {possibleColor = possibleColorDefault,
 
     return className;
 }
+
+const possibleTextColorDefault = {
+    default: {
+        primary: "text-black",
+        secondary: "text-black",
+        accent_1: "text-black",
+        accent_2: "text-black",
+        accent_3: "text-black",
+        accent_4: "text-black",
+        accent_5: "text-black",
+        white: "text-black",
+        black: "text-white",
+        default: "text-black",
+    },
+    intense: {
+        primary: "text-white",
+        secondary: "text-white",
+        accent_1: "text-white",
+        accent_2: "text-white",
+        accent_3: "text-white",
+        accent_4: "text-white",
+        accent_5: "text-white",
+        white: "text-black",
+        black: "text-white",
+        default: "text-white",
+    },
+    transpicuous: {
+        primary: "text-black",
+        secondary: "text-black",
+        accent_1: "text-black",
+        accent_2: "text-black",
+        accent_3: "text-black",
+        accent_4: "text-black",
+        accent_5: "text-black",
+        white: "text-black",
+        black: "text-white",
+        default: "text-black",
+    },
+}
+
+const backgroundColorNameDefault = 'background_color';
+const backgroundColorTypeDefault = 'background_color_type';
+
+export function getTextColorOnBackground(blok, {possibleTextColor = possibleTextColorDefault, backgroundColorName = backgroundColorNameDefault, backgroundColorType = backgroundColorTypeDefault} = {}) {
+    const className = `
+        ${possibleTextColor[blok[backgroundColorType] || 'default'][blok[backgroundColorName] || 'black']}
+    `.replace(/\s+/g, ' ').trim();
+
+    return className;
+}

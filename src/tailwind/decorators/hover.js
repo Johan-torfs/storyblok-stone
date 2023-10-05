@@ -12,6 +12,32 @@ const possibleColorsDefault = {
 }
 
 const possibleBackgroundColorsDefault = {
+    primary: "hover:bg-primary-200 dark:hover:bg-primary-700",
+    secondary: "hover:bg-secondary-200 dark:hover:bg-secondary-700",
+    accent_1: "hover:bg-accent-1-200 dark:hover:bg-accent-1-700",
+    accent_2: "hover:bg-accent-2-200 dark:hover:bg-accent-2-700",
+    accent_3: "hover:bg-accent-3-200 dark:hover:bg-accent-3-700",
+    accent_4: "hover:bg-accent-4-200 dark:hover:bg-accent-4-700",
+    accent_5: "hover:bg-accent-5-200 dark:hover:bg-accent-5-700",
+    white: "hover:bg-white dark:hover:bg-black",
+    black: "hover:bg-black dark:hover:bg-white",
+    default: "hover:bg-primary-200 dark:hover:bg-primary-700",
+}
+
+const possibleBackgroundColorsIntenseDefault = {
+    primary: "hover:bg-primary-600 dark:hover:bg-primary-500",
+    secondary: "hover:bg-secondary-600 dark:hover:bg-secondary-500",
+    accent_1: "hover:bg-accent-1-600 dark:hover:bg-accent-1-500",
+    accent_2: "hover:bg-accent-2-600 dark:hover:bg-accent-2-500",
+    accent_3: "hover:bg-accent-3-600 dark:hover:bg-accent-3-500",
+    accent_4: "hover:bg-accent-4-600 dark:hover:bg-accent-4-500",
+    accent_5: "hover:bg-accent-5-600 dark:hover:bg-accent-5-500",
+    white: "hover:bg-white dark:hover:bg-black",
+    black: "hover:bg-black dark:hover:bg-white",
+    default: "hover:bg-primary-600 dark:hover:bg-primary-500",
+}
+
+const possibleBackgroundColorsTranspicuousDefault = {
     primary: "hover:bg-primary-700/20 dark:hover:bg-primary-400/20",
     secondary: "hover:bg-secondary-700/20 dark:hover:bg-secondary-400/20",
     accent_1: "hover:bg-accent-1-700/20 dark:hover:bg-accent-1-400/20",
@@ -39,15 +65,26 @@ const possibleLineColorsDefault = {
 
 const typeNameDefault = 'hover';
 const colorNameDefault = 'hover_color';
+const colorTypeNameDefault = 'hover_color_type';
 
-export function getHoverClasses(blok, {possibleColors, typeName = typeNameDefault, colorName = colorNameDefault} = {}) { 
+export function getHoverClasses(blok, {possibleColors, typeName = typeNameDefault, colorName = colorNameDefault, colorTypeName = colorTypeNameDefault} = {}) { 
     if (!possibleColors) {
         switch (blok[typeName]) {
             case 'underline':
                 possibleColors = possibleLineColorsDefault;
                 break;
             case 'background':
-                possibleColors = possibleBackgroundColorsDefault;
+                switch (blok[colorTypeName]) {
+                    case 'intense':
+                        possibleColors = possibleBackgroundColorsIntenseDefault;
+                        break;
+                    case 'transpicuous':
+                        possibleColors = possibleBackgroundColorsTranspicuousDefault;
+                        break;
+                    default:
+                        possibleColors = possibleBackgroundColorsDefault;
+                        break;
+                }
                 break;
             case 'text':
                 possibleColors = possibleColorsDefault;

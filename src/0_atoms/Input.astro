@@ -32,7 +32,7 @@ const className = getClassName(blok, {
 const classNameRadio = getClassName({...blok, hover: 'background', background_color_type: 'transpicuous'}, {
     decorators: [
         {decorator: getBackgroundColorClasses, options: {colorName: 'color'}},
-        {decorator: getHoverClasses, options: {colorName: 'color'}},
+        {decorator: getHoverClasses, options: {colorName: 'color', colorTypeName: 'background_color_type'}},
         {decorator: getPeerCheckedClasses, options: {colorName: 'color'}},
     ]
 });
