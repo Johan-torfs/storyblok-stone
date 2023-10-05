@@ -25,3 +25,11 @@ export interface TextWidth {
         xl?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
     }
 }
+
+export interface TextDecoration {
+    text_decoration?: "underline" | "line-through" | "overline" | "none";
+}
+
+export interface TextUpperCase {
+    text_uppercase?: boolean;
+}
