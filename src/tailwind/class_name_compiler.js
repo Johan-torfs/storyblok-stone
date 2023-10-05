@@ -37,6 +37,7 @@ import { getTextWidthClasses } from './decorators/text_width';
 import { getTextUppercaseClasses } from './decorators/text_uppercase';
 import { getTextDecorationClasses } from './decorators/text_decoration';
 import { getHoverClasses } from './decorators/hover';
+import { getPeerCheckedClasses } from './decorators/peer_checked';
 
 export {
     getClassName,
@@ -67,4 +68,5 @@ export {
     getTextUppercaseClasses,
     getTextDecorationClasses,
     getHoverClasses,
+    getPeerCheckedClasses,
 }
