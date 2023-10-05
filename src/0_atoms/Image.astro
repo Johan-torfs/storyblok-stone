@@ -1,7 +1,11 @@
 ---
 import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+import type { Visibility } from '../tailwind/types/Visibility';
+import type { Dimensions } from '../tailwind/types/Dimensions';
+import type { BorderRadius } from '../tailwind/types/Border';
+import { getClassName, getVisibilityClasses, getBorderRadiusClasses } from '../tailwind/class_name_compiler';
 
-interface StoryblokImage extends SbBlokData {
+interface StoryblokImage extends SbBlokData, Visibility, Dimensions, BorderRadius {
     component: 'image',
     image: {
         id: number;
@@ -16,14 +20,6 @@ interface StoryblokImage extends SbBlokData {
         meta_data: {};
         is_external_url: boolean;
     },
-    xs: boolean;
-    sm: boolean;
-    md: boolean;
-    lg: boolean;
-    xl: boolean;
-    rounded?: "none" | "sm" | "md" | "lg" | "full";
-    width?: number;
-    height?: number;
     link: {
         id: number;
         url: string;
@@ -40,24 +36,6 @@ interface Props {
 
 const { blok } = Astro.props;
 
-const possibleRounded = {
-    none: "rounded-none",
-    sm: "rounded-sm",
-    md: "rounded-md",
-    lg: "rounded-lg",
-    full: "rounded-full"
-}
-
-const className = `
-    image
-    ${blok.xs ? "block" : "hidden"}
-    ${blok.sm ? "sm:block" : "sm:hidden"}
-    ${blok.md ? "md:block" : "md:hidden"}
-    ${blok.lg ? "lg:block" : "lg:hidden"}
-    ${blok.xl ? "xl:block" : "xl:hidden"}
-    ${blok.rounded ? possibleRounded[blok.rounded] : ""}
-`.replace(/\s+/g, ' ').trim();
-
 if (blok.link?.linktype === 'story') {
     blok.link.cached_url = `/${blok.link.cached_url}`;
 }
@@ -65,6 +43,13 @@ if (blok.link?.linktype === 'story') {
 if (blok.link?.cached_url == '/home') {
     blok.link.cached_url = '/';
 }
+
+const className = getClassName(blok, {
+    decorators: [
+        {decorator: getVisibilityClasses},
+        {decorator: getBorderRadiusClasses}
+    ]
+});
 ---
 
 {blok.link 
