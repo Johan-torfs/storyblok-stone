@@ -36,6 +36,7 @@ import { getMarginBottomClasses } from './decorators/margin_bottom';
 import { getTextWidthClasses } from './decorators/text_width';
 import { getTextUppercaseClasses } from './decorators/text_uppercase';
 import { getTextDecorationClasses } from './decorators/text_decoration';
+import { getHoverClasses } from './decorators/hover';
 
 export {
     getClassName,
@@ -65,4 +66,5 @@ export {
     getTextWidthClasses,
     getTextUppercaseClasses,
     getTextDecorationClasses,
+    getHoverClasses,
 }
