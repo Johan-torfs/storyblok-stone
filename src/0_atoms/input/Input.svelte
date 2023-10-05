@@ -1,6 +1,6 @@
 <script>
 import { storyblokEditable } from '@storyblok/astro';
-import { inputs } from '../stores.js';
+import { inputs } from '../../stores.js';
 
 export let blok;
 

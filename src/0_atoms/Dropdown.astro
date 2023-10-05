@@ -2,12 +2,16 @@
 import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import type { BackgroundColor } from '../tailwind/types/Color';
+import type { Border, BorderRadius } from '../tailwind/types/Border';
+import type { Shadow } from '../tailwind/types/Shadow';
+import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
+import { getClassName, getBackgroundColorClasses, getBorderClasses, getBorderRadiusClasses, getShadowClasses, getPaddingXClasses, getPaddingYClasses } from '../tailwind/class_name_compiler';
 
-interface StoryblokDropdown extends SbBlokData {
+interface StoryblokDropdown extends SbBlokData, BackgroundColor, Border, BorderRadius, Shadow, PaddingX, PaddingY {
     component: 'dropdown';
     label: string;
     content: [SbBlokData];
-    hover: 'underline' | 'none';
 }
 
 
@@ -16,6 +20,17 @@ interface Props {
 }
 
 const { blok } = Astro.props;
+
+const className = getClassName(blok, {
+    decorators: [
+        {decorator: getBackgroundColorClasses},
+        {decorator: getBorderClasses},
+        {decorator: getBorderRadiusClasses},
+        {decorator: getShadowClasses},
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses}
+    ]
+});
 ---
 
 <div {...storyblokEditable(blok)} class="group relative">
@@ -25,9 +40,9 @@ const { blok } = Astro.props;
         </svg>
     </span>
     {blok.content.length > 0 ?
-    <ul class="hidden duration-300 lg:invisible lg:absolute lg:flex lg:flex-col lg:h-auto lg:w-[13.5rem] lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100 bg-white shadow-lg border-secondary-500 border rounded-md p-2 top-8">
+    <ul class:list={[className, "duration-300 invisible absolute flex flex-col h-auto w-[13.5rem] opacity-0 group-hover:visible group-hover:opacity-100 top-8"]}>
         {blok.content?.map((blok: SbBlokData) => {
-            return <StoryblokComponent blok={blok} />
+            return <li class="flex flex-col items-start"><StoryblokComponent blok={blok} /></li>
         })}
     </ul>
     : null}

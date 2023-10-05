@@ -1,34 +1,20 @@
 <script>
-import { storyblokEditable } from '@storyblok/astro';
 import { fly } from 'svelte/transition';
 import { quadInOut } from 'svelte/easing';
 
-export let blok;
-
-const possiblePadding = {
-    0: "py-0 px-0",
-    2: "py-2 px-2",
-    4: "py-4 px-4",
-    6: "py-6 px-6",
-    8: "py-8 px-8",
-    16: "py-16 px-16",
-    24: "py-24 px-24",
-};
-
-const className = `
-    ${blok.padding ? possiblePadding[blok.padding] : ''}
-    overflow-hidden
-`.replace(/\s+/g, ' ').trim();
+export let className;
+export let states;
+export let storyblokEditableData;
 
 let formState = 0;
 let finalState = 0;
 let postSubmitState = 0;
 
-blok.states.forEach((state, index) => {
-    if (state.type == "final") {
+states.forEach((state, index) => {
+    if (state == "final") {
         finalState = index;
     }
-    if (state.type == "post-submit") {
+    if (state == "post-submit") {
         postSubmitState = index;
     }
 });
@@ -62,7 +48,7 @@ function changeFormState(number) {
 }
 </script>
 
-<form on:submit|preventDefault={updateForm} class={className} {...storyblokEditable(blok)}>
+<form on:submit|preventDefault={updateForm} class={className} data-blok-c={storyblokEditableData['data-blok-c']} data-blok-uid={storyblokEditableData['data-blok-uid']}>
     {#if formState == 0}
         <div in:fly={{delay: delay, duration: delay, x: '100%', y: 0, opacity: 1, easing: quadInOut }} out:fly={{duration: delay, x: '-100%', y: 0, opacity: 1, easing: quadInOut }} class="w-full">
             <slot name="name-0"/>

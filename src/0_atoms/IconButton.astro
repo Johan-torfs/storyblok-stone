@@ -1,18 +1,21 @@
 ---
 import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
+import type { BorderRadius } from '../tailwind/types/Border';
+import type { BackgroundColor } from '../tailwind/types/Color';
+import { getBorderRadiusClasses, getClassName, getPaddingXClasses, getPaddingYClasses, getBackgroundColorClasses, getHoverClasses, getFocusOutlineClasses, getTextColorOnBackground } from '../tailwind/class_name_compiler';
 
-interface StoryblokIconButton extends SbBlokData {
+interface StoryblokIconButton extends SbBlokData, PaddingX, PaddingY, BorderRadius, BackgroundColor {
     component: "icon_button";
     text?: string;
     icon: {
         type: string;
         icon: string;
     };
-    href?: string;
-    color?: "primary"| "secondary" | "accent_1" | "accent_2" | "accent_3" | "accent_4" | "accent_5" | "white" | "black";
-    rounded?: "none" | "sm" | "md" | "lg" | "full";
-    padding_x?: 0|2|4|6|8|16|24;
-    padding_y?: 0|2|4|6|8|16|24;
+    link: {
+        linktype: string;
+        cached_url: string;
+    }
     submit?: boolean;
 }
 
@@ -23,70 +26,37 @@ interface Props {
 
 const { blok } = Astro.props;
 
-const possibleColors = {
-    primary: "bg-primary-950 dark:bg-primary-700 hover:bg-primary-700 dark:hover:bg-primary-400 focus-visible:outline-primary-950 dark:focus-visible:outline-primary-700",
-    secondary: "bg-secondary-950 dark:bg-secondary-700 hover:bg-secondary-700 dark:hover:bg-secondary-400 focus-visible:outline-secondary-950 dark:focus-visible:outline-secondary-700",
-    accent_1: "bg-accent-1-950 dark:bg-accent-1-700 hover:bg-accent-1-700 dark:hover:bg-accent-1-400 focus-visible:outline-accent-1-950 dark:focus-visible:outline-accent-1-700",
-    accent_2: "bg-accent-2-950 dark:bg-accent-2-700 hover:bg-accent-2-700 dark:hover:bg-accent-2-400 focus-visible:outline-accent-2-950 dark:focus-visible:outline-accent-2-700",
-    accent_3: "bg-accent-3-950 dark:bg-accent-3-700 hover:bg-accent-3-700 dark:hover:bg-accent-3-400 focus-visible:outline-accent-3-950 dark:focus-visible:outline-accent-3-700",
-    accent_4: "bg-accent-4-950 dark:bg-accent-4-700 hover:bg-accent-4-700 dark:hover:bg-accent-4-400 focus-visible:outline-accent-4-950 dark:focus-visible:outline-accent-4-700",
-    accent_5: "bg-accent-5-500 dark:bg-accent-5-700 hover:bg-accent-5-700 dark:hover:bg-accent-5-400 focus-visible:outline-accent-5-500 dark:focus-visible:outline-accent-5-700",
-    white: "bg-white dark:bg-black hover:bg-white dark:hover:bg-black focus-visible:outline-white dark:focus-visible:outline-black",
-    black: "bg-black dark:bg-white hover:bg-black dark:hover:bg-white focus-visible:outline-black dark:focus-visible:outline-white",
-    default: "bg-primary-600 dark:bg-primary-400 hover:bg-primary-700 dark:hover:bg-primary-300 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-400 dark:text-primary-950",
+if (!blok.link) {
+    blok.link = {
+        linktype: 'url',
+        cached_url: '#',
+    };
 }
 
-const possibleTextColors = {
-    primary: "text-white",
-    secondary: "text-white",
-    accent_1: "text-white",
-    accent_2: "text-white",
-    accent_3: "text-white",
-    accent_4: "text-white",
-    accent_5: "text-white",
-    white: "text-white",
-    black: "text-black",
-    default: "text-white",
+if (blok.link.linktype === 'story') {
+    blok.link.cached_url = `/${blok.link.cached_url}`;
 }
 
-const possibleRounded = {
-    none: "rounded-none",
-    sm: "rounded-sm",
-    md: "rounded-md",
-    lg: "rounded-lg",
-    full: "rounded-full"
+if (blok.link.cached_url == '/home') {
+    blok.link.cached_url = '/';
 }
 
-const possiblePaddingX = {
-    0: "px-0",
-    2: "px-2",
-    4: "px-4",
-    6: "px-6",
-    8: "px-8",
-    16: "px-16",
-    24: "px-24",
-};
+const classNameColor = getClassName(blok, {
+    decorators: [
+        {decorator: getTextColorOnBackground},
+    ]
+});
 
-const possiblePaddingY = {
-    0: "py-0",
-    2: "py-2",
-    4: "py-4",
-    6: "py-6",
-    8: "py-8",
-    16: "py-16",
-    24: "py-24",
-};
-
-const classNameColor = `
-    ${blok.color ? possibleTextColors[blok.color] : possibleTextColors.default}
-`.replace(/\s+/g, ' ').trim();
-
-const className = `
-${blok.color ? possibleColors[blok.color] : possibleColors.default}
-    ${blok.rounded ? possibleRounded[blok.rounded] : possibleRounded.none}
-    ${blok.padding_x ? possiblePaddingX[blok.padding_x] : possiblePaddingX[4]}
-    ${blok.padding_y ? possiblePaddingY[blok.padding_y] : possiblePaddingY[2]}
-`.replace(/\s+/g, ' ').trim();
+const className = getClassName({...blok, hover: 'background'}, {
+    decorators: [
+        {decorator: getBorderRadiusClasses},
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
+        {decorator: getBackgroundColorClasses},
+        {decorator: getHoverClasses, options: {colorName: 'background_color', colorTypeName: 'background_color_type'}},
+        {decorator: getFocusOutlineClasses, options: {colorName: 'background_color'}},
+    ]
+});
 ---
 
 {blok.submit ? 
@@ -101,7 +71,7 @@ ${blok.color ? possibleColors[blok.color] : possibleColors.default}
 :
 <a
     {...storyblokEditable(blok)}
-    href={blok.href}
+    href={blok.link?.cached_url}
     class:list={["inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none", className]}
     type="button"
 >

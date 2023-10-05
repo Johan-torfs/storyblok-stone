@@ -1,34 +1,20 @@
 ---
-import { type SbBlokData } from '@storyblok/astro';
+import { type SbBlokData, storyblokEditable } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import NavigationSvelte from './navigation/Navigation.svelte';
 
-interface StoryblokNavigation extends SbBlokData {
+import { getClassName, getPaddingXClasses, getPaddingYClasses, getMarginXClasses, getMarginYClasses, getBackgroundColorClasses, getBreakpointClasses } from '../tailwind/class_name_compiler';
+import type { PaddingX, PaddingY} from '../tailwind/types/Padding';
+import type { MarginX, MarginY} from '../tailwind/types/Margin';
+import type { BackgroundColor, BackgroundColorDesktop } from '../tailwind/types/Color';
+import type { Breakpoint } from '../tailwind/types/Breakpoint';
+
+interface StoryblokNavigation extends SbBlokData, PaddingX, PaddingY, MarginX, MarginY, BackgroundColor, BackgroundColorDesktop, Breakpoint {
     component: 'navigation',
     mobile: [SbBlokData],
     mobile_menu: [SbBlokData],
     desktop: [SbBlokData],
-    margin_x: 0|2|4|6|8|16|24,
-    margin_y: 0|2|4|6|8|16|24,
-    padding_x: 0|2|4|6|8|16|24,
-    padding_y: 0|2|4|6|8|16|24,
-    margin_x_lg: 0|2|4|6|8|16|24,
-    margin_x_md: 0|2|4|6|8|16|24,
-    margin_x_sm: 0|2|4|6|8|16|24,
-    margin_x_xl: 0|2|4|6|8|16|24,
-    margin_y_lg: 0|2|4|6|8|16|24,
-    margin_y_md: 0|2|4|6|8|16|24,
-    margin_y_sm: 0|2|4|6|8|16|24,
-    margin_y_xl: 0|2|4|6|8|16|24,
-    padding_x_lg: 0|2|4|6|8|16|24,
-    padding_x_md: 0|2|4|6|8|16|24,
-    padding_x_sm: 0|2|4|6|8|16|24,
-    padding_x_xl: 0|2|4|6|8|16|24,
-    padding_y_lg: 0|2|4|6|8|16|24,
-    padding_y_md: 0|2|4|6|8|16|24,
-    padding_y_sm: 0|2|4|6|8|16|24,
-    padding_y_xl: 0|2|4|6|8|16|24,
 }
 
 interface Props {
@@ -36,9 +22,42 @@ interface Props {
 }
 
 const { blok } = Astro.props;
+
+const paddingClasses = getClassName(blok, {
+    decorators: [
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
+        {decorator: getMarginXClasses},
+        {decorator: getMarginYClasses},
+    ]
+});
+const backgroundColorClasses = getClassName(blok, {
+    decorators: [
+        {decorator: getBackgroundColorClasses},
+        {decorator: getBackgroundColorClasses, options: {colorName: 'background_color_desktop', screenSize: blok.breakpoint || 'md'}},
+    ]
+});
+const revealMobileClasses = getClassName(blok, {
+    decorators: [
+        {decorator: getBreakpointClasses, options: {type: 'mobile'}},
+    ]
+});
+const revealDesktopClasses = getClassName(blok, {
+    decorators: [
+        {decorator: getBreakpointClasses, options: {type: 'desktop'}},
+    ]
+});
+const storyblokEditableData = storyblokEditable(blok);
 ---
 
-<NavigationSvelte blok={blok} client:idle>
+<NavigationSvelte
+    paddingClasses={paddingClasses} 
+    backgroundColorClasses={backgroundColorClasses}
+    revealMobileClasses={revealMobileClasses}
+    revealDesktopClasses={revealDesktopClasses}
+    storyblokEditableData={storyblokEditableData} 
+    client:idle
+>
     <Fragment slot="mobile-menu">
         {blok.mobile_menu.map(item => {            
             return <StoryblokComponent blok={item} />

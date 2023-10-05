@@ -3,11 +3,13 @@ import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
-interface StoryblokContainer extends SbBlokData {
+import { getClassName, getPaddingYClasses, getContainerSizeClasses } from '../tailwind/class_name_compiler';
+import type { PaddingY } from '../tailwind/types/Padding';
+import type { Size } from '../tailwind/types/Container';
+
+interface StoryblokContainer extends SbBlokData, Size, PaddingY {
     component: 'container',
     content: [SbBlokData],
-    size?: "small" | "medium" | "large" | "full",
-    padding_y?: 0|2|4|6|8|16|24,
 }
 
 interface Props {
@@ -16,27 +18,12 @@ interface Props {
 
 const { blok } = Astro.props;
 
-const possibleSizes = {
-    small: "sm:max-w-sm",
-    medium: "sm:max-w-2xl",
-    large: "sm:max-w-2xl lg:max-w-7xl",
-    full: "sm:max-w-full",
-};
-
-const possiblePaddingY = {
-    0: "py-0",
-    2: "py-2",
-    4: "py-4",
-    6: "py-6",
-    8: "py-8",
-    16: "py-16",
-    24: "py-24",
-};
-
-const className = `
-    ${blok.size ? possibleSizes[blok.size] : possibleSizes["large"]}
-    ${blok.padding_y ? possiblePaddingY[blok.padding_y] : ""}
-`
+var className = getClassName(blok, {
+    decorators: [
+        {decorator: getPaddingYClasses},
+        {decorator: getContainerSizeClasses}
+    ]
+})
 ---
 
 <div {...storyblokEditable(blok)} class:list={["mx-auto", className]}>

@@ -1,5 +1,5 @@
 <script>
-import { inputs } from '../stores.js';
+import { inputs } from '../../stores.js';
 
 export let htmlWithClass;
 
