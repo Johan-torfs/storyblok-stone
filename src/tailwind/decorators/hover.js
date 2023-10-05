@@ -1,4 +1,4 @@
-const possibleColors = {
+const possibleColorsDefault = {
     primary: "hover:text-primary-700 dark:hover:text-primary-400",
     secondary: "hover:text-secondary-700 dark:hover:text-secondary-400",
     accent_1: "hover:text-accent-1-700 dark:hover:text-accent-1-400",
@@ -11,7 +11,7 @@ const possibleColors = {
     default: "hover:text-primary-700 dark:hover:text-primary-400",
 }
 
-const possibleBackgroundColors = {
+const possibleBackgroundColorsDefault = {
     primary: "hover:bg-primary-700/20 dark:hover:bg-primary-400/20",
     secondary: "hover:bg-secondary-700/20 dark:hover:bg-secondary-400/20",
     accent_1: "hover:bg-accent-1-700/20 dark:hover:bg-accent-1-400/20",
@@ -24,7 +24,7 @@ const possibleBackgroundColors = {
     default: "hover:bg-primary-700/20 dark:hover:bg-primary-400/20",
 }
 
-const possibleLineColors = {
+const possibleLineColorsDefault = {
     primary: "after:bg-primary-700 dark:after:bg-primary-400",
     secondary: "after:bg-secondary-700 dark:after:bg-secondary-400",
     accent_1: "after:bg-accent-1-700 dark:after:bg-accent-1-400",
@@ -40,11 +40,28 @@ const possibleLineColors = {
 const typeNameDefault = 'hover';
 const colorNameDefault = 'hover_color';
 
-export function getHoverClasses(blok, {possibleHover = possibleHoverDefault, typeName = typeNameDefault, colorName = colorNameDefault} = {}) {    
+export function getHoverClasses(blok, {possibleColors, typeName = typeNameDefault, colorName = colorNameDefault} = {}) { 
+    if (!possibleColors) {
+        switch (blok[typeName]) {
+            case 'underline':
+                possibleColors = possibleLineColorsDefault;
+                break;
+            case 'background':
+                possibleColors = possibleBackgroundColorsDefault;
+                break;
+            case 'text':
+                possibleColors = possibleColorsDefault;
+                break;
+            default:
+                possibleColors = possibleColorsDefault;
+                break;
+        }
+    }
+    
     const className = `
         relative cursor-pointer pointer-events-auto transition-all duration-200 ease-in-out
-        ${blok[typeName] === 'underline' ? 'relative cursor-pointer pointer-events-auto after:absolute after:block after:h-1 after:w-0 hover:after:w-full after:transition-all after:duration-200 after:delay-200 after:ease-in after:rounded-full after:-bottom-1 ' + possibleLineColors[blok[colorName] || 'default'] : ''}
-        ${blok[typeName] === 'background' ? 'rounded-md p-2 ' + possibleBackgroundColors[blok[colorName] || 'default'] : ''}
+        ${blok[typeName] === 'underline' ? 'relative cursor-pointer pointer-events-auto after:absolute after:block after:h-1 after:w-0 hover:after:w-full after:transition-all after:duration-200 after:delay-200 after:ease-in after:rounded-full after:-bottom-1 ' + possibleColors[blok[colorName] || 'default'] : ''}
+        ${blok[typeName] === 'background' ? 'rounded-md p-2 ' + possibleColors[blok[colorName] || 'default'] : ''}
         ${blok[typeName] === 'text' ? possibleColors[blok[colorName] || 'default'] : ''}
     `.replace(/\s+/g, ' ').trim();
 
