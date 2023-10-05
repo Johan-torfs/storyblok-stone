@@ -3,7 +3,8 @@ import { storeInput } from '../../stores.js';
 
 export let className;
 export let storyblokEditableData;
-export let { name, value, label } = blok;
+export let blok;
+let { name, value, label } = {...blok};
 
 const id = "input-" + Math.random().toString(36).slice(2, 11);
 </script>

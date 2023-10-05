@@ -34,7 +34,7 @@ const paddingClasses = getClassName(blok, {
 const backgroundColorClasses = getClassName(blok, {
     decorators: [
         {decorator: getBackgroundColorClasses},
-        {decorator: getBackgroundColorClasses, options: {name: 'background_color_desktop', screenSize: blok.breakpoint || 'md'}},
+        {decorator: getBackgroundColorClasses, options: {colorName: 'background_color_desktop', screenSize: blok.breakpoint || 'md'}},
     ]
 });
 const revealMobileClasses = getClassName(blok, {

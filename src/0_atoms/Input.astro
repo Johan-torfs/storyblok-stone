@@ -42,10 +42,9 @@ const classNameRadio = getClassName({...blok, hover: 'background', background_co
 {blok.type == "radio" ? (
     <InputRadio
         className={className + ' ' + classNameRadio + ' aspect-square w-12 flex items-center justify-center'}
-        name={blok.name}
-        value={blok.value}
-        label={blok.label}
+        blok={{name: blok.name, value: blok.value, label: blok.label}}
         storyblokEditableData={storyblokEditable(blok)}
+        client:visible
     />
 ) : (
     <InputSvelte blok={blok} client:visible />
