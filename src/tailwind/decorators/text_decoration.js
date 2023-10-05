@@ -6,7 +6,7 @@ const possibleDecorationDefault = {
     default: '',
 };
 
-const nameDefault = 'font';
+const nameDefault = 'text_decoration';
 
 export function getTextDecorationClasses(blok, {possibleDecoration = possibleDecorationDefault, name = nameDefault} = {}) {    
     const className = `
