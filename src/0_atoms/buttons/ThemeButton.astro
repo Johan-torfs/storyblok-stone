@@ -1,0 +1,76 @@
+---
+import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+import type { PaddingX, PaddingY } from '../../tailwind/types/Padding';
+import type { BorderRadius } from '../../tailwind/types/Border';
+import type { BackgroundColor } from '../../tailwind/types/Color';
+import { getBorderRadiusClasses, getClassName, getPaddingXClasses, getPaddingYClasses, getBackgroundColorClasses, getHoverClasses, getFocusOutlineClasses, getTextColorOnBackground } from '../../tailwind/class_name_compiler';
+
+interface StoryblokThemeButton extends SbBlokData, PaddingX, PaddingY, BorderRadius, BackgroundColor {
+    component: "theme_button";
+    icons: {
+        component: "theme_icon",
+        icon: {
+            type: string;
+            icon: string;
+        };
+        theme: string;
+    }[];
+}
+
+
+interface Props {
+    blok: StoryblokThemeButton;
+}
+
+const { blok } = Astro.props;
+
+const id = "theme-button-" + Math.random().toString(36).slice(2, 11);
+
+const classNameColor = getClassName(blok, {
+    decorators: [
+        {decorator: getTextColorOnBackground},
+    ]
+});
+
+const className = getClassName({...blok, hover: 'background'}, {
+    decorators: [
+        {decorator: getBorderRadiusClasses},
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
+        {decorator: getBackgroundColorClasses},
+        {decorator: getHoverClasses, options: {colorName: 'background_color', colorTypeName: 'background_color_type'}},
+        {decorator: getFocusOutlineClasses, options: {colorName: 'background_color'}},
+    ]
+});
+---
+
+<button
+    {...storyblokEditable(blok)}
+    class:list={["inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none", className]}
+    type="button"
+>
+    {blok.icons.map(icon => (
+        <i class:list={[icon.icon.type, icon.icon.icon, classNameColor, "hidden"]} aria-hidden="true" data-theme={icon.theme}></i>
+    ))} 
+</button>
+
+<script define:vars={{id: id}}>
+    const button = document.getElementById('{id}');
+    const icons = button.querySelectorAll('i');
+
+    var currentTheme = localStorage.getItem('theme') || 'light';
+    var currentIcon = button.querySelector(`[data-theme="${theme}"]`);
+
+    currentIcon.classList.remove('hidden');
+    localStorage.setItem('theme', currentTheme);
+
+    button.addEventListener('click', () => {
+        currentIcon.classList.add('hidden');
+
+        currentIcon = currentIcon.querySelector(' + i') || icons[0];
+        currentTheme = currentIcon.getAttribute('data-theme') || 'light';
+
+        currentIcon.classList.remove('hidden');
+        localStorage.setItem('theme', currentTheme);
+    });
+</script>
