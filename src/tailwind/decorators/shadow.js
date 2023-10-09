@@ -58,7 +58,7 @@ const screenSizesDefault = {
 const nameDefault = 'shadow';
 
 export function getShadowClasses(blok, {possibleShadow = possibleShadowDefault, screenSizes = screenSizesDefault, name = nameDefault} = {}) {    
-    const className = `
+    const className = `dark:shadow-white/5
         ${screenSizes.sizes.map((screen) => (blok[name] ? possibleShadow[screen][blok[name][screen]] : '')).join(' ')}
     `.replace(/\s+/g, ' ').trim();
 

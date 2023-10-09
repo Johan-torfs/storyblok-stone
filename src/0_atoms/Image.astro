@@ -20,6 +20,19 @@ interface StoryblokImage extends SbBlokData, Visibility, Dimensions, BorderRadiu
         meta_data: {};
         is_external_url: boolean;
     },
+    image_dark: {
+        id: number;
+        alt: string;
+        name: string;
+        focus: string;
+        title: string;
+        source: string;
+        filename: string;
+        copyright: string;
+        fieldtype: string;
+        meta_data: {};
+        is_external_url: boolean;
+    },
     link: {
         id: number;
         url: string;
@@ -59,16 +72,34 @@ const className = getClassName(blok, {
         {...storyblokEditable(blok)}
         src={blok.image.filename} 
         alt={blok.image.alt} 
-        class:list={[className, 'image']}
+        class:list={[className, 'image', {'dark:hidden': blok.image_dark?.id}]}
     />
+    {blok.image_dark?.id && 
+        <img 
+            {...storyblokEditable(blok)}
+            src={blok.image_dark.filename} 
+            alt={blok.image_dark.alt} 
+            class:list={[className, 'image', 'dark', {'hidden dark:block': true}]}
+        />
+    }
 </a> 
 :
-<img 
-    {...storyblokEditable(blok)}
-    src={blok.image.filename} 
-    alt={blok.image.alt} 
-    class:list={[className, 'image']}
-/>
+(<Fragment>
+    <img 
+        {...storyblokEditable(blok)}
+        src={blok.image.filename} 
+        alt={blok.image.alt} 
+        class:list={[className, 'image', {'dark:hidden': blok.image_dark?.id}]}
+    />
+    {blok.image_dark?.id && 
+        <img 
+            {...storyblokEditable(blok)}
+            src={blok.image_dark.filename} 
+            alt={blok.image_dark.alt} 
+            class:list={[className, 'image', 'dark', {'hidden dark:block': true}]}
+        />
+    }
+</Fragment>)
 }
 
 <style define:vars={{height: blok.height ? blok.height + "px" : "auto", width: blok.width ? blok.width + "px" : "auto"}}>

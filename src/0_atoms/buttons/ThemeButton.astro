@@ -70,8 +70,6 @@ const className = getClassName({...blok, hover: 'background'}, {
             var currentIcon = button?.querySelector(`[data-theme="${currentTheme}"]`) || icons[0];
 
             currentIcon.classList.remove('hidden');
-            localStorage.setItem('theme', currentTheme);
-            htmlElement?.classList.add(currentTheme);
 
             // Each time the button is clicked, update the count.
             button?.addEventListener('click', () => {
