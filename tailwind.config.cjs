@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import { transform } from '@astrojs/compiler';
 
 const colors = require('tailwindcss/colors');
 
@@ -130,14 +129,4 @@ module.exports = {
 	  '6xl': ['3.75rem', '4.25rem'],
     },
   },
-  safelist: [
-	{
-	  pattern: /grid-cols-+/,
-	  variants: ['sm', 'md', 'lg', 'xl', 'xxl'],
-	},
-	{
-		pattern: /gap-+/,
-		variants: ['sm', 'md', 'lg', 'xl', 'xxl'],
-	},
-  ],
 };

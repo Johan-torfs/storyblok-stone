@@ -8,6 +8,7 @@ const possibleColorsDefault = {
     accent_5: "focus-visible:outline-accent-5-500 dark:focus-visible:outline-accent-5-700",
     white: "focus-visible:outline-white dark:focus-visible:outline-black",
     black: "focus-visible:outline-black dark:focus-visible:outline-white",
+    default: "focus-visible:outline-black dark:focus-visible:outline-white",
 }
 
 const nameDefault = 'color';
