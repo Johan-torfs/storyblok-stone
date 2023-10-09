@@ -62,7 +62,7 @@ const className = getClassName({...blok, hover: 'background'}, {
         constructor() {
             super();
 
-            const body = document.querySelector('body');
+            const htmlElement = document.documentElement;
             const button = this.querySelector('button');
             const icons = button?.querySelectorAll('i') || [];
 
@@ -71,7 +71,7 @@ const className = getClassName({...blok, hover: 'background'}, {
 
             currentIcon.classList.remove('hidden');
             localStorage.setItem('theme', currentTheme);
-            body?.classList.add(currentTheme);
+            htmlElement?.classList.add(currentTheme);
 
             // Each time the button is clicked, update the count.
             button?.addEventListener('click', () => {
@@ -79,12 +79,12 @@ const className = getClassName({...blok, hover: 'background'}, {
                 currentIcon?.classList.add('hidden');
                 currentIcon = nextIcon;
 
-                body?.classList.remove(currentTheme);
+                htmlElement?.classList.remove(currentTheme);
                 currentTheme = currentIcon.getAttribute('data-theme') || 'light';
 
                 currentIcon.classList.remove('hidden');
                 localStorage.setItem('theme', currentTheme);
-                body?.classList.add(currentTheme);
+                htmlElement?.classList.add(currentTheme);
             });
         }
     }
