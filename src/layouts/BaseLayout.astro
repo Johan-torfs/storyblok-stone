@@ -2,6 +2,8 @@
 import { useStoryblokApi, type SbBlokData } from "@storyblok/astro";
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import { ViewTransitions } from "astro:transitions";
+import '@fortawesome/fontawesome-free/css/all.min.css'
 
 const storyblokApi = useStoryblokApi()
 const response = await storyblokApi.get('cdn/stories/settings/base-layout', {
@@ -25,11 +27,10 @@ const footer = response.data.story.content.footer;
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
 
-        <script src="https://kit.fontawesome.com/3025c21c68.js" crossorigin="anonymous" defer=true/>
-
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Hanken+Grotesk:wght@500;700;800&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+		<ViewTransitions />
 	</head>
 	<body class="bg-white dark:bg-black transition-colors">
 		{navigation?.map((blok: SbBlokData) => {            
@@ -61,4 +62,25 @@ const footer = response.data.story.content.footer;
 		document.documentElement.classList.add('light');
 		localStorage.setItem('theme', 'light');
 	}
+
+	document.addEventListener('astro:after-swap', () => {
+		const theme = localStorage.getItem('theme');
+
+		if (theme == 'dark') {
+			document.documentElement.classList.add('dark');
+			localStorage.setItem('theme', 'dark');
+		} else if (theme == 'light') {
+			document.documentElement.classList.remove('dark');
+			localStorage.setItem('theme', 'light');
+		} else if (prefersDark.matches) {
+			document.documentElement.classList.add('dark');
+			localStorage.setItem('theme', 'dark');
+		} else if (prefersLight.matches) {
+			document.documentElement.classList.remove('dark');
+			localStorage.setItem('theme', 'light');
+		} else {
+			document.documentElement.classList.add('light');
+			localStorage.setItem('theme', 'light');
+		}
+	})
 </script>
