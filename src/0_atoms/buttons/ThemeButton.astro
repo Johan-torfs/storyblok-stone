@@ -52,7 +52,7 @@ const className = getClassName({...blok, hover: 'background'}, {
         transition:persist
     >
         {blok.icons?.map(icon => (
-            <i class:list={[icon.icon.type, icon.icon.icon, classNameColor, "hidden"]} aria-hidden="true" data-theme={icon.theme}></i>
+            <i class:list={[icon.icon.type, icon.icon.icon, classNameColor, "!hidden"]} aria-hidden="true" data-theme={icon.theme}></i>
         ))} 
     </button>
 </theme-button>
@@ -70,18 +70,18 @@ const className = getClassName({...blok, hover: 'background'}, {
             var currentTheme = localStorage.getItem('theme') || 'light';
             var currentIcon = button?.querySelector(`[data-theme="${currentTheme}"]`) || icons[0];
 
-            currentIcon.classList.remove('hidden');
+            currentIcon.classList.remove('!hidden');
 
             // Each time the button is clicked, update the count.
             button?.addEventListener('click', () => {
-                const nextIcon = button?.querySelector('i:not(.hidden) + i') || icons[0];
-                currentIcon?.classList.add('hidden');
+                const nextIcon = button?.querySelector('i:not(.\\!hidden) + i') || icons[0];
+                currentIcon?.classList.add('!hidden');
                 currentIcon = nextIcon;
 
                 htmlElement?.classList.remove(currentTheme);
                 currentTheme = currentIcon.getAttribute('data-theme') || 'light';
 
-                currentIcon.classList.remove('hidden');
+                currentIcon.classList.remove('!hidden');
                 localStorage.setItem('theme', currentTheme);
                 htmlElement?.classList.add(currentTheme);
             });

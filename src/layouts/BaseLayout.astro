@@ -3,7 +3,8 @@ import { useStoryblokApi, type SbBlokData } from "@storyblok/astro";
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { ViewTransitions } from "astro:transitions";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+import '@fortawesome/fontawesome-free/css/solid.min.css';
 
 const storyblokApi = useStoryblokApi()
 const response = await storyblokApi.get('cdn/stories/settings/base-layout', {
