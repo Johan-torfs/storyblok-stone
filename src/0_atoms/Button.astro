@@ -1,18 +1,31 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+import { type SbBlokData } from '@storyblok/astro';
 
 import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
 import type { BorderRadius } from '../tailwind/types/Border';
 import type { BackgroundColor } from '../tailwind/types/Color';
-import { getBorderRadiusClasses, getClassName, getPaddingXClasses, getPaddingYClasses, getBackgroundColorClasses, getHoverClasses, getFocusOutlineClasses, getTextColorOnBackground } from '../tailwind/class_name_compiler';
+import IconButton from './buttons/IconButton.astro';
+import ThemeButton from './buttons/ThemeButton.astro';
 
 interface StoryblokButton extends SbBlokData, PaddingX, PaddingY, BorderRadius, BackgroundColor {
-    component: "button";
+    component: "button" | "icon_button" | "theme_button";
     text?: string;
     link: {
         linktype: string;
         cached_url: string;
-    }
+    };
+    icon?: {
+        type: string;
+        icon: string;
+    };
+    icons?: {
+        component: "theme_icon",
+        icon: {
+            type: string;
+            icon: string;
+        };
+        theme: string;
+    }[];
     submit?: boolean;
 }
 
@@ -22,35 +35,8 @@ interface Props {
 }
 
 const { blok } = Astro.props;
-
-const className = getClassName({...blok, hover: 'background'}, {
-    decorators: [
-        {decorator: getBorderRadiusClasses},
-        {decorator: getPaddingXClasses},
-        {decorator: getPaddingYClasses},
-        {decorator: getBackgroundColorClasses},
-        {decorator: getHoverClasses, options: {colorName: 'background_color', colorTypeName: 'background_color_type'}},
-        {decorator: getFocusOutlineClasses, options: {colorName: 'background_color'}},
-        {decorator: getTextColorOnBackground},
-    ]
-});
 ---
 
-{blok.submit ? 
-<button
-    {...storyblokEditable(blok)}
-    class:list={["inline-flex items-center justify-center border border-transparent font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none", className]}
-    type="submit"
->
-    {blok.text}
-</button>
-:
-<a
-    {...storyblokEditable(blok)}
-    href={blok.link?.cached_url}
-    class:list={["inline-flex items-center justify-center border border-transparent font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none", className]}
-    type="button"
->
-    {blok.text}
-</a>
-}
+{(blok.component == "button") && <IconButton blok={{...blok, component: "button"}} />}
+{(blok.component == "icon_button") && <IconButton blok={{...blok, component: "icon_button"}} />}
+{(blok.component == "theme_button") && <ThemeButton blok={{...blok, component: "theme_button"}} />}

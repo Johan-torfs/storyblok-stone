@@ -10,7 +10,7 @@ const possibleBackgroundColorsDefault = {
             accent_5: "bg-accent-5-100 dark:bg-accent-5-800",
             white: "bg-white dark:bg-black",
             black: "bg-black dark:bg-white",
-            transparent: "bg-transparent",
+            transparent: "bg-transparent dark:bg-transparent",
         },
         sm: {
             primary: "sm:bg-primary-100 dark:sm:bg-primary-800",
@@ -22,7 +22,7 @@ const possibleBackgroundColorsDefault = {
             accent_5: "sm:bg-accent-5-100 dark:sm:bg-accent-5-800",
             white: "sm:bg-white dark:sm:bg-black",
             black: "sm:bg-black dark:sm:bg-white",
-            transparent: "sm:bg-transparent",
+            transparent: "sm:bg-transparent dark:sm:bg-transparent",
         },
         md: {
             primary: "md:bg-primary-100 dark:md:bg-primary-800",
@@ -34,7 +34,7 @@ const possibleBackgroundColorsDefault = {
             accent_5: "md:bg-accent-5-100 dark:md:bg-accent-5-800",
             white: "md:bg-white dark:md:bg-black",
             black: "md:bg-black dark:md:bg-white",
-            transparent: "md:bg-transparent",
+            transparent: "md:bg-transparent dark:md:bg-transparent",
         },
         lg: {
             primary: "lg:bg-primary-100 dark:lg:bg-primary-800",
@@ -46,7 +46,7 @@ const possibleBackgroundColorsDefault = {
             accent_5: "lg:bg-accent-5-100 dark:lg:bg-accent-5-800",
             white: "lg:bg-white dark:lg:bg-black",
             black: "lg:bg-black dark:lg:bg-white",
-            transparent: "lg:bg-transparent",
+            transparent: "lg:bg-transparent dark:lg:bg-transparent",
         },
         xl: {
             primary: "xl:bg-primary-100 dark:xl:bg-primary-800",
@@ -58,7 +58,7 @@ const possibleBackgroundColorsDefault = {
             accent_5: "xl:bg-accent-5-100 dark:xl:bg-accent-5-800",
             white: "xl:bg-white dark:xl:bg-black",
             black: "xl:bg-black dark:xl:bg-white",
-            transparent: "xl:bg-transparent",
+            transparent: "xl:bg-transparent dark:xl:bg-transparent",
         }
     },
     gradient: {
@@ -72,7 +72,7 @@ const possibleBackgroundColorsDefault = {
             accent_5: "bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:from-accent-5-600 dark:to-accent-5-400",
             white: "bg-gradient-to-b from-white to-white dark:from-black dark:to-black",
             black: "bg-gradient-to-b from-black to-black dark:from-white dark:to-white",
-            transparent: "bg-transparent",
+            transparent: "bg-transparent dark:bg-transparent",
         },
         sm: {
             primary: "sm:bg-gradient-to-b from-primary-500 to-primary-700 dark:sm:from-primary-600 dark:sm:to-primary-400",
@@ -84,7 +84,7 @@ const possibleBackgroundColorsDefault = {
             accent_5: "sm:bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:sm:from-accent-5-600 dark:sm:to-accent-5-400",
             white: "sm:bg-gradient-to-b from-white to-white dark:sm:from-black dark:sm:to-black",
             black: "sm:bg-gradient-to-b from-black to-black dark:sm:from-white dark:sm:to-white",
-            transparent: "sm:bg-transparent",
+            transparent: "sm:bg-transparent dark:sm:bg-transparent",
         },
         md: {
             primary: "md:bg-gradient-to-b from-primary-500 to-primary-700 dark:md:from-primary-600 dark:md:to-primary-400",
@@ -96,7 +96,7 @@ const possibleBackgroundColorsDefault = {
             accent_5: "md:bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:md:from-accent-5-600 dark:md:to-accent-5-400",
             white: "md:bg-gradient-to-b from-white to-white dark:md:from-black dark:md:to-black",
             black: "md:bg-gradient-to-b from-black to-black dark:md:from-white dark:md:to-white",
-            transparent: "md:bg-transparent",
+            transparent: "md:bg-transparent dark:md:bg-transparent",
         },
         lg: {
             primary: "lg:bg-gradient-to-b from-primary-500 to-primary-700 dark:lg:from-primary-600 dark:lg:to-primary-400",
@@ -108,7 +108,7 @@ const possibleBackgroundColorsDefault = {
             accent_5: "lg:bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:lg:from-accent-5-600 dark:lg:to-accent-5-400",
             white: "lg:bg-gradient-to-b from-white to-white dark:lg:from-black dark:lg:to-black",
             black: "lg:bg-gradient-to-b from-black to-black dark:lg:from-white dark:lg:to-white",
-            transparent: "lg:bg-transparent",
+            transparent: "lg:bg-transparent dark:lg:bg-transparent",
         },
         xl: {
             primary: "xl:bg-gradient-to-b from-primary-500 to-primary-700 dark:xl:from-primary-600 dark:xl:to-primary-400",
@@ -120,7 +120,7 @@ const possibleBackgroundColorsDefault = {
             accent_5: "xl:bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:xl:from-accent-5-600 dark:xl:to-accent-5-400",
             white: "xl:bg-gradient-to-b from-white to-white dark:xl:from-black dark:xl:to-black",
             black: "xl:bg-gradient-to-b from-black to-black dark:xl:from-white dark:xl:to-white",
-            transparent: "xl:bg-transparent",
+            transparent: "xl:bg-transparent dark:xl:bg-transparent",
         }
     }
 }
@@ -137,7 +137,7 @@ const possibleBackgroundColorsIntense = {
             accent_5: "bg-accent-5-700 dark:bg-accent-5-400",
             white: "bg-white dark:bg-black",
             black: "bg-black dark:bg-white",
-            transparent: "bg-transparent",
+            transparent: "bg-transparent dark:bg-transparent",
         },
         sm: {
             primary: "sm:bg-primary-700 dark:sm:bg-primary-400",
@@ -149,7 +149,7 @@ const possibleBackgroundColorsIntense = {
             accent_5: "sm:bg-accent-5-700 dark:sm:bg-accent-5-400",
             white: "sm:bg-white dark:sm:bg-black",
             black: "sm:bg-black dark:sm:bg-white",
-            transparent: "sm:bg-transparent",
+            transparent: "sm:bg-transparent dark:sm:bg-transparent",
         },
         md: {
             primary: "md:bg-primary-700 dark:md:bg-primary-400",
@@ -161,7 +161,7 @@ const possibleBackgroundColorsIntense = {
             accent_5: "md:bg-accent-5-700 dark:md:bg-accent-5-400",
             white: "md:bg-white dark:md:bg-black",
             black: "md:bg-black dark:md:bg-white",
-            transparent: "md:bg-transparent",
+            transparent: "md:bg-transparent dark:md:bg-transparent",
         },
         lg: {
             primary: "lg:bg-primary-700 dark:lg:bg-primary-400",
@@ -173,7 +173,7 @@ const possibleBackgroundColorsIntense = {
             accent_5: "lg:bg-accent-5-700 dark:lg:bg-accent-5-400",
             white: "lg:bg-white dark:lg:bg-black",
             black: "lg:bg-black dark:lg:bg-white",
-            transparent: "lg:bg-transparent",
+            transparent: "lg:bg-transparent dark:lg:bg-transparent",
         },
         xl: {
             primary: "xl:bg-primary-700 dark:xl:bg-primary-400",
@@ -185,7 +185,7 @@ const possibleBackgroundColorsIntense = {
             accent_5: "xl:bg-accent-5-700 dark:xl:bg-accent-5-400",
             white: "xl:bg-white dark:xl:bg-black",
             black: "xl:bg-black dark:xl:bg-white",
-            transparent: "xl:bg-transparent",
+            transparent: "xl:bg-transparent dark:xl:bg-transparent",
         }
     },
     gradient: {
@@ -199,7 +199,7 @@ const possibleBackgroundColorsIntense = {
             accent_5: "bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:from-accent-5-600 dark:to-accent-5-400",
             white: "bg-gradient-to-b from-white to-white dark:from-black dark:to-black",
             black: "bg-gradient-to-b from-black to-black dark:from-white dark:to-white",
-            transparent: "bg-transparent",
+            transparent: "bg-transparent dark:bg-transparent",
         },
         sm: {
             primary: "sm:bg-gradient-to-b from-primary-500 to-primary-700 dark:sm:from-primary-600 dark:sm:to-primary-400",
@@ -211,7 +211,7 @@ const possibleBackgroundColorsIntense = {
             accent_5: "sm:bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:sm:from-accent-5-600 dark:sm:to-accent-5-400",
             white: "sm:bg-gradient-to-b from-white to-white dark:sm:from-black dark:sm:to-black",
             black: "sm:bg-gradient-to-b from-black to-black dark:sm:from-white dark:sm:to-white",
-            transparent: "sm:bg-transparent",
+            transparent: "sm:bg-transparent dark:sm:bg-transparent",
         },
         md: {
             primary: "md:bg-gradient-to-b from-primary-500 to-primary-700 dark:md:from-primary-600 dark:md:to-primary-400",
@@ -223,7 +223,7 @@ const possibleBackgroundColorsIntense = {
             accent_5: "md:bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:md:from-accent-5-600 dark:md:to-accent-5-400",
             white: "md:bg-gradient-to-b from-white to-white dark:md:from-black dark:md:to-black",
             black: "md:bg-gradient-to-b from-black to-black dark:md:from-white dark:md:to-white",
-            transparent: "md:bg-transparent",
+            transparent: "md:bg-transparent dark:md:bg-transparent",
         },
         lg: {
             primary: "lg:bg-gradient-to-b from-primary-500 to-primary-700 dark:lg:from-primary-600 dark:lg:to-primary-400",
@@ -235,7 +235,7 @@ const possibleBackgroundColorsIntense = {
             accent_5: "lg:bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:lg:from-accent-5-600 dark:lg:to-accent-5-400",
             white: "lg:bg-gradient-to-b from-white to-white dark:lg:from-black dark:lg:to-black",
             black: "lg:bg-gradient-to-b from-black to-black dark:lg:from-white dark:lg:to-white",
-            transparent: "lg:bg-transparent",
+            transparent: "lg:bg-transparent dark:lg:bg-transparent",
         },
         xl: {
             primary: "xl:bg-gradient-to-b from-primary-500 to-primary-700 dark:xl:from-primary-600 dark:xl:to-primary-400",
@@ -247,7 +247,7 @@ const possibleBackgroundColorsIntense = {
             accent_5: "xl:bg-gradient-to-b from-accent-5-500 to-accent-5-700 dark:xl:from-accent-5-600 dark:xl:to-accent-5-400",
             white: "xl:bg-gradient-to-b from-white to-white dark:xl:from-black dark:xl:to-black",
             black: "xl:bg-gradient-to-b from-black to-black dark:xl:from-white dark:xl:to-white",
-            transparent: "xl:bg-transparent",
+            transparent: "xl:bg-transparent dark:xl:bg-transparent",
         }
     }
 }
@@ -264,7 +264,7 @@ const possibleBackgroundColorsTranspicuous = {
             accent_5: "bg-accent-5-700/10 dark:bg-accent-5-400/10",
             white: "bg-white/10 dark:bg-black/10",
             black: "bg-black/10 dark:bg-white/10",
-            transparent: "bg-transparent",
+            transparent: "bg-transparent dark:bg-transparent",
         },
         sm: {
             primary: "sm:bg-primary-700/10 dark:sm:bg-primary-400/10",
@@ -276,7 +276,7 @@ const possibleBackgroundColorsTranspicuous = {
             accent_5: "sm:bg-accent-5-700/10 dark:sm:bg-accent-5-400/10",
             white: "sm:bg-white/10 dark:sm:bg-black/10",
             black: "sm:bg-black/10 dark:sm:bg-white/10",
-            transparent: "sm:bg-transparent",
+            transparent: "sm:bg-transparent dark:sm:bg-transparent",
         },
         md: {
             primary: "md:bg-primary-700/10 dark:md:bg-primary-400/10",
@@ -288,7 +288,7 @@ const possibleBackgroundColorsTranspicuous = {
             accent_5: "md:bg-accent-5-700/10 dark:md:bg-accent-5-400/10",
             white: "md:bg-white/10 dark:md:bg-black/10",
             black: "md:bg-black/10 dark:md:bg-white/10",
-            transparent: "md:bg-transparent",
+            transparent: "md:bg-transparent dark:md:bg-transparent",
         },
         lg: {
             primary: "lg:bg-primary-700/10 dark:lg:bg-primary-400/10",
@@ -300,7 +300,7 @@ const possibleBackgroundColorsTranspicuous = {
             accent_5: "lg:bg-accent-5-700/10 dark:lg:bg-accent-5-400/10",
             white: "lg:bg-white/10 dark:lg:bg-black/10",
             black: "lg:bg-black/10 dark:lg:bg-white/10",
-            transparent: "lg:bg-transparent",
+            transparent: "lg:bg-transparent dark:lg:bg-transparent",
         },
         xl: {
             primary: "xl:bg-primary-700/10 dark:xl:bg-primary-400/10",
@@ -312,7 +312,7 @@ const possibleBackgroundColorsTranspicuous = {
             accent_5: "xl:bg-accent-5-700/10 dark:xl:bg-accent-5-400/10",
             white: "xl:bg-white/10 dark:xl:bg-black/10",
             black: "xl:bg-black/10 dark:xl:bg-white/10",
-            transparent: "xl:bg-transparent",
+            transparent: "xl:bg-transparent dark:xl:bg-transparent",
         }
     },
     gradient: {
@@ -326,7 +326,7 @@ const possibleBackgroundColorsTranspicuous = {
             accent_5: "bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:from-accent-5-600/10 dark:to-accent-5-400/10",
             white: "bg-gradient-to-b from-white/10 to-white/10 dark:from-black/10 dark:to-black/10",
             black: "bg-gradient-to-b from-black/10 to-black/10 dark:from-white/10 dark:to-white/10",
-            transparent: "bg-transparent",
+            transparent: "bg-transparent dark:bg-transparent",
         },
         sm: {
             primary: "sm:bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:sm:from-primary-600/10 dark:sm:to-primary-400/10",
@@ -338,7 +338,7 @@ const possibleBackgroundColorsTranspicuous = {
             accent_5: "sm:bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:sm:from-accent-5-600/10 dark:sm:to-accent-5-400/10",
             white: "sm:bg-gradient-to-b from-white/10 to-white/10 dark:sm:from-black/10 dark:sm:to-black/10",
             black: "sm:bg-gradient-to-b from-black/10 to-black/10 dark:sm:from-white/10 dark:sm:to-white/10",
-            transparent: "sm:bg-transparent",
+            transparent: "sm:bg-transparent dark:sm:bg-transparent",
         },
         md: {
             primary: "md:bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:md:from-primary-600/10 dark:md:to-primary-400/10",
@@ -350,7 +350,7 @@ const possibleBackgroundColorsTranspicuous = {
             accent_5: "md:bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:md:from-accent-5-600/10 dark:md:to-accent-5-400/10",
             white: "md:bg-gradient-to-b from-white/10 to-white/10 dark:md:from-black/10 dark:md:to-black/10",
             black: "md:bg-gradient-to-b from-black/10 to-black/10 dark:md:from-white/10 dark:md:to-white/10",
-            transparent: "md:bg-transparent",
+            transparent: "md:bg-transparent dark:md:bg-transparent",
         },
         lg: {
             primary: "lg:bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:lg:from-primary-600/10 dark:lg:to-primary-400/10",
@@ -362,7 +362,7 @@ const possibleBackgroundColorsTranspicuous = {
             accent_5: "lg:bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:lg:from-accent-5-600/10 dark:lg:to-accent-5-400/10",
             white: "lg:bg-gradient-to-b from-white/10 to-white/10 dark:lg:from-black/10 dark:lg:to-black/10",
             black: "lg:bg-gradient-to-b from-black/10 to-black/10 dark:lg:from-white/10 dark:lg:to-white/10",
-            transparent: "lg:bg-transparent",
+            transparent: "lg:bg-transparent dark:lg:bg-transparent",
         },
         xl: {
             primary: "xl:bg-gradient-to-b from-primary-500/10 to-primary-700/10 dark:xl:from-primary-600/10 dark:xl:to-primary-400/10",
@@ -374,7 +374,7 @@ const possibleBackgroundColorsTranspicuous = {
             accent_5: "xl:bg-gradient-to-b from-accent-5-500/10 to-accent-5-700/10 dark:xl:from-accent-5-600/10 dark:xl:to-accent-5-400/10",
             white: "xl:bg-gradient-to-b from-white/10 to-white/10 dark:xl:from-black/10 dark:xl:to-black/10",
             black: "xl:bg-gradient-to-b from-black/10 to-black/10 dark:xl:from-white/10 dark:xl:to-white/10",
-            transparent: "xl:bg-transparent",
+            transparent: "xl:bg-transparent dark:xl:bg-transparent",
         }
     }
 }

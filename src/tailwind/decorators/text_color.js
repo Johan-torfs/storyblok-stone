@@ -36,40 +36,40 @@ export function getTextColorClasses(blok, {possibleColor = possibleColorDefault,
 
 const possibleTextColorDefault = {
     default: {
-        primary: "text-black",
-        secondary: "text-black",
-        accent_1: "text-black",
-        accent_2: "text-black",
-        accent_3: "text-black",
-        accent_4: "text-black",
-        accent_5: "text-black",
-        white: "text-black",
-        black: "text-white",
-        default: "text-black",
+        primary: "text-black dark:text-white",
+        secondary: "text-black dark:text-white",
+        accent_1: "text-black dark:text-white",
+        accent_2: "text-black dark:text-white",
+        accent_3: "text-black dark:text-white",
+        accent_4: "text-black dark:text-white",
+        accent_5: "text-black dark:text-white",
+        white: "text-black dark:text-white",
+        black: "text-white dark:text-black",
+        default: "text-black dark:text-white",
     },
     intense: {
-        primary: "text-white",
-        secondary: "text-white",
-        accent_1: "text-white",
-        accent_2: "text-white",
-        accent_3: "text-white",
-        accent_4: "text-white",
-        accent_5: "text-white",
-        white: "text-black",
-        black: "text-white",
-        default: "text-white",
+        primary: "text-white dark:text-black",
+        secondary: "text-white dark:text-black",
+        accent_1: "text-white dark:text-black",
+        accent_2: "text-white dark:text-black",
+        accent_3: "text-white dark:text-black",
+        accent_4: "text-white dark:text-black",
+        accent_5: "text-white dark:text-black",
+        white: "text-black dark:text-white",
+        black: "text-white dark:text-black",
+        default: "text-white dark:text-black",
     },
     transpicuous: {
-        primary: "text-black",
-        secondary: "text-black",
-        accent_1: "text-black",
-        accent_2: "text-black",
-        accent_3: "text-black",
-        accent_4: "text-black",
-        accent_5: "text-black",
-        white: "text-black",
-        black: "text-white",
-        default: "text-black",
+        primary: "text-black dark:text-white",
+        secondary: "text-black dark:text-white",
+        accent_1: "text-black dark:text-white",
+        accent_2: "text-black dark:text-white",
+        accent_3: "text-black dark:text-white",
+        accent_4: "text-black dark:text-white",
+        accent_5: "text-black dark:text-white",
+        white: "text-black dark:text-white",
+        black: "text-white dark:text-black",
+        default: "text-black dark:text-white",
     },
 }
 
@@ -78,7 +78,7 @@ const backgroundColorTypeDefault = 'background_color_type';
 
 export function getTextColorOnBackground(blok, {possibleTextColor = possibleTextColorDefault, backgroundColorName = backgroundColorNameDefault, backgroundColorType = backgroundColorTypeDefault} = {}) {
     const className = `
-        ${possibleTextColor[blok[backgroundColorType] || 'default'][blok[backgroundColorName] || 'black']}
+        ${possibleTextColor[blok[backgroundColorType] || 'default'][blok[backgroundColorName] || 'default']}
     `.replace(/\s+/g, ' ').trim();
 
     return className;
