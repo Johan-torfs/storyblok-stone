@@ -5,6 +5,7 @@ import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
 import type { BorderRadius } from '../tailwind/types/Border';
 import type { BackgroundColor } from '../tailwind/types/Color';
 import IconButton from './buttons/IconButton.astro';
+import ThemeButton from './buttons/ThemeButton.astro';
 
 interface StoryblokButton extends SbBlokData, PaddingX, PaddingY, BorderRadius, BackgroundColor {
     component: "button" | "icon_button" | "theme_button";
@@ -17,6 +18,14 @@ interface StoryblokButton extends SbBlokData, PaddingX, PaddingY, BorderRadius, 
         type: string;
         icon: string;
     };
+    icons?: {
+        component: "theme_icon",
+        icon: {
+            type: string;
+            icon: string;
+        };
+        theme: string;
+    }[];
     submit?: boolean;
 }
 
@@ -30,3 +39,4 @@ const { blok } = Astro.props;
 
 {(blok.component == "button") && <IconButton blok={{...blok, component: "button"}} />}
 {(blok.component == "icon_button") && <IconButton blok={{...blok, component: "icon_button"}} />}
+{(blok.component == "theme_button") && <ThemeButton blok={{...blok, component: "theme_button"}} />}
