@@ -1,8 +1,10 @@
 ---
-import { type SbBlokData } from '@storyblok/astro';
+import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 import HamburgerSvelte from './hamburger/Hamburger.svelte';
+import { getClassName, getVisibilityClasses } from '../tailwind/class_name_compiler';
+import type { Visibility } from '../tailwind/types/Visibility';
 
-interface StoryblokHamburger extends SbBlokData {
+interface StoryblokHamburger extends SbBlokData, Visibility {
     component: 'hamburger';
     aria_controls: string;
 }
@@ -13,6 +15,14 @@ interface Props {
 }
 
 const { blok } = Astro.props;
+
+const className = getClassName(blok, {
+    decorators: [
+        {decorator: getVisibilityClasses}
+    ]
+});
+
+const storyblokEditableData = storyblokEditable(blok);
 ---
 
-<HamburgerSvelte blok={blok} client:idle />
+<HamburgerSvelte className={className} storyblokEditableData={storyblokEditableData} controls={blok.aria_controls} client:idle />
