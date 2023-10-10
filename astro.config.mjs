@@ -6,8 +6,6 @@ import vercel from "@astrojs/vercel/serverless";
 import svelte from "@astrojs/svelte";
 const env = loadEnv("", process.cwd(), ['STORYBLOK', 'PUBLIC_VERCEL_ENV']);
 
-
-// https://astro.build/config
 export default defineConfig({
   output: env.PUBLIC_VERCEL_ENV === 'production' ? 'hybrid' : 'server',
   adapter: vercel(),
