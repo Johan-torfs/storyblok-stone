@@ -13,7 +13,7 @@ import type { Visibility } from '../tailwind/types/Visibility';
 interface StoryblokGrid extends SbBlokData, Gap, Columns, PaddingX, PaddingY, JustifyContent, JustifyItems, AlignContent, AlignItems, Visibility {
     component: 'grid',
     content: [SbBlokData],
-    type: 'grid' | 'dividers',
+    type: 'grid' | 'dividers' | 'divide-x-lg',
 }
 
 interface Props {
@@ -40,7 +40,10 @@ if (!blok.type) blok.type = 'grid';
 
 switch (blok.type) {
     case 'dividers':
-        className += 'divide-primary-900/10 dark:divide-primary-300/10 divide-y';
+        className += ' divide-primary-900/10 dark:divide-primary-300/10 divide-y';
+        break;
+    case 'divide-x-lg':
+        className += ' divide-primary-900/10 dark:divide-primary-300/10 divide-y lg:divide-x lg:divide-y-0';
         break;
     default:
         break;
