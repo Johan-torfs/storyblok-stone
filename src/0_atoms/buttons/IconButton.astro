@@ -2,10 +2,9 @@
 import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 import type { PaddingX, PaddingY } from '../../tailwind/types/Padding';
 import type { BorderRadius } from '../../tailwind/types/Border';
-import type { BackgroundColor } from '../../tailwind/types/Color';
-import { getBorderRadiusClasses, getClassName, getPaddingXClasses, getPaddingYClasses, getBackgroundColorClasses, getHoverClasses, getFocusOutlineClasses, getTextColorOnBackground } from '../../tailwind/class_name_compiler';
+import { getBorderRadiusClasses, getClassName, getPaddingXClasses, getPaddingYClasses } from '../../tailwind/class_name_compiler';
 
-interface StoryblokIconButton extends SbBlokData, PaddingX, PaddingY, BorderRadius, BackgroundColor {
+interface StoryblokIconButton extends SbBlokData, PaddingX, PaddingY, BorderRadius {
     component: "icon_button" | "button";
     text?: string;
     icon?: {
@@ -17,6 +16,7 @@ interface StoryblokIconButton extends SbBlokData, PaddingX, PaddingY, BorderRadi
         cached_url: string;
     }
     submit?: boolean;
+    type: "primary";
 }
 
 
@@ -41,41 +41,39 @@ if (blok.link.cached_url == '/home') {
     blok.link.cached_url = '/';
 }
 
-const classNameColor = getClassName(blok, {
-    decorators: [
-        {decorator: getTextColorOnBackground},
-    ]
-});
-
-const className = getClassName({...blok, hover: 'background'}, {
+var className = getClassName(blok, {
     decorators: [
         {decorator: getBorderRadiusClasses},
         {decorator: getPaddingXClasses},
         {decorator: getPaddingYClasses},
-        {decorator: getBackgroundColorClasses},
-        {decorator: getHoverClasses, options: {colorName: 'background_color', colorTypeName: 'background_color_type'}},
-        {decorator: getFocusOutlineClasses, options: {colorName: 'background_color'}},
     ]
 });
+
+if (!blok.type) blok.type = 'primary';
+switch (blok.type) {
+    default:
+        className = 'items-center inline-flex focus-visible:outline focus-visible:outline-2 text-base bg-primary-600 border border-transparent dark:bg-primary-400 dark:focus-visible:outline-primary-400 dark:hover:bg-primary-300 dark:text-primary-950 focus-visible:outline-offset-2 focus-visible:outline-primary-600 font-medium hover:bg-primary-700 justify-center px-5 py-3 rounded-full text-white transition';
+        break;
+}
 ---
 
 {blok.submit ? 
 <button
     {...storyblokEditable(blok)}
-    class:list={["inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none", className]}
+    class:list={[className]}
     type="submit"
 >
-    {blok.icon?.icon ? <i class:list={[blok.icon?.type, blok.icon?.icon, classNameColor]} aria-hidden="true"></i> : null}
-    <span class:list={[{"ml-2": !!blok.icon?.type}, classNameColor]}>{blok.text}</span>  
+    {blok.icon?.icon ? <i class:list={[blok.icon?.type, blok.icon?.icon]} aria-hidden="true"></i> : null}
+    <span class:list={[{"ml-2": !!blok.icon?.type}]}>{blok.text}</span>  
 </button>
 :
 <a
     {...storyblokEditable(blok)}
     href={blok.link?.cached_url}
-    class:list={["inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none", className]}
+    class:list={[className]}
     type="button"
 >
-    {blok.icon?.icon ? <i class:list={[blok.icon?.type, blok.icon?.icon, classNameColor]} aria-hidden="true"></i> : null}
-    <span class:list={[{"ml-2": !!blok.icon?.type}, classNameColor]}>{blok.text}</span>  
+    {blok.icon?.icon ? <i class:list={[blok.icon?.type, blok.icon?.icon]} aria-hidden="true"></i> : null}
+    <span class:list={[{"ml-2": !!blok.icon?.type}]}>{blok.text}</span>  
 </a>
 }

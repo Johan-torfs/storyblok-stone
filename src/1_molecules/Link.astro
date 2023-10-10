@@ -1,14 +1,14 @@
 ---
 import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-import type { Hover } from '../tailwind/types/Hover';
-import { getClassName, getHoverClasses, getTextCenterClasses, getTextWidthClasses, getPaddingXClasses, getPaddingYClasses, getTextColorClasses } from '../tailwind/class_name_compiler';
-import type { TextCenter, TextMaxWidth } from '../tailwind/types/Text';
+// @ts-ignore
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import { getClassName, getPaddingXClasses, getPaddingYClasses } from '../tailwind/class_name_compiler';
 import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
-import type { TextColor } from '../tailwind/types/Color';
 
-interface StoryblokLink extends SbBlokData, TextColor, Hover, TextMaxWidth, TextCenter, PaddingX, PaddingY {
+interface StoryblokLink extends SbBlokData, PaddingX, PaddingY {
     component: 'link';
-    text: string;
+    content: SbBlokData[];
+    type: 'link';
     link: {
         linktype: 'url' | 'story' | 'asset';
         cached_url: string;
@@ -38,14 +38,18 @@ if (blok.link.cached_url == '/home') {
 
 const className = getClassName(blok, {
     decorators: [
-        {decorator: getHoverClasses},
-        {decorator: getTextCenterClasses},
-        {decorator: getTextWidthClasses},
         {decorator: getPaddingXClasses},
         {decorator: getPaddingYClasses},
-        {decorator: getTextColorClasses},
     ]
 });
+
+if (!blok.type) blok.type = 'link';
 ---
 
-<a {...storyblokEditable(blok)} href={blok.link.cached_url} class={className}>{blok.text}</a>
+{blok.type == 'link' ? (
+<a {...storyblokEditable(blok)} href={blok.link.cached_url} class:list={[className, blok.type, 'group']}>
+    {blok.content?.map(item => {            
+        return <StoryblokComponent blok={{...item, }} />
+    })}
+</a>
+) : null}

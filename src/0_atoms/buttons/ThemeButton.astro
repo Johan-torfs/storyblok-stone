@@ -3,7 +3,6 @@ import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 import type { PaddingX, PaddingY } from '../../tailwind/types/Padding';
 import type { BorderRadius } from '../../tailwind/types/Border';
 import type { BackgroundColor } from '../../tailwind/types/Color';
-import { getBorderRadiusClasses, getClassName, getPaddingXClasses, getPaddingYClasses, getBackgroundColorClasses, getHoverClasses, getFocusOutlineClasses, getTextColorOnBackground } from '../../tailwind/class_name_compiler';
 
 interface StoryblokThemeButton extends SbBlokData, PaddingX, PaddingY, BorderRadius, BackgroundColor {
     component: "theme_button";

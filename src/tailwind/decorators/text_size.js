@@ -62,7 +62,7 @@ const possibleFontSizeDefault = {
 };
 
 const possibleFontSizePerTag = {
-    h1: "text-4xl sm:text-5xl lg:text-6xl",
+    h1: "font-medium tracking-tight text-4xl sm:text-5xl lg:text-6xl",
     h2: "text-3xl sm:text-4xl",
     h3: "text-xl",
 }

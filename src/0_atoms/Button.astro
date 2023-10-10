@@ -7,7 +7,7 @@ import type { BackgroundColor } from '../tailwind/types/Color';
 import IconButton from './buttons/IconButton.astro';
 import ThemeButton from './buttons/ThemeButton.astro';
 
-interface StoryblokButton extends SbBlokData, PaddingX, PaddingY, BorderRadius, BackgroundColor {
+interface StoryblokButton extends SbBlokData, PaddingX, PaddingY, BorderRadius {
     component: "button" | "icon_button" | "theme_button";
     text?: string;
     link: {
@@ -27,6 +27,7 @@ interface StoryblokButton extends SbBlokData, PaddingX, PaddingY, BorderRadius, 
         theme: string;
     }[];
     submit?: boolean;
+    type: "primary";
 }
 
 

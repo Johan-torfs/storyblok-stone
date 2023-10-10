@@ -31,7 +31,7 @@ function fadeSlide(node, options) {
         <slot name="mobile-menu"/>
     </div>
     {#if $navigation.open}
-        <div id="page-navigation" class={["bg-primary-500/10 dark:bg-primary-400/10 w-full flex justify-center items-center pointer-events-auto -z-10 isolate"].join(' ')} transition:fadeSlide={{duration: 300, easing: sineInOut}}>
+        <div id="page-navigation" class={["bg-primary-500/10 dark:bg-primary-400/10 w-full pointer-events-auto -z-10 isolate"].join(' ')} transition:fadeSlide={{duration: 300, easing: sineInOut}}>
             <slot name="mobile"/>
         </div>
     {/if}
