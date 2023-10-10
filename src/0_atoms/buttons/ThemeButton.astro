@@ -26,22 +26,9 @@ const { blok } = Astro.props;
 
 const id = "theme-button-" + Math.random().toString(36).slice(2, 11);
 
-const classNameColor = getClassName(blok, {
-    decorators: [
-        {decorator: getTextColorOnBackground},
-    ]
-});
+const classNameColor = 'text-primary-950 dark:text-primary-200';
 
-const className = getClassName({...blok, hover: 'background'}, {
-    decorators: [
-        {decorator: getBorderRadiusClasses},
-        {decorator: getPaddingXClasses},
-        {decorator: getPaddingYClasses},
-        {decorator: getBackgroundColorClasses},
-        {decorator: getHoverClasses, options: {colorName: 'background_color', colorTypeName: 'background_color_type'}},
-        {decorator: getFocusOutlineClasses, options: {colorName: 'background_color'}},
-    ]
-});
+const className = 'hover:bg-primary-500/10 dark:hover:bg-primary-400/10 focus-visible:ring-2 focus:outline-none ring-primary-950 dark:ring-primary-200 text-primary-950 dark:text-primary-200 rounded-full transition-all duration-200 ease-in-out p-4 min-w-[50px]';
 ---
 
 <theme-button>

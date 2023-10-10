@@ -31,12 +31,6 @@ const paddingClasses = getClassName(blok, {
         {decorator: getMarginYClasses},
     ]
 });
-const backgroundColorClasses = getClassName(blok, {
-    decorators: [
-        {decorator: getBackgroundColorClasses},
-        {decorator: getBackgroundColorClasses, options: {colorName: 'background_color_desktop', screenSize: blok.breakpoint || 'md'}},
-    ]
-});
 const revealMobileClasses = getClassName(blok, {
     decorators: [
         {decorator: getBreakpointClasses, options: {type: 'mobile'}},
@@ -52,7 +46,6 @@ const storyblokEditableData = storyblokEditable(blok);
 
 <NavigationSvelte
     paddingClasses={paddingClasses} 
-    backgroundColorClasses={backgroundColorClasses}
     revealMobileClasses={revealMobileClasses}
     revealDesktopClasses={revealDesktopClasses}
     storyblokEditableData={storyblokEditableData} 
