@@ -1,7 +1,7 @@
 const possibleContainerSizeDefault = {
     small: "sm:max-w-sm",
     medium: "sm:max-w-2xl",
-    large: "sm:max-w-2xl lg:max-w-7xl",
+    large: "px-8 sm:max-w-2xl lg:max-w-7xl",
     full: "sm:max-w-full",
 }
 

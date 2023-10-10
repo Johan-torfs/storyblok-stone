@@ -20,6 +20,7 @@ export default defineConfig({
       flex: '4_layout_elements/Flex',
       column: '4_layout_elements/Column',
       card: '1_molecules/Card',
+      accordeon: '1_molecules/Accordeon',
       alert: '1_molecules/Alert',
       form: '1_molecules/Form',
       navigation: '1_molecules/Navigation',
