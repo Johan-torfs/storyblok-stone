@@ -1,6 +1,8 @@
 ---
 import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import '@fortawesome/fontawesome-free/css/solid.min.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
 ---
 
 <html lang="en">
@@ -10,16 +12,12 @@ import '@fortawesome/fontawesome-free/css/solid.min.css';
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Hanken+Grotesk:wght@500;700;800&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-white dark:bg-black transition-colors">
+	<body class="bg-primary-50 text-primary-950 dark:bg-primary-950 dark:text-primary-200 antialiased transition">
 		<slot name="nav"/>
-        <header><slot name="header"/></header>
+        <slot name="header"/>
         <main><slot/></main>
-        <footer><slot name="footer"/></footer>
+        <slot name="footer"/>
 	</body>
 </html>
 

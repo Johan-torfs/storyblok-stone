@@ -48,6 +48,11 @@ const blok = import.meta.env.PUBLIC_VERCEL_ENV == 'production' ? Astro.props.blo
 ---
 
 <BaseLayout>
+    <Fragment slot-name="header">
+        {blok.header?.map((blok: SbBlokData) => {            
+            return <StoryblokComponent blok={blok} />
+        })}
+    </Fragment>
     {blok.content?.map((blok: SbBlokData) => {            
         return <StoryblokComponent blok={blok} />
     })}
