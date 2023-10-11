@@ -8,7 +8,7 @@ import {type PaddingX, type PaddingY} from '../tailwind/types/Padding';
 import {type MarginX, type MarginY} from '../tailwind/types/Margin';
 import {type BackgroundColor} from '../tailwind/types/Color';
 
-interface StoryblokSection extends SbBlokData, PaddingX, PaddingY, MarginX, MarginY, BackgroundColor {
+interface StoryblokSection extends SbBlokData, PaddingX, PaddingY, MarginX, MarginY {
     component: 'section',
     content: [SbBlokData],
     type: 'section' | 'footer' | 'div' | 'header';
@@ -26,7 +26,6 @@ const className = getClassName(blok, {
         {decorator: getPaddingYClasses},
         {decorator: getMarginXClasses},
         {decorator: getMarginYClasses},
-        {decorator: getBackgroundColorClasses},
     ]
 })
 ---
