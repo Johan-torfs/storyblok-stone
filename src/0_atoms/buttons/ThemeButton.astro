@@ -31,7 +31,7 @@ const className = 'hover:bg-primary-500/10 dark:hover:bg-primary-400/10 focus-vi
 ---
 
 <theme-button>
-    <button
+    <button id={id}
         {...storyblokEditable(blok)}
         class:list={["inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none aspect-square", className]}
         type="button"
@@ -56,6 +56,7 @@ const className = 'hover:bg-primary-500/10 dark:hover:bg-primary-400/10 focus-vi
             var currentTheme = localStorage.getItem('theme') || 'light';
             var currentIcon = button?.querySelector(`[data-theme="${currentTheme}"]`) || icons[0];
 
+            icons.forEach(icon => !icon.classList.contains('!hidden') ? icon.classList.add('!hidden') : null);
             currentIcon.classList.remove('!hidden');
 
             // Each time the button is clicked, update the count.
