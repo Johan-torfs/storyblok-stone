@@ -5,7 +5,7 @@ import type { TextCenter, TextFont, TextSize, TextMaxWidth } from '../tailwind/t
 import { getClassName, getTextColorClasses, getFontClasses, getFontSizeClasses, getTextCenterClasses, getMarginBottomClasses, getTextMaxWidthClasses } from '../tailwind/class_name_compiler';
 import type { MarginBottom } from '../tailwind/types/Margin';
 
-interface StoryblokTitle extends SbBlokData, TextColor, TextFont, TextSize, TextCenter, TextMaxWidth, MarginBottom {
+interface StoryblokTitle extends SbBlokData, TextColor, TextSize, TextCenter, TextMaxWidth, MarginBottom {
     component: 'title';
     title: string;
     html_tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
@@ -21,7 +21,6 @@ const { blok } = Astro.props;
 const className = getClassName(blok, {
     decorators: [
         {decorator: getTextColorClasses},
-        {decorator: getFontClasses},
         {decorator: getFontSizeClasses},
         {decorator: getTextCenterClasses},
         {decorator: getMarginBottomClasses},
@@ -32,12 +31,12 @@ const className = getClassName(blok, {
 
 {blok.html_tag == 'h1' ? (
     <h1 {...storyblokEditable(blok)}
-    class:list={[className]}>{blok.title}</h1>
+    class:list={["font-medium tracking-tight", className]}>{blok.title}</h1>
 ) : null}
 
 {blok.html_tag == 'h2' || blok.html_tag == undefined ? (
     <h2 {...storyblokEditable(blok)} 
-    class:list={[className]}>{blok.title}</h2>
+    class:list={["font-medium tracking-tight", className]}>{blok.title}</h2>
 ) : null}
 
 {blok.html_tag == 'h3' ? (

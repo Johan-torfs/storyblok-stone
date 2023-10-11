@@ -3,15 +3,17 @@ import { type SbBlokData, storyblokEditable } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
-import { getClassName, getGapClasses, getColumnsClasses, getPaddingXClasses, getPaddingYClasses, getAlignContentClasses, getAlignItemsClasses, getJustifyContentClasses, getJustifyItemsClasses } from '../tailwind/class_name_compiler';
+import { getClassName, getGapClasses, getColumnsClasses, getPaddingXClasses, getPaddingYClasses, getAlignContentClasses, getAlignItemsClasses, getJustifyContentClasses, getJustifyItemsClasses, getVisibilityClasses } from '../tailwind/class_name_compiler';
 import type { Gap } from '../tailwind/types/Gap'
 import type { Columns } from '../tailwind/types/Columns'
 import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
 import type { JustifyContent, JustifyItems, AlignContent, AlignItems } from '../tailwind/types/Grid';
+import type { Visibility } from '../tailwind/types/Visibility';
 
-interface StoryblokGrid extends SbBlokData, Gap, Columns, PaddingX, PaddingY, JustifyContent, JustifyItems, AlignContent, AlignItems {
+interface StoryblokGrid extends SbBlokData, Gap, Columns, PaddingX, PaddingY, JustifyContent, JustifyItems, AlignContent, AlignItems, Visibility {
     component: 'grid',
     content: [SbBlokData],
+    type: 'grid' | 'dividers' | 'divide-x-lg',
 }
 
 interface Props {
@@ -30,8 +32,22 @@ var className = getClassName(blok, {
         {decorator: getAlignItemsClasses},
         {decorator: getJustifyContentClasses},
         {decorator: getJustifyItemsClasses},
+        {decorator: getVisibilityClasses},
     ]
-})
+});
+
+if (!blok.type) blok.type = 'grid';
+
+switch (blok.type) {
+    case 'dividers':
+        className += ' divide-primary-900/10 dark:divide-primary-300/10 divide-y';
+        break;
+    case 'divide-x-lg':
+        className += ' divide-primary-900/10 dark:divide-primary-300/10 divide-y lg:divide-x lg:divide-y-0';
+        break;
+    default:
+        break;
+}
 ---
 
 <div class:list={["grid", className]} {...storyblokEditable(blok)}>

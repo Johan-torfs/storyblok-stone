@@ -1,18 +1,17 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-// @ts-ignore
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-
-import { getBackgroundColorClasses, getBorderClasses, getClassName, getPaddingXClasses, getPaddingYClasses, getShadowClasses, getBorderRadiusClasses } from '../tailwind/class_name_compiler';
+import type { SbBlokData } from '@storyblok/astro';
 import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
-import type { BackgroundGradient } from '../tailwind/types/Color';
-import type { Border, BorderRadius } from '../tailwind/types/Border';
-import type { Dimensions } from '../tailwind/types/Dimensions';
-import type { Shadow } from '../tailwind/types/Shadow';
+import type { BorderRadius } from '../tailwind/types/Border';
+import type { Visibility } from '../tailwind/types/Visibility';
 
-interface StoryblokCard extends SbBlokData, PaddingX, PaddingY, BackgroundGradient, Border, Dimensions, Shadow, BorderRadius {
+import PrimaryCard from './cards/PrimaryCard.astro';
+import TransparentCard from './cards/TransparentCard.astro';
+import BorderPrimaryCard from './cards/BorderPrimaryCard.astro';
+
+export interface StoryblokCard extends SbBlokData, PaddingX, PaddingY, BorderRadius, Visibility {
     component: 'card',
     content: [SbBlokData],
+    type: 'primary-card' | 'transparent-card' | 'border-primary-card',
 }
 
 interface Props {
@@ -21,30 +20,17 @@ interface Props {
 
 const { blok } = Astro.props;
 
-var className = getClassName(blok, {
-    decorators: [
-        {decorator: getPaddingXClasses},
-        {decorator: getPaddingYClasses},
-        {decorator: getBackgroundColorClasses},
-        {decorator: getBorderClasses},
-        {decorator: getShadowClasses},
-        {decorator: getBorderRadiusClasses}
-    ]
-});
+if (!blok.type) blok.type = 'primary-card';
 ---
 
-<div class:list={["card-container overflow-hidden", className]} {...storyblokEditable(blok)}>
-    {blok.content.map(item => {            
-        return <StoryblokComponent blok={item} />
-    })}
-</div>
+{blok.type == 'primary-card' ? (
+    <PrimaryCard blok={blok}/>
+) : null }
 
-<style define:vars={{height: blok.height + "px" || "auto", width: blok.width + "px" || "auto"}}>
-    .card-container {
-        min-height: var(--height);
-    }
+{blok.type == 'transparent-card' ? (
+    <TransparentCard blok={blok}/>
+) : null }
 
-    .card-container {
-        width: clamp(150px, var(--width), 100%);
-    }
-</style>
+{blok.type == 'border-primary-card' ? (
+    <BorderPrimaryCard blok={blok}/>
+) : null }

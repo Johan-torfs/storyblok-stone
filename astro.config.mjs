@@ -6,8 +6,6 @@ import vercel from "@astrojs/vercel/serverless";
 import svelte from "@astrojs/svelte";
 const env = loadEnv("", process.cwd(), ['STORYBLOK', 'PUBLIC_VERCEL_ENV']);
 
-
-// https://astro.build/config
 export default defineConfig({
   output: env.PUBLIC_VERCEL_ENV === 'production' ? 'hybrid' : 'server',
   adapter: vercel(),
@@ -22,9 +20,11 @@ export default defineConfig({
       flex: '4_layout_elements/Flex',
       column: '4_layout_elements/Column',
       card: '1_molecules/Card',
+      accordeon: '1_molecules/Accordeon',
       alert: '1_molecules/Alert',
       form: '1_molecules/Form',
       navigation: '1_molecules/Navigation',
+      link: '1_molecules/Link',
       button: '0_atoms/Button',
       icon_button: '0_atoms/Button',
       theme_button: '0_atoms/Button',
@@ -34,7 +34,6 @@ export default defineConfig({
       icon: '0_atoms/Icon',
       input: '0_atoms/Input',
       hamburger: '0_atoms/Hamburger',
-      link: '0_atoms/Link',
       dropdown: '0_atoms/Dropdown',
       score_circle: '0_atoms/custom/ScoreCircle',
     },

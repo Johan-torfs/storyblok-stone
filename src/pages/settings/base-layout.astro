@@ -14,11 +14,17 @@ const response = await storyblokApi.get('cdn/stories/settings/base-layout', {
 });
 
 const navigation = response.data.story.content.navigation;
+const footer = response.data.story.content.footer;
 ---
 
 <SettingsLayout>
     <Fragment slot="nav">
         {navigation?.map((blok: SbBlokData) => {            
+			return <StoryblokComponent blok={blok} />
+		})}
+    </Fragment>
+    <Fragment slot="footer">
+        {footer?.map((blok: SbBlokData) => {            
 			return <StoryblokComponent blok={blok} />
 		})}
     </Fragment>

@@ -1,8 +1,9 @@
 <script>
-import { storyblokEditable } from '@storyblok/astro';
 import { navigation } from '../../stores.js';
 
-export let blok;
+export let className;
+export let storyblokEditableData;
+export let controls;
 
 function toggle() {
     navigation.update((s) => {
@@ -10,15 +11,33 @@ function toggle() {
         return s;
     });
 }
+
+function close() {
+    navigation.update((s) => {
+        s['open'] = false;
+        return s;
+    });
+}
+
+function subscribeToAstro() {
+    document.addEventListener('astro:after-swap', close)
+}
 </script>
 
-
-
-<button {...storyblokEditable(blok)} class="hamburger pointer-events-auto lg:hidden w-8 h-6" aria-controls={blok.controls || "page navigation"} aria-expanded={$navigation.open} aria-label="open navigation" on:click={toggle}>
-    <svg aria-hidden="true">
-        <line x1="15%" y1="10%" x2="95%" y2="10%" stroke-width="3" stroke="#000000" stroke-linecap="round" />
-        <line x1="5%" y1="50%" x2="95%" y2="50%" stroke-width="3" stroke="#000000" stroke-linecap="round" />
-        <line x1="15%" y1="90%" x2="95%" y2="90%" stroke-width="3" stroke="#000000" stroke-linecap="round" />
+<button 
+    data-blok-c={storyblokEditableData['data-blok-c']} 
+    data-blok-uid={storyblokEditableData['data-blok-uid']} 
+    class={"hamburger pointer-events-auto px-2.5 py-3.5" + className} 
+    aria-controls={controls || "page navigation"} 
+    aria-expanded={$navigation.open} 
+    aria-label="open navigation" 
+    on:click={toggle}
+    use:subscribeToAstro
+>
+    <svg aria-hidden="true" class="stroke-primary-950 dark:stroke-primary-200" width="30px" height="22px">
+        <line x1="15%" y1="10%" x2="95%" y2="10%" stroke-width="3" stroke-linecap="round" />
+        <line x1="5%" y1="50%" x2="95%" y2="50%" stroke-width="3" stroke-linecap="round" />
+        <line x1="15%" y1="90%" x2="95%" y2="90%" stroke-width="3" stroke-linecap="round" />
     </svg>
 </button>
 
@@ -52,12 +71,12 @@ function toggle() {
 }
 
 .hamburger[aria-expanded="true"] > svg line:first-child {
-    translate: -10% 40%;
+    translate: 0% 40%;
     rotate: 45deg;
 }
 
 .hamburger[aria-expanded="true"] > svg line:last-child {
-    translate: -10% -40%;
+    translate: 0% -40%;
     rotate: -45deg;
 }
 

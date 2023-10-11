@@ -1,0 +1,26 @@
+---
+import type { SbBlokData } from '@storyblok/astro';
+import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
+import type { Visibility } from '../tailwind/types/Visibility';
+
+import PrimaryCardAccordeon from './accordeons/PrimaryCardAccordeon.astro';
+
+export interface StoryblokAccordeon extends SbBlokData, PaddingX, PaddingY, Visibility {
+    component: 'accordeon',
+    title: [SbBlokData],
+    content: [SbBlokData],
+    type: 'primary-card-accordion',
+}
+
+interface Props {
+    blok: StoryblokAccordeon;
+}
+
+const { blok } = Astro.props;
+
+if (!blok.type) blok.type = 'primary-card-accordion';
+---
+
+{blok.type == 'primary-card-accordion' ? (
+    <PrimaryCardAccordeon blok={blok}/>
+) : null }
