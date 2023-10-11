@@ -22,7 +22,7 @@ var className = getClassName(blok, {
 });
 ---
 
-<div class:list={[className, 'bg-primary-500/10 dark:bg-primary-400/10']} {...storyblokEditable(blok)} >
+<div class:list={[className, 'grid bg-primary-500/10 dark:bg-primary-400/10']} {...storyblokEditable(blok)} >
     {blok.content.map(item => {            
         return <StoryblokComponent blok={item} />
     })}
