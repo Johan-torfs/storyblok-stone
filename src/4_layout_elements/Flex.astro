@@ -3,12 +3,13 @@ import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
-import { getClassName, getGapClasses, getPaddingXClasses, getPaddingYClasses, getAlignItemsClasses, getJustifyContentClasses } from '../tailwind/class_name_compiler';
+import { getClassName, getGapClasses, getPaddingXClasses, getPaddingYClasses, getAlignItemsClasses, getJustifyContentClasses, getMarginBottomClasses } from '../tailwind/class_name_compiler';
 import type { Gap } from '../tailwind/types/Gap'
 import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
 import type { JustifyContent, AlignItems } from '../tailwind/types/Grid';
+import type { MarginBottom } from '../tailwind/types/Margin';
 
-interface StoryblokFlex extends SbBlokData, Gap, PaddingX, PaddingY, JustifyContent, AlignItems {
+interface StoryblokFlex extends SbBlokData, Gap, PaddingX, PaddingY, MarginBottom, JustifyContent, AlignItems {
     component: 'flex',
     content: [SbBlokData],
 }
@@ -26,6 +27,7 @@ var className = getClassName(blok, {
         {decorator: getPaddingYClasses},
         {decorator: getAlignItemsClasses},
         {decorator: getJustifyContentClasses},
+        {decorator: getMarginBottomClasses},
     ]
 })
 ---
