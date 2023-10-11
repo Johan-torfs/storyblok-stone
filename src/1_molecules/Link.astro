@@ -47,7 +47,7 @@ if (!blok.type) blok.type = 'link';
 ---
 
 {blok.type == 'link' ? (
-<a {...storyblokEditable(blok)} href={blok.link.cached_url} class:list={[className, blok.type, 'group']}>
+<a {...storyblokEditable(blok)} href={blok.link.cached_url} target={blok.new_tab ? '_blank' : '_self'} class:list={[className, blok.type, 'group']}>
     {blok.content?.map(item => {            
         return <StoryblokComponent blok={{...item, }} />
     })}

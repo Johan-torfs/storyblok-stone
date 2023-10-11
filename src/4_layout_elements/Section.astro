@@ -6,7 +6,6 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { getClassName, getPaddingXClasses, getPaddingYClasses, getMarginXClasses, getMarginYClasses, getBackgroundColorClasses } from '../tailwind/class_name_compiler';
 import {type PaddingX, type PaddingY} from '../tailwind/types/Padding';
 import {type MarginX, type MarginY} from '../tailwind/types/Margin';
-import {type BackgroundColor} from '../tailwind/types/Color';
 
 interface StoryblokSection extends SbBlokData, PaddingX, PaddingY, MarginX, MarginY {
     component: 'section',
