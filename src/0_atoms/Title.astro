@@ -31,12 +31,12 @@ const className = getClassName(blok, {
 
 {blok.html_tag == 'h1' ? (
     <h1 {...storyblokEditable(blok)}
-    class:list={[className]}>{blok.title}</h1>
+    class:list={["font-medium tracking-tight", className]}>{blok.title}</h1>
 ) : null}
 
 {blok.html_tag == 'h2' || blok.html_tag == undefined ? (
     <h2 {...storyblokEditable(blok)} 
-    class:list={[className]}>{blok.title}</h2>
+    class:list={["font-medium tracking-tight", className]}>{blok.title}</h2>
 ) : null}
 
 {blok.html_tag == 'h3' ? (

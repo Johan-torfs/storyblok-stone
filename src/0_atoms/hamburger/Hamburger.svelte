@@ -11,6 +11,17 @@ function toggle() {
         return s;
     });
 }
+
+function close() {
+    navigation.update((s) => {
+        s['open'] = false;
+        return s;
+    });
+}
+
+function subscribeToAstro() {
+    document.addEventListener('astro:after-swap', close)
+}
 </script>
 
 <button 
@@ -21,6 +32,7 @@ function toggle() {
     aria-expanded={$navigation.open} 
     aria-label="open navigation" 
     on:click={toggle}
+    use:subscribeToAstro
 >
     <svg aria-hidden="true" class="stroke-primary-950 dark:stroke-primary-200" width="30px" height="22px">
         <line x1="15%" y1="10%" x2="95%" y2="10%" stroke-width="3" stroke-linecap="round" />

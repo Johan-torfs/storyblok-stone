@@ -6,11 +6,12 @@ import type { Visibility } from '../tailwind/types/Visibility';
 
 import PrimaryCard from './cards/PrimaryCard.astro';
 import TransparentCard from './cards/TransparentCard.astro';
+import BorderPrimaryCard from './cards/BorderPrimaryCard.astro';
 
 export interface StoryblokCard extends SbBlokData, PaddingX, PaddingY, BorderRadius, Visibility {
     component: 'card',
     content: [SbBlokData],
-    type: 'primary-card' | 'transparent-card',
+    type: 'primary-card' | 'transparent-card' | 'border-primary-card',
 }
 
 interface Props {
@@ -28,4 +29,8 @@ if (!blok.type) blok.type = 'primary-card';
 
 {blok.type == 'transparent-card' ? (
     <TransparentCard blok={blok}/>
+) : null }
+
+{blok.type == 'border-primary-card' ? (
+    <BorderPrimaryCard blok={blok}/>
 ) : null }
