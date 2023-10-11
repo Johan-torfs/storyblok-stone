@@ -25,6 +25,7 @@ export default defineConfig({
       form: '1_molecules/Form',
       navigation: '1_molecules/Navigation',
       link: '1_molecules/Link',
+      icon_list: '1_molecules/IconList',
       button: '0_atoms/Button',
       icon_button: '0_atoms/Button',
       theme_button: '0_atoms/Button',
