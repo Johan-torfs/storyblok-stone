@@ -2,13 +2,10 @@
 import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-import type { BackgroundColor, TextColor } from '../tailwind/types/Color';
-import type { Border, BorderRadius } from '../tailwind/types/Border';
-import type { Shadow } from '../tailwind/types/Shadow';
 import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
-import { getClassName, getBackgroundColorClasses, getBorderClasses, getBorderRadiusClasses, getShadowClasses, getPaddingXClasses, getPaddingYClasses, getTextColorClasses } from '../tailwind/class_name_compiler';
+import { getClassName, getPaddingXClasses, getPaddingYClasses } from '../tailwind/class_name_compiler';
 
-interface StoryblokDropdown extends SbBlokData, TextColor, BackgroundColor, Border, BorderRadius, Shadow, PaddingX, PaddingY {
+interface StoryblokDropdown extends SbBlokData, PaddingX, PaddingY {
     component: 'dropdown';
     label: string;
     content: [SbBlokData];
@@ -23,23 +20,13 @@ const { blok } = Astro.props;
 
 const className = getClassName(blok, {
     decorators: [
-        {decorator: getBackgroundColorClasses},
-        {decorator: getBorderClasses},
-        {decorator: getBorderRadiusClasses},
-        {decorator: getShadowClasses},
         {decorator: getPaddingXClasses},
         {decorator: getPaddingYClasses},
     ]
 });
-
-const classNameText = getClassName(blok, {
-    decorators: [
-        {decorator: getTextColorClasses}
-    ]
-});
 ---
 
-<div {...storyblokEditable(blok)} class:list={["group relative", classNameText]}>
+<div {...storyblokEditable(blok)} class:list={["group relative"]}>
     <span class="flex items-center relative cursor-pointer pointer-events-auto">{blok.label}
         <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>

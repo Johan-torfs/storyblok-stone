@@ -56,7 +56,7 @@ const screenSizesDefault = {
 };
 
 const nameDefault = 'margin_bottom';
-const tagNameDefault = 'html_tag';
+const tagNameDefault = 'type';
 
 export function getMarginBottomClasses(blok, {possibleMargin = possibleMarginDefault, screenSizes = screenSizesDefault, name = nameDefault, tagName = tagNameDefault} = {}) {    
     const className = `

@@ -1,12 +1,11 @@
 ---
 import { storyblokEditable, type SbBlokData, type ISbRichtext, renderRichText } from '@storyblok/astro';
 import TextSvelte from './text/Text.svelte';
-import { getClassName, getFontClasses, getFontSizeClasses, getMarginBottomClasses, getTextCenterClasses, getTextColorClasses, getTextMaxWidthClasses, getTextDecorationClasses, getTextUppercaseClasses } from '../tailwind/class_name_compiler';
-import type { TextColor } from '../tailwind/types/Color';
+import { getClassName, getFontSizeClasses, getMarginBottomClasses, getTextCenterClasses, getTextMaxWidthClasses } from '../tailwind/class_name_compiler';
 import type { MarginBottom } from '../tailwind/types/Margin';
-import type { TextFont, TextSize, TextCenter, TextMaxWidth, TextDecoration, TextUpperCase } from '../tailwind/types/Text';
+import type { TextSize, TextCenter, TextMaxWidth } from '../tailwind/types/Text';
 
-interface StoryblokParagraph extends SbBlokData, TextColor, TextSize, TextCenter, TextMaxWidth, TextDecoration, TextUpperCase, MarginBottom {
+interface StoryblokParagraph extends SbBlokData, TextSize, TextCenter, TextMaxWidth, MarginBottom {
     component: 'paragraph';
     content: ISbRichtext;
     interactive?: boolean;

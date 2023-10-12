@@ -1,45 +1,61 @@
+import { GuardScreensizes, type ScreenSize } from "./guards/Guard";
+
+// ############# //
+// # Text Font # //
+// ############# //
 export interface TextFont {
     font?: "sans" | "montserrat" | "fraunces";
 }
 
+
+// ############# //
+// # Text Size # //
+// ############# //
+const textSize = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl"];
+const textSizeGuardClass: GuardScreensizes = new GuardScreensizes(textSize);
+export const textSizeGuard = (x: any) => textSizeGuardClass.guard(x);
+
 export interface TextSize {
-    font_size?: {
-        xs: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl";
-        sm: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl";
-        md: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl";
-        lg: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl";
-        xl: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl";
-    };
+    font_size?: ScreenSize<(typeof textSize)[number]>;
 }
 
+// ############### //
+// # Text Center # //
+// ############### //
+export const isTextCenterType = (x: any) => (typeof x === "boolean");
+export const textCenterGuard = (x: any) => {
+    if (isTextCenterType(x)) return x;
+    return undefined;
+}
 export interface TextCenter {
     text_center?: boolean;
 }
 
+// ############## //
+// # Text Width # //
+// ############## //
+const textWidth = ["sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "full", "prose", "fit"];
+const textWidthGuardClass: GuardScreensizes = new GuardScreensizes(textWidth);
+export const textWidthGuard = (x: any) => textWidthGuardClass.guard(x);
+
 export interface TextMaxWidth {
-    max_width?: {
-        xs?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
-        sm?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
-        md?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
-        lg?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
-        xl?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
-    }
+    max_width?: ScreenSize<(typeof textWidth)[number]>;
 }
 
 export interface TextWidth {
-    text_width?: {
-        xs?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
-        sm?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
-        md?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
-        lg?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
-        xl?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | "prose" | "fit";
-    }
+    text_width?: ScreenSize<(typeof textWidth)[number]>;
 }
 
+// ############## //
+// # Text Decor # //
+// ############## //
 export interface TextDecoration {
     text_decoration?: "underline" | "line-through" | "overline" | "none";
 }
 
+// ############## //
+// # Text Upper # //
+// ############## //
 export interface TextUpperCase {
     text_uppercase?: boolean;
 }

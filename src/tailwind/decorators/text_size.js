@@ -72,7 +72,7 @@ const screenSizesDefault = {
 };
 
 const nameDefault = 'font_size';
-const tagNameDefault = 'html_tag';
+const tagNameDefault = 'type';
 
 export function getFontSizeClasses(blok, {possibleFontSize = possibleFontSizeDefault, screenSizes = screenSizesDefault, name = nameDefault, tagName = tagNameDefault} = {}) {
     const className = `

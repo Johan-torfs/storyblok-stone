@@ -4,13 +4,12 @@ import { type SbBlokData, storyblokEditable } from '@storyblok/astro';
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import NavigationSvelte from './navigation/Navigation.svelte';
 
-import { getClassName, getPaddingXClasses, getPaddingYClasses, getMarginXClasses, getMarginYClasses, getBackgroundColorClasses, getBreakpointClasses } from '../tailwind/class_name_compiler';
+import { getClassName, getPaddingXClasses, getPaddingYClasses, getMarginXClasses, getMarginYClasses, getBreakpointClasses } from '../tailwind/class_name_compiler';
 import type { PaddingX, PaddingY} from '../tailwind/types/Padding';
 import type { MarginX, MarginY} from '../tailwind/types/Margin';
-import type { BackgroundColor, BackgroundColorDesktop } from '../tailwind/types/Color';
 import type { Breakpoint } from '../tailwind/types/Breakpoint';
 
-interface StoryblokNavigation extends SbBlokData, PaddingX, PaddingY, MarginX, MarginY, BackgroundColor, BackgroundColorDesktop, Breakpoint {
+interface StoryblokNavigation extends SbBlokData, PaddingX, PaddingY, MarginX, MarginY, Breakpoint {
     component: 'navigation',
     mobile: [SbBlokData],
     mobile_menu: [SbBlokData],

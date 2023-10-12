@@ -2,12 +2,11 @@
 import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 import InputSvelte from './input/Input.svelte';
 import InputRadio from './input/InputRadio.svelte';
-import type { Color } from '../tailwind/types/Color';
 import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
 import type { BorderRadius } from '../tailwind/types/Border';
-import { getClassName, getPaddingXClasses, getPaddingYClasses, getBackgroundColorClasses, getHoverClasses, getPeerCheckedClasses, getBorderRadiusClasses } from '../tailwind/class_name_compiler';
+import { getClassName, getPaddingXClasses, getPaddingYClasses, getBorderRadiusClasses } from '../tailwind/class_name_compiler';
 
-interface StoryblokInput extends SbBlokData, Color, PaddingX, PaddingY, BorderRadius {
+interface StoryblokInput extends SbBlokData, PaddingX, PaddingY, BorderRadius {
     component: "input";
     name?: string;
     value?: string;
@@ -28,20 +27,12 @@ const className = getClassName(blok, {
         {decorator: getBorderRadiusClasses},
     ]
 });
-
-const classNameRadio = getClassName({...blok, hover: 'background', background_color_type: 'transpicuous'}, {
-    decorators: [
-        {decorator: getBackgroundColorClasses, options: {colorName: 'color'}},
-        {decorator: getHoverClasses, options: {colorName: 'color', colorTypeName: 'background_color_type'}},
-        {decorator: getPeerCheckedClasses, options: {colorName: 'color'}},
-    ]
-});
 ---
 
 
 {blok.type == "radio" ? (
     <InputRadio
-        className={className + ' ' + classNameRadio + ' aspect-square w-12 flex items-center justify-center'}
+        className={className + ' aspect-square w-12 flex items-center justify-center'}
         blok={{name: blok.name, value: blok.value, label: blok.label}}
         storyblokEditableData={storyblokEditable(blok)}
         client:visible
