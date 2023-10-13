@@ -1,17 +1,14 @@
 ---
-import { type SbBlokData, storyblokEditable } from '@storyblok/astro';
+import { storyblokEditable } from '@storyblok/astro';
 // @ts-ignore
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 import { getClassName, getPaddingXClasses, getPaddingYClasses, getMarginXClasses, getMarginYClasses } from '../tailwind/class_name_compiler';
-import {type PaddingX, type PaddingY} from '../tailwind/types/Padding';
-import {type MarginX, type MarginY} from '../tailwind/types/Margin';
-
-interface StoryblokSection extends SbBlokData, PaddingX, PaddingY, MarginX, MarginY {
-    component: 'section',
-    content: [SbBlokData],
-    type: 'section' | 'footer' | 'div' | 'header';
-}
+import type { StoryblokSection } from './dto/SectionDTO.astro';
+import DefaultSection from './section/DefaultSection.astro';
+import FooterSection from './section/FooterSection.astro';
+import HeaderSection from './section/HeaderSection.astro';
+import DivSection from './section/DivSection.astro';
 
 interface Props {
     blok: StoryblokSection;
@@ -29,31 +26,25 @@ const className = getClassName(blok, {
 })
 ---
 
-{!blok.type || blok.type === 'section' ?
-<section class:list={[className]} {...storyblokEditable(blok)}>
-    {blok.content.map(item => {            
-		return <StoryblokComponent blok={item}/>
-	})}
-</section>
+{blok.type == 'section' ?
+    <DefaultSection blok={blok} className={className}>
+        <slot />
+    </DefaultSection>
 : null}
+
 {blok.type === 'footer' ?
-<footer class:list={[className, 'bg-primary-500/10 dark:bg-primary-400/10']} {...storyblokEditable(blok)}>
-    {blok.content.map(item => {            
-		return <StoryblokComponent blok={item}/>
-	})}
-</footer>
+    <FooterSection blok={blok} className={className}>
+        <slot />
+    </FooterSection>
 : null}
+
 {blok.type === 'header' ?
-<header class:list={[className]} {...storyblokEditable(blok)}>
-    {blok.content.map(item => {            
-		return <StoryblokComponent blok={item}/>
-	})}
-</header>
+    <HeaderSection blok={blok} className={className}>
+        <slot />
+    </HeaderSection>
 : null}
 {blok.type === 'div' ?
-<div class:list={[className]} {...storyblokEditable(blok)}>
-    {blok.content.map(item => {            
-		return <StoryblokComponent blok={item}/>
-	})}
-</div>
+    <DivSection blok={blok} className={className}>
+        <slot />
+    </DivSection>
 : null}
