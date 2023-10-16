@@ -10,7 +10,6 @@ import { getJustifyContentClasses } from './decorators/grid_justify_content';
 import { getJustifyItemsClasses } from './decorators/grid_justify_items';
 import { getColSpanClasses } from './decorators/columns_col_span';
 import { getVisibilityClasses } from './decorators/visibility';
-import { getBreakpointClasses } from './decorators/breakpoint';
 import { getBorderRadiusClasses } from './decorators/border_radius';
 import { getFontSizeClasses } from './decorators/text_size';
 import { getTextCenterClasses } from './decorators/text_center';
@@ -42,7 +41,6 @@ export {
     getJustifyItemsClasses,
     getColSpanClasses,
     getVisibilityClasses,
-    getBreakpointClasses,
     getBorderRadiusClasses,
     getFontSizeClasses,
     getTextCenterClasses,

@@ -1,40 +1,13 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-// @ts-ignore
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { getClassName, getPaddingXClasses, getPaddingYClasses } from '../tailwind/class_name_compiler';
-import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
-
-interface StoryblokLink extends SbBlokData, PaddingX, PaddingY {
-    component: 'link';
-    content: SbBlokData[];
-    type: 'link';
-    link: {
-        linktype: 'url' | 'story' | 'asset';
-        cached_url: string;
-    };
-}
+import type { StoryblokLink } from './_dto/LinkDTO.astro';
+import DefaultLink from './link/DefaultLink.astro';
 
 interface Props {
     blok: StoryblokLink;
 }
 
 const { blok } = Astro.props;
-
-if (!blok.link) {
-    blok.link = {
-        linktype: 'url',
-        cached_url: '#',
-    };
-}
-
-if (blok.link.linktype === 'story') {
-    blok.link.cached_url = `/${blok.link.cached_url}`;
-}
-
-if (blok.link.cached_url == '/home') {
-    blok.link.cached_url = '/';
-}
 
 const className = getClassName(blok, {
     decorators: [
@@ -47,9 +20,7 @@ if (!blok.type) blok.type = 'link';
 ---
 
 {blok.type == 'link' ? (
-<a {...storyblokEditable(blok)} href={blok.link.cached_url} target={blok.new_tab ? '_blank' : '_self'} class:list={[className, blok.type, 'group']}>
-    {blok.content?.map(item => {            
-        return <StoryblokComponent blok={{...item, }} />
-    })}
-</a>
+<DefaultLink blok={blok} className={className}>
+    <slot />
+</DefaultLink>
 ) : null}

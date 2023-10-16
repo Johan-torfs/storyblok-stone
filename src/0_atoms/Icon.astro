@@ -1,14 +1,7 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-
-interface StoryblokIcon extends SbBlokData {
-    component: "icon";
-    icon: {
-        type: string;
-        icon: string;
-    };
-}
-
+import type { StoryblokIcon } from './_dto/IconDTO.astro';
+import PrimaryIcon from './icon/PrimaryIcon.astro';
+import DefaultIcon from './icon/DefaultIcon.astro';
 
 interface Props {
     blok: StoryblokIcon;
@@ -17,4 +10,10 @@ interface Props {
 const { blok } = Astro.props;
 ---
 
-<i {...storyblokEditable(blok)} class:list={[blok.icon.type, blok.icon.icon]} aria-hidden="true"></i>
+{blok.type == 'icon' ?
+<DefaultIcon blok={blok} /> 
+: null}
+
+{blok.type == 'primary-lg' ?
+<PrimaryIcon blok={blok} /> 
+: null}
