@@ -35,7 +35,7 @@ export default defineConfig({
       paragraph: '0_atoms/_dto/TextDTO',
       title: '0_atoms/_dto/TitleDTO',
       icon: '0_atoms/_dto/IconDTO',
-      input: '0_atoms/Input',
+      input: '0_atoms/_dto/InputDTO',
       hamburger: '0_atoms/Hamburger',
       dropdown: '0_atoms/Dropdown',
       score_circle: '0_atoms/custom/ScoreCircle',
