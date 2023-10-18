@@ -8,11 +8,11 @@ export interface ScreenSize<T> {
 
 export class GuardScreensizes {
     constructor(private values: string[]) {
-        this.values = values;
+        this.values = values.map(x => x.toString());
     }
 
     private isValue(x: any): x is (typeof this.values)[number] {
-        return [...this.values, ''].includes(x);
+        return [...this.values, ''].includes(x.toString());
     }
 
     private isType(x: any) {
