@@ -1,29 +1,14 @@
 ---
-import { storyblokEditable } from '@storyblok/astro';
-// @ts-ignore
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-
-import { getClassName, getPaddingXClasses, getPaddingYClasses, getBorderRadiusClasses, getVisibilityClasses } from '../../tailwind/class_name_compiler';
-import type { StoryblokCard } from '../Card.astro';
+import type { StoryblokCard } from '../_dto/CardDTO.astro';
 
 interface Props {
     blok: StoryblokCard;
+    className?: string;
 }
 
-const { blok } = Astro.props;
-
-var className = getClassName(blok, {
-    decorators: [
-        {decorator: getPaddingXClasses},
-        {decorator: getPaddingYClasses},
-        {decorator: getBorderRadiusClasses},
-        {decorator: getVisibilityClasses, options: {display: 'grid'}}
-    ]
-});
+const { blok, className } = Astro.props;
 ---
 
-<div class:list={[className, "grid"]} {...storyblokEditable(blok)} >
-    {blok.content.map(item => {            
-        return <StoryblokComponent blok={item} />
-    })}
+<div class:list={[className, 'grid']} data-blok-c={blok.storyblokData?.['data-blok-c']} data-blok-uid={blok.storyblokData?.['data-blok-uid']}>
+    <slot /> 
 </div>

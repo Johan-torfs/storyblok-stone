@@ -1,18 +1,9 @@
 ---
-import type { SbBlokData } from '@storyblok/astro';
-import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
-import type { BorderRadius } from '../tailwind/types/Border';
-import type { Visibility } from '../tailwind/types/Visibility';
-
 import PrimaryCard from './cards/PrimaryCard.astro';
 import TransparentCard from './cards/TransparentCard.astro';
 import BorderPrimaryCard from './cards/BorderPrimaryCard.astro';
-
-export interface StoryblokCard extends SbBlokData, PaddingX, PaddingY, BorderRadius, Visibility {
-    component: 'card',
-    content: [SbBlokData],
-    type: 'primary-card' | 'transparent-card' | 'border-primary-card',
-}
+import type { StoryblokCard } from './_dto/CardDTO.astro';
+import { getClassName, getPaddingXClasses, getPaddingYClasses, getBorderRadiusClasses, getVisibilityClasses } from '../tailwind/class_name_compiler';
 
 interface Props {
     blok: StoryblokCard;
@@ -20,17 +11,30 @@ interface Props {
 
 const { blok } = Astro.props;
 
-if (!blok.type) blok.type = 'primary-card';
+var className = getClassName(blok, {
+    decorators: [
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
+        {decorator: getBorderRadiusClasses},
+        {decorator: getVisibilityClasses, options: {display: 'grid'}}
+    ]
+});
 ---
 
 {blok.type == 'primary-card' ? (
-    <PrimaryCard blok={blok}/>
+    <PrimaryCard blok={blok} className={className}>
+        <slot />    
+    </PrimaryCard>
 ) : null }
 
 {blok.type == 'transparent-card' ? (
-    <TransparentCard blok={blok}/>
+    <TransparentCard blok={blok} className={className}>
+        <slot /> 
+    </TransparentCard>
 ) : null }
 
 {blok.type == 'border-primary-card' ? (
-    <BorderPrimaryCard blok={blok}/>
+    <BorderPrimaryCard blok={blok} className={className}>
+        <slot /> 
+    </BorderPrimaryCard>
 ) : null }
