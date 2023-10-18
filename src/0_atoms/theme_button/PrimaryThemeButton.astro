@@ -1,39 +1,24 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-import type { PaddingX, PaddingY } from '../../tailwind/types/Padding';
-import type { BorderRadius } from '../../tailwind/types/Border';
-import type { BackgroundColor } from '../../tailwind/types/Color';
-
-interface StoryblokThemeButton extends SbBlokData, PaddingX, PaddingY, BorderRadius, BackgroundColor {
-    component: "theme_button";
-    icons?: {
-        component: "theme_icon",
-        icon: {
-            type: string;
-            icon: string;
-        };
-        theme: string;
-    }[];
-}
-
+import type { StoryblokThemeButton } from '../_dto/ThemeButtonDTO.astro';
 
 interface Props {
     blok: StoryblokThemeButton;
+    className?: string;
 }
 
-const { blok } = Astro.props;
+const { blok, className } = Astro.props;
 
 const id = "theme-button-" + Math.random().toString(36).slice(2, 11);
 
 const classNameColor = 'text-primary-950 dark:text-primary-200';
 
-const className = 'hover:bg-primary-500/10 dark:hover:bg-primary-400/10 focus-visible:ring-2 focus:outline-none ring-primary-950 dark:ring-primary-200 text-primary-950 dark:text-primary-200 rounded-full transition-all duration-200 ease-in-out p-4 min-w-[50px]';
+const classNameLocal = [className, 'hover:bg-primary-500/10 dark:hover:bg-primary-400/10 focus-visible:ring-2 focus:outline-none ring-primary-950 dark:ring-primary-200 text-primary-950 dark:text-primary-200 rounded-full transition-all duration-200 ease-in-out p-4 min-w-[50px] inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none aspect-square'].join(' ');
 ---
 
 <theme-button>
     <button id={id}
-        {...storyblokEditable(blok)}
-        class:list={["inline-flex items-center justify-center border border-transparent font-medium text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer leading-none aspect-square", className]}
+        data-blok-c={blok.storyblokData?.['data-blok-c']} data-blok-uid={blok.storyblokData?.['data-blok-uid']}
+        class:list={[classNameLocal]}
         type="button"
         transition:persist
     >

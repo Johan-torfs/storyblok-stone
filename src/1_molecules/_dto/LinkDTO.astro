@@ -9,14 +9,16 @@ import type { MarginX, MarginY } from '../../tailwind/types/Margin';
 import { marginGuard } from '../../tailwind/types/Margin';
 import Link from '../Link.astro';
 
+interface LinkDTO {
+    linktype: string;
+    cached_url: string;
+}
+
 export interface StoryblokLinkDTO extends SbBlokData {
     component: 'link';
     content: SbBlokData[];
     type: 'link';
-    link: {
-        linktype: 'url' | 'story' | 'asset';
-        cached_url: string;
-    };
+    link: LinkDTO;
     new_tab: boolean;
 }
 
