@@ -11,7 +11,7 @@ import Column from '../Column.astro';
 
 export interface StoryblokColumnDTO extends SbBlokData {
     component: 'container',
-    content: [SbBlokData],
+    content: SbBlokData[],
     type: any,
     padding_x?: any,
     padding_y?: any,

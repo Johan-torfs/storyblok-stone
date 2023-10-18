@@ -23,7 +23,7 @@ export default defineConfig({
       card: '1_molecules/Card',
       accordeon: '1_molecules/Accordeon',
       alert: '1_molecules/Alert',
-      form: '1_molecules/Form',
+      form: '1_molecules/_dto/FormDTO',
       navigation: '1_molecules/_dto/NavigationDTO',
       link: '1_molecules/_dto/LinkDTO',
       list: '1_molecules/_dto/ListDTO',

@@ -17,7 +17,7 @@ import { visibilityGuard } from '../../tailwind/types/Visibility';
 
 export interface StoryblokGridDTO extends SbBlokData {
     component: 'grid',
-    content: [SbBlokData],
+    content: SbBlokData[],
     type?: any,
     gap?: any,
     grid_columns?: any,

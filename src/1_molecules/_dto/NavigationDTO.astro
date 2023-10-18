@@ -11,9 +11,9 @@ import Navigation from '../Navigation.astro';
 
 export interface StoryblokNavigationDTO extends SbBlokData {
     component: 'navigation',
-    desktop: [SbBlokData],
-    mobile: [SbBlokData],
-    mobile_menu: [SbBlokData],
+    desktop: SbBlokData[],
+    mobile: SbBlokData[],
+    mobile_menu: SbBlokData[],
     type: any,
     padding_x?: any,
     padding_y?: any,

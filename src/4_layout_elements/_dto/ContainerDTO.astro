@@ -9,7 +9,7 @@ import Container from '../Container.astro';
 
 export interface StoryblokContainerDTO extends SbBlokData {
     component: 'container',
-    content: [SbBlokData],
+    content: SbBlokData[],
     size: any,
     padding_x?: any,
     padding_y?: any,
