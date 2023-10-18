@@ -24,7 +24,7 @@ const isType = (x: any): x is BlokType => blokType.includes(x);
 
 export interface StoryblokText extends StoryblokEditableData, TextSize, TextCenter, TextMaxWidth, MarginBottom {
     text: string;
-    interactive?: boolean;
+    interactive: boolean;
     type: BlokType, 
 }
 

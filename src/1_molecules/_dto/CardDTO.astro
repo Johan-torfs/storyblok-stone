@@ -4,9 +4,9 @@ import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 import Card from '../Card.astro';
-import type { BorderRadius } from '../../tailwind/types/Border';
+import { borderRadiusSizeGuard, type BorderRadius, borderRadiusPositionGuard } from '../../tailwind/types/Border';
 import { paddingGuard, type PaddingX, type PaddingY } from '../../tailwind/types/Padding';
-import type { Visibility } from '../../tailwind/types/Visibility';
+import { visibilityGuard, type Visibility } from '../../tailwind/types/Visibility';
 import type { StoryblokEditableData } from '../../storyblok/StoryblokEditableData';
 
 export interface StoryblokCardDTO extends SbBlokData {
@@ -15,6 +15,8 @@ export interface StoryblokCardDTO extends SbBlokData {
     type: any,
     padding_x: any,
     padding_y: any,
+    border_radius_size: any,
+    border_radius_position: any,
     from: any,
     to: any,
 }
@@ -38,6 +40,10 @@ const card: StoryblokCard = {
     storyblokData: storyblokEditable(blok),
     padding_x: paddingGuard(blok.padding_x),
     padding_y: paddingGuard(blok.padding_y),
+    border_radius_size: borderRadiusSizeGuard(blok.border_radius_size),
+    border_radius_position: borderRadiusPositionGuard(blok.border_radius_position),
+    from: visibilityGuard(blok.from),
+    to: visibilityGuard(blok.to),
 };
 ---
 
