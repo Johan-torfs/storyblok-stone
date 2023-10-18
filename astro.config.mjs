@@ -36,7 +36,7 @@ export default defineConfig({
       title: '0_atoms/_dto/TitleDTO',
       icon: '0_atoms/_dto/IconDTO',
       input: '0_atoms/_dto/InputDTO',
-      hamburger: '0_atoms/Hamburger',
+      hamburger: '0_atoms/_dto/HamburgerDTO',
       dropdown: '0_atoms/Dropdown',
     },
     componentsDir: "src",
