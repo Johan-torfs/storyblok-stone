@@ -1,0 +1,44 @@
+---
+import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
+// @ts-ignore
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+import Alert from '../Alert.astro';
+import type { BorderRadius } from '../../tailwind/types/Border';
+import { paddingGuard, type PaddingX, type PaddingY } from '../../tailwind/types/Padding';
+import type { Visibility } from '../../tailwind/types/Visibility';
+import type { StoryblokEditableData } from '../../storyblok/StoryblokEditableData';
+
+export interface StoryblokAlertDTO extends SbBlokData {
+    component: 'alert',
+    content: SbBlokData[],
+    type: any,
+}
+
+const blokType = ['primary', 'danger', 'warning', 'info', 'success'] as const;
+type BlokType = (typeof blokType)[number];
+const isType = (x: any): x is BlokType => blokType.includes(x);
+
+export interface StoryblokAlert extends StoryblokEditableData, PaddingX, PaddingY, BorderRadius, Visibility {
+    type: BlokType,
+}
+
+interface Props {
+    blok: StoryblokAlertDTO;
+}
+
+const { blok } = Astro.props;
+
+const alert: StoryblokAlert = {
+    type: (isType(blok.type) ? blok.type : 'primary'),
+    storyblokData: storyblokEditable(blok),
+    padding_x: paddingGuard(blok.padding_x),
+    padding_y: paddingGuard(blok.padding_y),
+};
+---
+
+<Alert blok={alert}>
+    {blok.content.map(item => {            
+        return <StoryblokComponent blok={item} />
+    })}
+</Alert>

@@ -1,16 +1,13 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-// @ts-ignore
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 import { getClassName, getPaddingXClasses, getPaddingYClasses, getBorderRadiusClasses } from '../tailwind/class_name_compiler';
-import type { BorderRadius } from '../tailwind/types/Border';
-import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
+import type { StoryblokAlert } from './_dto/AlertDTO.astro';
 
-interface StoryblokAlert extends SbBlokData, PaddingX, PaddingY, BorderRadius {
-    component: 'alert',
-    content: [SbBlokData],
-}
+import PrimaryAlert from './alert/PrimaryAlert.astro';
+import DangerAlert from './alert/DangerAlert.astro';
+import WarningAlert from './alert/WarningAlert.astro';
+import SuccessAlert from './alert/SuccessAlert.astro';
+import InfoAlert from './alert/InfoAlert.astro';
 
 interface Props {
     blok: StoryblokAlert;
@@ -27,8 +24,32 @@ var className = getClassName(blok, {
 });
 ---
 
-<div {...storyblokEditable(blok)} class:list={[className]}>
-    {blok.content.map(item => {            
-        return <StoryblokComponent blok={item} />
-    })}
-</div>
+{blok.type == 'primary' ?
+<PrimaryAlert blok={blok} className={className}>
+    <slot />
+</PrimaryAlert>
+: null}
+
+{blok.type == 'danger' ?
+<DangerAlert blok={blok} className={className}>
+    <slot />
+</DangerAlert>
+: null}
+
+{blok.type == 'warning' ?
+<WarningAlert blok={blok} className={className}>
+    <slot />
+</WarningAlert>
+: null}
+
+{blok.type == 'success' ?
+<SuccessAlert blok={blok} className={className}>
+    <slot />
+</SuccessAlert>
+: null}
+
+{blok.type == 'info' ?
+<InfoAlert blok={blok} className={className}>
+    <slot />
+</InfoAlert>
+: null}
