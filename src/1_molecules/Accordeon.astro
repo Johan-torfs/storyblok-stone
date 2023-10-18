@@ -1,16 +1,7 @@
 ---
-import type { SbBlokData } from '@storyblok/astro';
-import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
-import type { Visibility } from '../tailwind/types/Visibility';
-
-import PrimaryCardAccordeon from './accordeons/PrimaryCardAccordeon.astro';
-
-export interface StoryblokAccordeon extends SbBlokData, PaddingX, PaddingY, Visibility {
-    component: 'accordeon',
-    title: [SbBlokData],
-    content: [SbBlokData],
-    type: 'primary-card-accordion',
-}
+import PrimaryCardAccordeon from './accordeon/PrimaryCardAccordeon.svelte';
+import type { StoryblokAccordeon } from './_dto/AccordeonDTO.astro';
+import { getClassName, getPaddingXClasses, getPaddingYClasses, getVisibilityClasses } from '../tailwind/class_name_compiler';
 
 interface Props {
     blok: StoryblokAccordeon;
@@ -18,9 +9,26 @@ interface Props {
 
 const { blok } = Astro.props;
 
-if (!blok.type) blok.type = 'primary-card-accordion';
+const className = getClassName(blok, {
+    decorators: [
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
+        {decorator: getVisibilityClasses, options: {display: 'grid'}}
+    ]
+});
 ---
 
 {blok.type == 'primary-card-accordion' ? (
-    <PrimaryCardAccordeon blok={blok}/>
+<PrimaryCardAccordeon 
+    className={className} 
+    storyblokEditableData={blok.storyblokData} 
+    client:idle
+>
+    <Fragment slot="title">
+        <slot name="title" />
+    </Fragment>
+    <Fragment slot="content">
+        <slot name="content" />
+    </Fragment>
+</PrimaryCardAccordeon>
 ) : null }
