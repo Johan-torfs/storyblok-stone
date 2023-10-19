@@ -40,7 +40,7 @@ if (import.meta.env.PUBLIC_VERCEL_ENV != 'production') {
     }
 
     const errorCode = response.status;
-    if (errorCode) return Astro.redirect(`/${errorCode}`);
+    if (errorCode) return Astro.redirect(`/${errorCode}-page`);
 }
 
 const blok = import.meta.env.PUBLIC_VERCEL_ENV == 'production' ? Astro.props.blok : response.data.story.content;
