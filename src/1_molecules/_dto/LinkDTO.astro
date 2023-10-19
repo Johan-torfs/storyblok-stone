@@ -51,8 +51,8 @@ const link: StoryblokLink = {
 
 function normalizedLink(link: StoryblokLinkDTO['link']): string {
     if (!link) return '#';
+    if (link.cached_url == 'home') return '/';
     if (link.linktype === 'story') return `/${link.cached_url}`;
-    if (link.cached_url == '/home') return '/';
     return  link.cached_url;
 }
 ---

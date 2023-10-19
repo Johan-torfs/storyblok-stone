@@ -5,7 +5,6 @@ import type { BorderRadius } from '../../tailwind/types/Border';
 import type { PaddingX, PaddingY } from '../../tailwind/types/Padding';
 
 import Button from '../Button.astro';
-import ThemeButton from '../ThemeButton.astro';
 
 interface Icon {
     type: string;
@@ -59,8 +58,8 @@ const button: StoryblokButton = {
 
 function normalizedLink(link: Link): string {
     if (!link) return '#';
+    if (link.cached_url === 'home') return '/';
     if (link.linktype === 'story') return `/${link.cached_url}`;
-    if (link.cached_url == '/home') return '/';
     return  link.cached_url;
 }
 ---
