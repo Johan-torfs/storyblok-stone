@@ -27,7 +27,7 @@ function subscribeToAstro() {
 <button 
     data-blok-c={storyblokEditableData['data-blok-c']} 
     data-blok-uid={storyblokEditableData['data-blok-uid']} 
-    class={[className, 'hamburger pointer-events-auto px-2.5 py-3.5hover:bg-primary-500/10 dark:hover:bg-primary-400/10 focus-visible:ring-2 focus:outline-none ring-primary-950 dark:ring-primary-200 text-primary-950 dark:text-primary-200 rounded-full transition-all duration-200 ease-in-out min-w-[50px]'].join(' ')} 
+    class={[className, 'hamburger pointer-events-auto px-2.5 py-3.5 hover:bg-primary-500/10 dark:hover:bg-primary-400/10 focus-visible:ring-2 focus:outline-none ring-primary-950 dark:ring-primary-200 text-primary-950 dark:text-primary-200 rounded-full transition-all duration-200 ease-in-out min-w-[50px]'].join(' ')} 
     aria-controls={ariaControls} 
     aria-expanded={$navigation.open} 
     aria-label="open navigation" 
