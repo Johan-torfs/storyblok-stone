@@ -1,20 +1,9 @@
 ---
-import { type SbBlokData, storyblokEditable } from '@storyblok/astro';
-// @ts-ignore
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-
 import { getClassName, getGapClasses, getColumnsClasses, getPaddingXClasses, getPaddingYClasses, getAlignContentClasses, getAlignItemsClasses, getJustifyContentClasses, getJustifyItemsClasses, getVisibilityClasses } from '../tailwind/class_name_compiler';
-import type { Gap } from '../tailwind/types/Gap'
-import type { Columns } from '../tailwind/types/Columns'
-import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
-import type { JustifyContent, JustifyItems, AlignContent, AlignItems } from '../tailwind/types/Grid';
-import type { Visibility } from '../tailwind/types/Visibility';
-
-interface StoryblokGrid extends SbBlokData, Gap, Columns, PaddingX, PaddingY, JustifyContent, JustifyItems, AlignContent, AlignItems, Visibility {
-    component: 'grid',
-    content: [SbBlokData],
-    type: 'grid' | 'dividers' | 'divide-x-lg',
-}
+import type { StoryblokGrid } from './_dto/GridDTO.astro';
+import DefaultGrid from './grid/DefaultGrid.astro';
+import DividersYGrid from './grid/DividersYGrid.astro';
+import DividersXGrid from './grid/DividersXGrid.astro';
 
 interface Props {
     blok: StoryblokGrid;
@@ -35,23 +24,22 @@ var className = getClassName(blok, {
         {decorator: getVisibilityClasses},
     ]
 });
-
-if (!blok.type) blok.type = 'grid';
-
-switch (blok.type) {
-    case 'dividers':
-        className += ' divide-primary-900/10 dark:divide-primary-300/10 divide-y';
-        break;
-    case 'divide-x-lg':
-        className += ' divide-primary-900/10 dark:divide-primary-300/10 divide-y lg:divide-x lg:divide-y-0';
-        break;
-    default:
-        break;
-}
 ---
 
-<div class:list={["grid", className]} {...storyblokEditable(blok)}>
-    {blok.content.map(item => {            
-		return <StoryblokComponent blok={item} />
-	})}
-</div>
+{blok.type == 'grid' ? (
+    <DefaultGrid blok={blok} className={className}>
+        <slot />
+    </DefaultGrid>
+) : null}
+
+{blok.type == 'dividers' || blok.type == undefined ? (
+    <DividersYGrid blok={blok} className={className}>
+        <slot />
+    </DividersYGrid>
+) : null}
+
+{blok.type == 'divide-x-lg' ? (
+    <DividersXGrid blok={blok} className={className}>
+        <slot />
+    </DividersXGrid>
+) : null}

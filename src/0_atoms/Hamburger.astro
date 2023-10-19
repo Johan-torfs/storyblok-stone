@@ -1,14 +1,7 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
 import HamburgerSvelte from './hamburger/Hamburger.svelte';
 import { getClassName, getVisibilityClasses } from '../tailwind/class_name_compiler';
-import type { Visibility } from '../tailwind/types/Visibility';
-
-interface StoryblokHamburger extends SbBlokData, Visibility {
-    component: 'hamburger';
-    aria_controls: string;
-}
-
+import type { StoryblokHamburger } from './_dto/HamburgerDTO.astro';
 
 interface Props {
     blok: StoryblokHamburger;
@@ -20,9 +13,9 @@ const className = getClassName(blok, {
     decorators: [
         {decorator: getVisibilityClasses}
     ]
-}) + ' ' + 'hover:bg-primary-500/10 dark:hover:bg-primary-400/10 focus-visible:ring-2 focus:outline-none ring-primary-950 dark:ring-primary-200 text-primary-950 dark:text-primary-200 rounded-full transition-all duration-200 ease-in-out min-w-[50px]';
-
-const storyblokEditableData = storyblokEditable(blok);
+});
 ---
 
-<HamburgerSvelte className={className} storyblokEditableData={storyblokEditableData} controls={blok.aria_controls} client:idle />
+{blok.type == 'hamburger' ?
+    <HamburgerSvelte className={className} storyblokEditableData={blok.storyblokData} ariaControls={blok.aria_controls} client:idle />
+: null}

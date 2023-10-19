@@ -1,34 +1,7 @@
 ---
-import { type SbBlokData } from '@storyblok/astro';
-
-import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
-import type { BorderRadius } from '../tailwind/types/Border';
-import type { BackgroundColor } from '../tailwind/types/Color';
-import IconButton from './buttons/IconButton.astro';
-import ThemeButton from './buttons/ThemeButton.astro';
-
-interface StoryblokButton extends SbBlokData, PaddingX, PaddingY, BorderRadius {
-    component: "button" | "icon_button" | "theme_button";
-    text?: string;
-    link: {
-        linktype: string;
-        cached_url: string;
-    };
-    icon?: {
-        type: string;
-        icon: string;
-    };
-    icons?: {
-        component: "theme_icon",
-        icon: {
-            type: string;
-            icon: string;
-        };
-        theme: string;
-    }[];
-    submit?: boolean;
-    type: "primary";
-}
+import PrimaryButton from './button/PrimaryButton.astro';
+import type { StoryblokButton } from './_dto/ButtonDTO.astro';
+import { getClassName, getPaddingXClasses, getPaddingYClasses, getBorderRadiusClasses } from '../tailwind/class_name_compiler';
 
 
 interface Props {
@@ -36,8 +9,16 @@ interface Props {
 }
 
 const { blok } = Astro.props;
+
+var className = getClassName(blok, {
+    decorators: [
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
+        {decorator: getBorderRadiusClasses}
+    ]
+});
 ---
 
-{(blok.component == "button") && <IconButton blok={{...blok, component: "button"}} />}
-{(blok.component == "icon_button") && <IconButton blok={{...blok, component: "icon_button"}} />}
-{(blok.component == "theme_button") && <ThemeButton blok={{...blok, component: "theme_button"}} />}
+{blok.type == 'primary' ?
+    <PrimaryButton className={className} blok={blok} />
+: null}

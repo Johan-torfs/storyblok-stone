@@ -1,15 +1,7 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-// @ts-ignore
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-
-import { getClassName, getColSpanClasses } from '../tailwind/class_name_compiler';
-import type { ColSpan } from '../tailwind/types/Columns';
-
-interface StoryblokColumn extends SbBlokData, ColSpan {
-    component: 'column';
-    content: [SbBlokData],
-}
+import { getClassName, getColSpanClasses, getPaddingXClasses, getPaddingYClasses } from '../tailwind/class_name_compiler';
+import type { StoryblokColumn } from './_dto/ColumnDTO.astro';
+import DefaultColumn from './column/DefaultColumn.astro'
 
 interface Props {
     blok: StoryblokColumn;
@@ -19,13 +11,15 @@ const { blok } = Astro.props;
 
 var className = getClassName(blok, {
     decorators: [
+        {decorator: getPaddingXClasses},
+        {decorator: getPaddingYClasses},
         {decorator: getColSpanClasses},
     ]
 })
 ---
 
-<div {...storyblokEditable(blok)} class:list={[className]}>
-    {blok.content.map(item => {            
-		return <StoryblokComponent blok={item} />
-	})}
-</div>
+{blok.type == "column" ?
+    <DefaultColumn blok={blok} className={className}>
+        <slot />
+    </DefaultColumn>
+: null}

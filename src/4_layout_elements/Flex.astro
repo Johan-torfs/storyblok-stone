@@ -1,18 +1,7 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-// @ts-ignore
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-
 import { getClassName, getGapClasses, getPaddingXClasses, getPaddingYClasses, getAlignItemsClasses, getJustifyContentClasses, getMarginBottomClasses } from '../tailwind/class_name_compiler';
-import type { Gap } from '../tailwind/types/Gap'
-import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
-import type { JustifyContent, AlignItems } from '../tailwind/types/Grid';
-import type { MarginBottom } from '../tailwind/types/Margin';
-
-interface StoryblokFlex extends SbBlokData, Gap, PaddingX, PaddingY, MarginBottom, JustifyContent, AlignItems {
-    component: 'flex',
-    content: [SbBlokData],
-}
+import type { StoryblokFlex } from './_dto/FlexDTO.astro';
+import DefaultFlex from './flex/DefaultFlex.astro';
 
 interface Props {
     blok: StoryblokFlex;
@@ -32,8 +21,6 @@ var className = getClassName(blok, {
 })
 ---
 
-<div class:list={["flex", className]} {...storyblokEditable(blok)}>
-    {blok.content.map(item => {            
-		return <StoryblokComponent blok={item} />
-	})}
-</div>
+<DefaultFlex blok={blok} className={className}>
+    <slot />
+</DefaultFlex>

@@ -1,61 +1,13 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-import type { Visibility } from '../tailwind/types/Visibility';
-import type { Dimensions } from '../tailwind/types/Dimensions';
-import type { BorderRadius } from '../tailwind/types/Border';
 import { getClassName, getVisibilityClasses, getBorderRadiusClasses } from '../tailwind/class_name_compiler';
-
-interface StoryblokImage extends SbBlokData, Visibility, Dimensions, BorderRadius {
-    component: 'image',
-    image: {
-        id: number;
-        alt: string;
-        name: string;
-        focus: string;
-        title: string;
-        source: string;
-        filename: string;
-        copyright: string;
-        fieldtype: string;
-        meta_data: {};
-        is_external_url: boolean;
-    },
-    image_dark: {
-        id: number;
-        alt: string;
-        name: string;
-        focus: string;
-        title: string;
-        source: string;
-        filename: string;
-        copyright: string;
-        fieldtype: string;
-        meta_data: {};
-        is_external_url: boolean;
-    },
-    link: {
-        id: number;
-        url: string;
-        linktype: string;
-        fieldtype: string;
-        cached_url: string;
-    }
-}
-
+import type { StoryblokImage } from './_dto/ImageDTO.astro';
+import DefaultImage from './image/DefaultImage.astro'
 
 interface Props {
     blok: StoryblokImage;
 }
 
 const { blok } = Astro.props;
-
-if (blok.link?.linktype === 'story') {
-    blok.link.cached_url = `/${blok.link.cached_url}`;
-}
-
-if (blok.link?.cached_url == '/home') {
-    blok.link.cached_url = '/';
-}
 
 const className = getClassName(blok, {
     decorators: [
@@ -65,46 +17,6 @@ const className = getClassName(blok, {
 });
 ---
 
-{blok.link?.id
-? 
-<a href={blok.link.cached_url}>
-    <img 
-        {...storyblokEditable(blok)}
-        src={blok.image.filename} 
-        alt={blok.image.alt} 
-        class:list={[className, 'image', {'dark:hidden': blok.image_dark?.id}]}
-    />
-    {blok.image_dark?.id && 
-        <img 
-            {...storyblokEditable(blok)}
-            src={blok.image_dark.filename} 
-            alt={blok.image_dark.alt} 
-            class:list={[className, 'image', 'dark', {'hidden dark:block': true}]}
-        />
-    }
-</a> 
-:
-(<Fragment>
-    <img 
-        {...storyblokEditable(blok)}
-        src={blok.image.filename} 
-        alt={blok.image.alt} 
-        class:list={[className, 'image', {'dark:hidden': blok.image_dark?.id}]}
-    />
-    {blok.image_dark?.id && 
-        <img 
-            {...storyblokEditable(blok)}
-            src={blok.image_dark.filename} 
-            alt={blok.image_dark.alt} 
-            class:list={[className, 'image', 'dark', {'hidden dark:block': true}]}
-        />
-    }
-</Fragment>)
-}
-
-<style define:vars={{height: blok.height ? blok.height + "px" : "auto", width: blok.width ? blok.width + "px" : "auto"}}>
-    .image {
-        max-height: var(--height);
-        width: var(--width);
-    }
-</style>
+{blok.type == 'image' ?
+    <DefaultImage blok={blok} className={className} />
+: null}

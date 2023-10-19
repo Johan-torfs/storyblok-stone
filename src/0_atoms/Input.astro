@@ -1,19 +1,9 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-import InputSvelte from './input/Input.svelte';
-import InputRadio from './input/InputRadio.svelte';
-import type { Color } from '../tailwind/types/Color';
-import type { PaddingX, PaddingY } from '../tailwind/types/Padding';
-import type { BorderRadius } from '../tailwind/types/Border';
-import { getClassName, getPaddingXClasses, getPaddingYClasses, getBackgroundColorClasses, getHoverClasses, getPeerCheckedClasses, getBorderRadiusClasses } from '../tailwind/class_name_compiler';
+import TextInput from './input/TextInput.svelte';
+import RadioInput from './input/RadioInput.svelte';
 
-interface StoryblokInput extends SbBlokData, Color, PaddingX, PaddingY, BorderRadius {
-    component: "input";
-    name?: string;
-    value?: string;
-    label?: string;
-    type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search" | "date" | "time" | "datetime-local" | "month" | "week" | "color" | "radio" | "checkbox" | "file" | "image" | "range" | "hidden";
-}
+import { getClassName, getPaddingXClasses, getPaddingYClasses, getBorderRadiusClasses } from '../tailwind/class_name_compiler';
+import type { StoryblokInput } from './_dto/InputDTO.astro';
 
 interface Props {
     blok: StoryblokInput;
@@ -28,25 +18,22 @@ const className = getClassName(blok, {
         {decorator: getBorderRadiusClasses},
     ]
 });
-
-const classNameRadio = getClassName({...blok, hover: 'background', background_color_type: 'transpicuous'}, {
-    decorators: [
-        {decorator: getBackgroundColorClasses, options: {colorName: 'color'}},
-        {decorator: getHoverClasses, options: {colorName: 'color', colorTypeName: 'background_color_type'}},
-        {decorator: getPeerCheckedClasses, options: {colorName: 'color'}},
-    ]
-});
 ---
 
+{blok.type == "text" ? (
+    <TextInput
+        className={className}
+        blok={{name: blok.name, value: blok.value, label: blok.label}}
+        storyblokEditableData={blok.storyblokData}
+        client:idle
+    />
+) : null}
 
 {blok.type == "radio" ? (
-    <InputRadio
-        className={className + ' ' + classNameRadio + ' aspect-square w-12 flex items-center justify-center'}
+    <RadioInput
+        className={className + ' aspect-square w-12 flex items-center justify-center'}
         blok={{name: blok.name, value: blok.value, label: blok.label}}
-        storyblokEditableData={storyblokEditable(blok)}
-        client:visible
+        storyblokEditableData={blok.storyblokData}
+        client:idle
     />
-) : (
-    <InputSvelte blok={blok} client:visible />
-)
-}
+) : null}

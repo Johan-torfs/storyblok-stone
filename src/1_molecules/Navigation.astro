@@ -1,21 +1,8 @@
 ---
-import { type SbBlokData, storyblokEditable } from '@storyblok/astro';
-// @ts-ignore
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
-import NavigationSvelte from './navigation/Navigation.svelte';
+import DefaultNavigation from './navigation/DefaultNavigation.svelte';
 
-import { getClassName, getPaddingXClasses, getPaddingYClasses, getMarginXClasses, getMarginYClasses, getBackgroundColorClasses, getBreakpointClasses } from '../tailwind/class_name_compiler';
-import type { PaddingX, PaddingY} from '../tailwind/types/Padding';
-import type { MarginX, MarginY} from '../tailwind/types/Margin';
-import type { BackgroundColor, BackgroundColorDesktop } from '../tailwind/types/Color';
-import type { Breakpoint } from '../tailwind/types/Breakpoint';
-
-interface StoryblokNavigation extends SbBlokData, PaddingX, PaddingY, MarginX, MarginY, BackgroundColor, BackgroundColorDesktop, Breakpoint {
-    component: 'navigation',
-    mobile: [SbBlokData],
-    mobile_menu: [SbBlokData],
-    desktop: [SbBlokData],
-}
+import { getClassName, getPaddingXClasses, getPaddingYClasses, getMarginXClasses, getMarginYClasses } from '../tailwind/class_name_compiler';
+import type { StoryblokNavigation } from './_dto/NavigationDTO.astro';
 
 interface Props {
     blok: StoryblokNavigation;
@@ -23,7 +10,7 @@ interface Props {
 
 const { blok } = Astro.props;
 
-const paddingClasses = getClassName(blok, {
+const className = getClassName(blok, {
     decorators: [
         {decorator: getPaddingXClasses},
         {decorator: getPaddingYClasses},
@@ -31,39 +18,22 @@ const paddingClasses = getClassName(blok, {
         {decorator: getMarginYClasses},
     ]
 });
-const revealMobileClasses = getClassName(blok, {
-    decorators: [
-        {decorator: getBreakpointClasses, options: {type: 'mobile'}},
-    ]
-});
-const revealDesktopClasses = getClassName(blok, {
-    decorators: [
-        {decorator: getBreakpointClasses, options: {type: 'desktop'}},
-    ]
-});
-const storyblokEditableData = storyblokEditable(blok);
 ---
 
-<NavigationSvelte
-    paddingClasses={paddingClasses} 
-    revealMobileClasses={revealMobileClasses}
-    revealDesktopClasses={revealDesktopClasses}
-    storyblokEditableData={storyblokEditableData} 
+{blok.type == "navigation" ? 
+<DefaultNavigation
+    className={className}
+    storyblokEditableData={blok.storyblokData}
     client:idle
 >
-    <Fragment slot="mobile-menu">
-        {blok.mobile_menu.map(item => {            
-            return <StoryblokComponent blok={item} />
-        })}
+    <Fragment slot="desktop">
+        <slot name="desktop" />
     </Fragment>
     <Fragment slot="mobile">
-        {blok.mobile.map(item => {            
-            return <StoryblokComponent blok={item} />
-        })}
+        <slot name="mobile" />
     </Fragment>
-    <Fragment slot="desktop">
-        {blok.desktop.map(item => {            
-            return <StoryblokComponent blok={item} />
-        })}
+    <Fragment slot="mobile-menu">
+        <slot name="mobile-menu" />
     </Fragment>
-</NavigationSvelte>
+</DefaultNavigation>
+: null}

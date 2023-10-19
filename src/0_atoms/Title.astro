@@ -1,16 +1,12 @@
 ---
-import { storyblokEditable, type SbBlokData, type ISbRichtext } from '@storyblok/astro';
-import type { TextColor } from '../tailwind/types/Color';
-import type { TextCenter, TextFont, TextSize, TextMaxWidth } from '../tailwind/types/Text';
-import { getClassName, getTextColorClasses, getFontClasses, getFontSizeClasses, getTextCenterClasses, getMarginBottomClasses, getTextMaxWidthClasses } from '../tailwind/class_name_compiler';
-import type { MarginBottom } from '../tailwind/types/Margin';
-
-interface StoryblokTitle extends SbBlokData, TextColor, TextSize, TextCenter, TextMaxWidth, MarginBottom {
-    component: 'title';
-    title: string;
-    html_tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-}
-
+import { getClassName, getFontSizeClasses, getTextCenterClasses, getMarginBottomClasses, getTextMaxWidthClasses } from '../tailwind/class_name_compiler';
+import type { StoryblokTitle } from './_dto/TitleDTO.astro';
+import H1 from './title/H1.astro';
+import H2 from './title/H2.astro';
+import H3 from './title/H3.astro';
+import H4 from './title/H4.astro';
+import H5 from './title/H5.astro';
+import H6 from './title/H6.astro';
 
 interface Props {
     blok: StoryblokTitle;
@@ -20,7 +16,6 @@ const { blok } = Astro.props;
 
 const className = getClassName(blok, {
     decorators: [
-        {decorator: getTextColorClasses},
         {decorator: getFontSizeClasses},
         {decorator: getTextCenterClasses},
         {decorator: getMarginBottomClasses},
@@ -29,32 +24,26 @@ const className = getClassName(blok, {
 });
 ---
 
-{blok.html_tag == 'h1' ? (
-    <h1 {...storyblokEditable(blok)}
-    class:list={["font-medium tracking-tight", className]}>{blok.title}</h1>
+{blok.type == 'h1' ? (
+    <H1 blok={blok} className={className} />
 ) : null}
 
-{blok.html_tag == 'h2' || blok.html_tag == undefined ? (
-    <h2 {...storyblokEditable(blok)} 
-    class:list={["font-medium tracking-tight", className]}>{blok.title}</h2>
+{blok.type == 'h2' || blok.type == undefined ? (
+    <H2 blok={blok} className={className} />
 ) : null}
 
-{blok.html_tag == 'h3' ? (
-    <h3 {...storyblokEditable(blok)} 
-    class:list={[className]}>{blok.title}</h3>
+{blok.type == 'h3' ? (
+    <H3 blok={blok} className={className} />
 ) : null}
 
-{blok.html_tag == 'h4' ? (
-    <h4 {...storyblokEditable(blok)} 
-    class:list={[className]}>{blok.title}</h4>
+{blok.type == 'h4' ? (
+    <H4 blok={blok} className={className} />
 ) : null}
 
-{blok.html_tag == 'h5' ? (
-    <h5 {...storyblokEditable(blok)} 
-    class:list={[className]}>{blok.title}</h5>
+{blok.type == 'h5' ? (
+    <H5 blok={blok} className={className} />
 ) : null}
 
-{blok.html_tag == 'h6' ? (
-    <h6 {...storyblokEditable(blok)} 
-    class:list={[className]}>{blok.title}</h6>
+{blok.type == 'h6' ? (
+    <H6 blok={blok} className={className} />
 ) : null}

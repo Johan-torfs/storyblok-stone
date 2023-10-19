@@ -1,21 +1,14 @@
 ---
-import { storyblokEditable, type SbBlokData, type ISbRichtext, renderRichText } from '@storyblok/astro';
-import TextSvelte from './text/Text.svelte';
-import { getClassName, getFontClasses, getFontSizeClasses, getMarginBottomClasses, getTextCenterClasses, getTextColorClasses, getTextMaxWidthClasses, getTextDecorationClasses, getTextUppercaseClasses } from '../tailwind/class_name_compiler';
-import type { TextColor } from '../tailwind/types/Color';
-import type { MarginBottom } from '../tailwind/types/Margin';
-import type { TextFont, TextSize, TextCenter, TextMaxWidth, TextDecoration, TextUpperCase } from '../tailwind/types/Text';
-
-interface StoryblokParagraph extends SbBlokData, TextColor, TextSize, TextCenter, TextMaxWidth, TextDecoration, TextUpperCase, MarginBottom {
-    component: 'paragraph';
-    content: ISbRichtext;
-    interactive?: boolean;
-    type: 'paragraph' | 'paragraph-faded' | 'link' | 'text';
-}
+import { getClassName, getFontSizeClasses, getMarginBottomClasses, getTextCenterClasses, getTextMaxWidthClasses } from '../tailwind/class_name_compiler';
+import type { StoryblokText } from './_dto/TextDTO.astro';
+import ParagraphText from './text/ParagraphText.astro';
+import ParagraphFadedText from './text/ParagraphFadedText.astro';
+import TextText from './text/TextText.astro';
+import LinkText from './text/LinkText.astro';
 
 
 interface Props {
-    blok: StoryblokParagraph;
+    blok: StoryblokText;
 }
 
 const { blok } = Astro.props;
@@ -28,33 +21,20 @@ const className = getClassName(blok, {
         {decorator: getTextMaxWidthClasses}
     ]
 });
-
-if (!blok.type) blok.type = 'paragraph';
- 
-const html = renderRichText(blok.content);
-const storyblokEditableData = storyblokEditable(blok);
-let htmlWithClass = '';
-switch (blok.type) {
-    case 'text':
-        htmlWithClass = html
-            .replace(/<p>/g, `<span class="${className}" data-blok-c='${storyblokEditableData['data-blok-c']}' data-blok-uid='${storyblokEditableData['data-blok-uid']}' interactive='${!!blok.interactive}'>`)
-            .replace(/<\/p>/g, '</span>')
-        break;
-    case 'link':
-        htmlWithClass = html
-            .replace(/<p>/g, `<span class="${className + ' group-[.link]:group-hover:underline'}" data-blok-c='${storyblokEditableData['data-blok-c']}' data-blok-uid='${storyblokEditableData['data-blok-uid']}' interactive='${!!blok.interactive}'>`)
-            .replace(/<\/p>/g, '</span>')
-        break;
-    case 'paragraph-faded':
-        htmlWithClass = html
-            .replace(/<p>/g, `<p class="${className + ' dark:text-primary-200/70 text-primary-950/70'}" data-blok-c='${storyblokEditableData['data-blok-c']}' data-blok-uid='${storyblokEditableData['data-blok-uid']}' interactive='${!!blok.interactive}'>`)
-            .replace(/<\/p>/g, '</p>')
-        break;
-    default:
-        htmlWithClass = html
-            .replace(/<p>/g, `<p class="${className}" data-blok-c='${storyblokEditableData['data-blok-c']}' data-blok-uid='${storyblokEditableData['data-blok-uid']}' interactive='${!!blok.interactive}'>`)
-        break;
-}
 ---
 
-{blok.interactive ? <TextSvelte htmlWithClass={htmlWithClass} client:visible/> : <Fragment set:html={htmlWithClass} class=" max"/>}
+{blok.type == 'paragraph' ? 
+    <ParagraphText blok={blok} className={className} />
+: null}
+
+{blok.type == 'paragraph-faded' ? 
+    <ParagraphFadedText blok={blok} className={className} />
+: null}
+
+{blok.type == 'text' ? 
+    <TextText blok={blok} className={className} />
+: null}
+
+{blok.type == 'link' ? 
+    <LinkText blok={blok} className={className} />
+: null}

@@ -1,28 +1,19 @@
 ---
-import { storyblokEditable, type SbBlokData } from '@storyblok/astro';
-import type { TextColor } from '../tailwind/types/Color';
-import { getClassName, getTextColorClasses } from '../tailwind/class_name_compiler';
-
-interface StoryblokIcon extends SbBlokData, TextColor {
-    component: "icon";
-    icon: {
-        type: string;
-        icon: string;
-    };
-}
-
+import type { StoryblokIcon } from './_dto/IconDTO.astro';
+import PrimaryIcon from './icon/PrimaryIcon.astro';
+import DefaultIcon from './icon/DefaultIcon.astro';
 
 interface Props {
     blok: StoryblokIcon;
 }
 
 const { blok } = Astro.props;
-
-const className = getClassName(blok, {
-    decorators: [
-        {decorator: getTextColorClasses},
-    ]
-});
 ---
 
-<i {...storyblokEditable(blok)} class:list={[blok.icon.type, blok.icon.icon, className]} aria-hidden="true"></i>
+{blok.type == 'icon' ?
+<DefaultIcon blok={blok} /> 
+: null}
+
+{blok.type == 'primary-lg' ?
+<PrimaryIcon blok={blok} /> 
+: null}
