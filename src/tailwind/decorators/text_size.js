@@ -76,7 +76,7 @@ const tagNameDefault = 'type';
 
 export function getFontSizeClasses(blok, {possibleFontSize = possibleFontSizeDefault, screenSizes = screenSizesDefault, name = nameDefault, tagName = tagNameDefault} = {}) {
     const className = `
-        ${blok[name] ? screenSizes.sizes.map((screen) => (blok[name][screen] ? possibleFontSize[screen][blok[name][screen]] : '')).join(' ') : (blok[tagName] ? possibleFontSizePerTag[blok[tagName]] : '')}
+        ${blok[name] ? screenSizes.sizes.map((screen) => (blok[name][screen] ? possibleFontSize[screen][blok[name][screen]] : '')).join(' ') : (blok[tagName] ? possibleFontSizePerTag[blok[tagName]] || '' : '')}
     `.replace(/\s+/g, ' ').trim();
 
     return className;

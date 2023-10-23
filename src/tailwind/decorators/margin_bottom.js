@@ -60,7 +60,7 @@ const tagNameDefault = 'type';
 
 export function getMarginBottomClasses(blok, {possibleMargin = possibleMarginDefault, screenSizes = screenSizesDefault, name = nameDefault, tagName = tagNameDefault} = {}) {    
     const className = `
-        ${blok[name] ? screenSizes.sizes.map((screen) => (blok[name][screen] ? possibleMargin[screen][blok[name][screen]] : '')).join(' ') : (blok[tagName] ? possibleMarginPerTag[blok[tagName]] : '')}
+        ${blok[name] ? screenSizes.sizes.map((screen) => (blok[name][screen] ? possibleMargin[screen][blok[name][screen]] : '')).join(' ') : (blok[tagName] ? possibleMarginPerTag[blok[tagName]] || '' : '')}
     `.replace(/\s+/g, ' ').trim();
 
     return className;
