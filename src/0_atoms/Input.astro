@@ -1,9 +1,10 @@
 ---
-import TextInput from './input/TextInput.svelte';
+import DefaultInput from './input/DefaultInput.svelte';
 import RadioInput from './input/RadioInput.svelte';
 
 import { getClassName, getPaddingXClasses, getPaddingYClasses, getBorderRadiusClasses } from '../tailwind/class_name_compiler';
 import type { StoryblokInput } from './_dto/InputDTO.astro';
+import TextAreaInput from './input/TextAreaInput.svelte';
 
 interface Props {
     blok: StoryblokInput;
@@ -21,9 +22,29 @@ const className = getClassName(blok, {
 ---
 
 {blok.type == "text" ? (
-    <TextInput
+    <DefaultInput
         className={className}
-        blok={{name: blok.name, value: blok.value, label: blok.label}}
+        blok={{name: blok.name, value: blok.value, label: blok.label, placeholder: blok.placeholder}}
+        storyblokEditableData={blok.storyblokData}
+        type="text"
+        client:idle
+    />
+) : null}
+
+{blok.type == "email" ? (
+    <DefaultInput
+        className={className}
+        blok={{name: blok.name, value: blok.value, label: blok.label, placeholder: blok.placeholder}}
+        storyblokEditableData={blok.storyblokData}
+        type="email"
+        client:idle
+    />
+) : null}
+
+{blok.type == "text-area" ? (
+    <TextAreaInput
+        className={className}
+        blok={{name: blok.name, value: blok.value, label: blok.label, placeholder: blok.placeholder}}
         storyblokEditableData={blok.storyblokData}
         client:idle
     />
@@ -31,7 +52,7 @@ const className = getClassName(blok, {
 
 {blok.type == "radio" ? (
     <RadioInput
-        className={className + ' aspect-square w-12 flex items-center justify-center'}
+        className={className}
         blok={{name: blok.name, value: blok.value, label: blok.label}}
         storyblokEditableData={blok.storyblokData}
         client:idle
