@@ -10,6 +10,7 @@ export interface StoryblokInputDTO extends SbBlokData {
     name: string;
     value: string;
     label: string;
+    placeholder: string;
     type: any;
     padding_x?: any,
     padding_y?: any,
@@ -17,7 +18,7 @@ export interface StoryblokInputDTO extends SbBlokData {
     border_radius_position?: any,
 }
 
-const blokType = ['text', 'radio'] as const; // "text", "email", "password", "number", "tel", "url", "search", "date", "time", "datetime-local", "month", "week", "color", "radio", "checkbox", "file", "image", "range", "hidden"
+const blokType = ['text', 'radio', 'email', 'text-area'] as const; // "text", "email", "password", "number", "tel", "url", "search", "date", "time", "datetime-local", "month", "week", "color", "radio", "checkbox", "file", "image", "range", "hidden"
 type BlokType = (typeof blokType)[number];
 const isType = (x: any): x is BlokType => blokType.includes(x);
 
@@ -26,6 +27,7 @@ export interface StoryblokInput extends StoryblokEditableData, PaddingX, Padding
     value: string;
     label: string;
     type: BlokType, 
+    placeholder: string;
 }
 
 interface Props {
@@ -38,6 +40,7 @@ const title: StoryblokInput = {
     name: blok.name,
     value: blok.value,
     label: blok.label,
+    placeholder: blok.placeholder,
     type: (isType(blok.type) ? blok.type : 'text'),
     storyblokData: storyblokEditable(blok),
     padding_x: paddingGuard(blok.padding_x),

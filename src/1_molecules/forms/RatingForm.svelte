@@ -41,6 +41,7 @@ function submitForm(e) {
 
 const delay = 300;
 function changeFormState(number) {
+    if (number == formState) return;
     formState = -1;
     setTimeout(() => {
         formState = number;
